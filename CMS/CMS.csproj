@@ -205,8 +205,13 @@
     <Compile Include="Migrations\201903081456322_AddNewFieldsToUser.Designer.cs">
       <DependentUpon>201903081456322_AddNewFieldsToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903120735292_ModifyUser.cs" />
+    <Compile Include="Migrations\201903120735292_ModifyUser.Designer.cs">
+      <DependentUpon>201903120735292_ModifyUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\User.cs" />
+    <Compile Include="Models\ViewModels\AccountDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -253,6 +258,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\AccountDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,6 +280,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903081456322_AddNewFieldsToUser.resx">
       <DependentUpon>201903081456322_AddNewFieldsToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903120735292_ModifyUser.resx">
+      <DependentUpon>201903120735292_ModifyUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

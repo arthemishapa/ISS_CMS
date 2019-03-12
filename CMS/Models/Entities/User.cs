@@ -13,10 +13,6 @@ namespace CMS.Models.Entities
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Affilation { get; set; }
-
         [MaxLength(50)]
         public string PersonalWebpage { get; set; }
 
