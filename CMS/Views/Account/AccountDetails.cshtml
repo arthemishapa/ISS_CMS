@@ -1,0 +1,38 @@
+﻿@model CMS.Models.ViewModels.AccountDetailsViewModel
+@{
+    ViewBag.Title = "AccountDetails";
+}
+
+<h2>AccountDetails</h2>
+
+@using (Html.BeginForm("AccountDetails", "Account", FormMethod.Post, new { id = "detailsForm", name = "detailsForm" }))
+{
+    <div class="form-horizontal">
+        @Html.HiddenFor(m => m.MemberID, new { ID = "MemberID" })
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Webpage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => Model.Webpage, "", new { @class = "form-control", @placeholder = "Optional" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => Model.SelectedAffilationType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(m => Model.SelectedAffilationType,
+                    new SelectList(Model.AffilationTypes, "Value", "Text"),
+                    htmlAttributes: new
+                    {
+                        @class = "form-control",
+                        id = "Type"
+                    })
+                @Html.ValidationMessageFor(m => Model.SelectedAffilationType, "",
+                    new { @class = "text-danger" })
+            </div>
+         </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Submit" />
+            </div>
+        </div>
+    </div>
+}
