@@ -20,10 +20,12 @@ namespace CMS
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/Bootstrap/bootstrap.js"));
+                      "~/Scripts/Bootstrap/bootstrap.js",
+                      "~/Scripts/Bootstrap/Datepicker/bootstrap-datepicker.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/Bootstrap/bootstrap.css",
+                      "~/Content/Bootstrap/Datepicker/bootstrap-datepicker3.css",
                       "~/Content/site.css"));
         }
     }
