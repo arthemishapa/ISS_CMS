@@ -1,2 +1,200 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CMS.CMS.DAL.Entities.Conference">
+    <Position X="1" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAAACAAAAAAAAAAAAQgAAAIAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>CMS.DAL\Entities\Conference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMS.CMS.DAL.Entities.Role">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Entities\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMS.CMS.DAL.Entities.Section">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAQAAAAAAAAQIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Entities\Section.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMS.CMS.DAL.Entities.Session">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQCAAAAAAAAAQAAAAAAAAQAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Entities\Session.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMS.CMS.DAL.Entities.Submission">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAgAAAAAAAAAAAABAAARAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Entities\Submission.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMS.CMS.DAL.Entities.SubmissionReview">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAACAQAAAAAAAAAAAAAAACEAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Entities\SubmissionReview.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMS.CMS.DAL.Entities.User">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAQAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Entities\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMS.CMS.DAL.Entities.UserRoles">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAIAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAIAQAAA=</HashCode>
+      <FileName>CMS.DAL\Entities\UserRoles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMS.CMS.DAL.Repository.ConferenceRepository">
+    <Position X="1" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAACgAAAAAEAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\ConferenceRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.208" />
+  </Class>
+  <Class Name="CMS.CMS.DAL.Repository.RoleRepository">
+    <Position X="3.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAASAAAAAAAAAAAAgAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\RoleRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMS.CMS.DAL.Repository.SectionRepository">
+    <Position X="5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAEAAAAAAAAAAAAAAgQAACAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\SectionRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMS.CMS.DAL.Repository.SessionRepository">
+    <Position X="6.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAQAAAAQIAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\SessionRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMS.CMS.DAL.Repository.SubmissionRepository">
+    <Position X="8.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAQAAACAAAAAAAAAAAAAAAABACAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\SubmissionRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMS.CMS.DAL.Repository.SubmissionReviewRepository">
+    <Position X="10.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAAAAAAAQAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\SubmissionReviewRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMS.CMS.DAL.Repository.UserRepository">
+    <Position X="12" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAIAAAAAAAEAAAAAAAAAQAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMS.CMS.DAL.Repository.UserRolesRepository">
+    <Position X="13.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAgAAAAAAAAAgAAAAAAAAAAAAAgCAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\UserRolesRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CMS.CMS.DAL.DatabaseContext.CMSDbContext">
+    <Position X="16.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAEAAAAAAAAAAACAAAAAAAgAAAEgAAEAAAAIAAAA=</HashCode>
+      <FileName>CMS.DAL\DatabaseContext\CMSDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Microsoft.AspNet.Identity.EntityFramework.IdentityDbContext&lt;TUser&gt;">
+    <Position X="16.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Microsoft.AspNet.Identity.EntityFramework.IdentityDbContext&lt;TUser, TRole, TKey, TUserLogin, TUserRole, TUserClaim&gt;" HideInheritanceLine="true">
+    <Position X="16.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Data.Entity.DbContext">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="CMS.CMS.DAL.Repository.IConferenceRepository">
+    <Position X="1" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACgAAAAAEAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\IConferenceRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMS.CMS.DAL.Repository.IRoleRepository">
+    <Position X="3.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAQAAAAAAAAAAAAgAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\IRoleRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMS.CMS.DAL.Repository.ISectionRepository">
+    <Position X="5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAgQAACAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\ISectionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMS.CMS.DAL.Repository.ISessionRepository">
+    <Position X="6.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAQIAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\ISessionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMS.CMS.DAL.Repository.ISubmissionRepository">
+    <Position X="8.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAACAAAAAAAAAAAAAAAABACAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\ISubmissionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMS.CMS.DAL.Repository.ISubmissionReviewRepository">
+    <Position X="10.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAAAAAAAQAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\ISubmissionReviewRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMS.CMS.DAL.Repository.IUserRepository">
+    <Position X="12" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAEAAAAAAAAAQAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\IUserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CMS.CMS.DAL.Repository.IUserRolesRepository">
+    <Position X="13.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAgAAAAAAAAAAAAAgCAAAAAAAAAA=</HashCode>
+      <FileName>CMS.DAL\Repository\IUserRolesRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

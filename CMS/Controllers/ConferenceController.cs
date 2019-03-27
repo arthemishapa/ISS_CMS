@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL.Entities;
+using CMS.CMS.DAL.Repository;
 
 namespace CMS.Controllers
 {
     public class ConferenceController : Controller
     {
+        private readonly IConferenceRepository conferenceRepository;
+
+        public ConferenceController(IConferenceRepository conferenceRepository)
+        {
+            this.conferenceRepository = conferenceRepository;
+        }
+
         [Authorize]
         public ActionResult Add()
         {

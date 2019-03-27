@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL.Entities;
+using CMS.CMS.DAL.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -12,7 +13,7 @@ namespace CMS.Controllers
 {
     [Authorize]
     public class AccountController : Controller
-    {
+    { 
         #region Variables
 
         private ApplicationSignInManager _signInManager;
@@ -26,7 +27,7 @@ namespace CMS.Controllers
             InitialiseAffiliationTypesDropDownList();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
