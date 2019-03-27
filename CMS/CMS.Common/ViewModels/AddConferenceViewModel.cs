@@ -1,11 +1,9 @@
-﻿using CMS.Models.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using CMS.CMS.DAL.Entities;
 
-namespace CMS.Models.ViewModels
+namespace CMS.CMS.Common.ViewModels
 {
     public class AddConferenceViewModel
     {

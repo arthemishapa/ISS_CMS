@@ -1,8 +1,7 @@
-namespace CMS.Migrations
+using System.Data.Entity.Migrations;
+
+namespace CMS.CMS.DAL.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class AddNewFieldsToUser : DbMigration
     {
         public override void Up()

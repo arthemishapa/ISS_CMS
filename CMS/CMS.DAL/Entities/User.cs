@@ -4,16 +4,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace CMS.Models.Entities
+namespace CMS.CMS.DAL.Entities
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class User : IdentityUser
     {
         [Required]
-        [MaxLength(50)]
         public string Name { get; set; }
 
-        [MaxLength(50)]
         public string PersonalWebpage { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

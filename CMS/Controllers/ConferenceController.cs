@@ -1,14 +1,12 @@
-﻿using CMS.Models.Entities;
-using CMS.Models.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using CMS.CMS.Common.ViewModels;
+using CMS.CMS.DAL.Entities;
 
 namespace CMS.Controllers
 {
-    public class ConferencesController : Controller
+    public class ConferenceController : Controller
     {
         [Authorize]
         public ActionResult Add()

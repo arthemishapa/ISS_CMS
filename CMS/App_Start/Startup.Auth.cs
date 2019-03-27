@@ -1,11 +1,11 @@
 ﻿using System;
+using CMS.CMS.DAL.DatabaseContext;
+using CMS.CMS.DAL.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using CMS.DatabaseContext;
-using CMS.Models.Entities;
 
 namespace CMS
 {

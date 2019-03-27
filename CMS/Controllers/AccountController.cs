@@ -1,17 +1,12 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CMS.CMS.Common.ViewModels;
+using CMS.CMS.DAL.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using CMS.Models;
-using CMS.Models.ViewModels;
-using CMS.Models.Entities;
-using System.Collections.Generic;
 
 namespace CMS.Controllers
 {

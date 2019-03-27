@@ -1,9 +1,9 @@
-﻿@model CMS.Models.ViewModels.AddConferenceViewModel
+﻿@model CMS.CMS.Common.ViewModels.AddConferenceViewModel
 @{
     ViewBag.Title = "Add conference";
 }
 <h2>@ViewBag.Title</h2>
-@using (Html.BeginForm("Add", "Conferences"))
+@using (Html.BeginForm("Add", "Conference"))
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
