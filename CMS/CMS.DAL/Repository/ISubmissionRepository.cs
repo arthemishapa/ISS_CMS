@@ -6,7 +6,7 @@ namespace CMS.CMS.DAL.Repository
     {
         void AddSubmission(Submission submission);
         void UpdateSubmission(Submission submission);
-        void DeleteSubmission(Submission submission);
+        void DeleteSubmission(int submissionId);
         Submission GetSubmissionById(int submissionId);
     }
 }

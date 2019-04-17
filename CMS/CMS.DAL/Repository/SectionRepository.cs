@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using CMS.CMS.DAL.DatabaseContext;
+﻿using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.DAL.Repository
@@ -26,7 +22,7 @@ namespace CMS.CMS.DAL.Repository
 
         }
 
-        public void DeleteSection(Section section)
+        public void DeleteSection(int sectionId)
         {
 
         }

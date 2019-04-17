@@ -6,7 +6,6 @@ namespace CMS.CMS.DAL.Repository
     {
         void AddUser(User userRoles);
         void UpdateUserRoles(UserRoles userRoles);
-        void DeleteUserRoles(UserRoles userRoles);
         UserRoles GetUserRoles(string userId, int roleId);
     }
 }

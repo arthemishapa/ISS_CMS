@@ -6,7 +6,7 @@ namespace CMS.CMS.DAL.Repository
     {
         void AddSession(Session session);
         void UpdateSession(Session session);
-        void DeleteSession(Session session);
+        void DeleteSession(int sessionId);
         Session GetSessionById(int sessionId);
     }
 }

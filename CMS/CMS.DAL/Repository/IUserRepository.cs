@@ -6,7 +6,7 @@ namespace CMS.CMS.DAL.Repository
     {
         void AddUser(User user);
         void UpdateUser(User user);
-        void DeleteUser(User user);
+        void DeleteUser(string userId);
         User GetUserById(string userId);
     }
 }

@@ -6,7 +6,7 @@ namespace CMS.CMS.DAL.Repository
     {
         void AddSection(Section section);
         void UpdateSection(Section section);
-        void DeleteSection(Section section);
+        void DeleteSection(int sectionId);
         Section GetSectionById(int sectionId);
     }
 }
