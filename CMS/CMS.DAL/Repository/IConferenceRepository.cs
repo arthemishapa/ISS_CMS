@@ -6,7 +6,7 @@ namespace CMS.CMS.DAL.Repository
     {
         void AddConference(Conference conference);
         void UpdateConference(Conference conference);
-        void DeleteConference(Conference conference);
+        void DeleteConference(int conferenceId);
         Conference GetConferenceById(int conferenceId);
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL.Entities;
 using CMS.CMS.DAL.Repository;
+
+using Microsoft.AspNet.Identity;
 
 namespace CMS.Controllers
 {
@@ -30,7 +33,7 @@ namespace CMS.Controllers
                 {
                     new Section { Id = 1, Name = "S1" },
                     new Section { Id = 2, Name = "S2" }
-                }
+                } // TODO: remove this
             };
 
             return View(viewModel);
@@ -41,7 +44,18 @@ namespace CMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(AddConferenceViewModel model)
         {
-            return RedirectToAction("Index", "Home");
+            conferenceRepository.AddConference(new Conference
+            {
+                Name = model.Name,
+                ChairId = User.Identity.GetUserId(),
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                AbstractPaperDeadline = model.AbstractPaperDeadline,
+                ProposalPaperDeadline = model.ProposalPaperDeadline,
+                BiddingDeadline = model.BiddingDeadline
+            });
+
+            return RedirectToAction("Index", "Home"); // TODO: redirect to details page
         }
     }
 }

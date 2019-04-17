@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
+
 using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
 
@@ -18,7 +16,8 @@ namespace CMS.CMS.DAL.Repository
 
         public void AddConference(Conference conference)
         {
-
+            context.Conferences.Add(conference);
+            context.SaveChanges();
         }
 
         public void UpdateConference(Conference conference)
@@ -26,14 +25,13 @@ namespace CMS.CMS.DAL.Repository
 
         }
 
-        public void DeleteConference(Conference conference)
+        public void DeleteConference(int conferenceId)
         {
-
         }
 
         public Conference GetConferenceById(int conferenceId)
         {
-            return null;
+            return context.Conferences.SingleOrDefault(c => c.Id == conferenceId);
         }
     }
 }

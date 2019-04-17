@@ -260,6 +260,10 @@
     <Compile Include="CMS.Common\ViewModels\AddConferenceViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\LoginViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Migrations\201904171938437_AddChairColumnToConference.cs" />
+    <Compile Include="Migrations\201904171938437_AddChairColumnToConference.Designer.cs">
+      <DependentUpon>201904171938437_AddChairColumnToConference.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -432,6 +436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CMS.DAL\Migrations\201903271951425_AddSubmissionReviewsTable.resx">
       <DependentUpon>201903271951425_AddSubmissionReviewsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904171938437_AddChairColumnToConference.resx">
+      <DependentUpon>201904171938437_AddChairColumnToConference.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
