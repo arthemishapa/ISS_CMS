@@ -1,3 +1,15 @@
-﻿@{
+﻿@model List<CMS.CMS.DAL.Entities.Conference>
+@{
     ViewBag.Title = "Home Page";
+}
+
+@foreach (var conference in Model)
+{
+    <div class="row">
+        <div class="col-md-10">
+            @Html.LabelFor(x => conference.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <br />
+            <p style="float:left">@Html.ActionLink("View details", "Details", "Conference", new { conference.Id }, null)</p>
+        </div>
+    </div>
 }

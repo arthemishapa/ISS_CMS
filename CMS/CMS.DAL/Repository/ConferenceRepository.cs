@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
@@ -32,6 +33,11 @@ namespace CMS.CMS.DAL.Repository
         public Conference GetConferenceById(int conferenceId)
         {
             return context.Conferences.SingleOrDefault(c => c.Id == conferenceId);
+        }
+
+        public IEnumerable<Conference> GetAll()
+        {   
+            return context.Conferences.ToList();
         }
     }
 }

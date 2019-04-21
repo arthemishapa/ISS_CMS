@@ -1,4 +1,5 @@
 ﻿using CMS.CMS.DAL.Entities;
+using System.Collections.Generic;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -8,5 +9,6 @@ namespace CMS.CMS.DAL.Repository
         void UpdateConference(Conference conference);
         void DeleteConference(int conferenceId);
         Conference GetConferenceById(int conferenceId);
+        IEnumerable<Conference> GetAll();
     }
 }

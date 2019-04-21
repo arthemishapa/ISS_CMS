@@ -19,6 +19,20 @@ namespace CMS.Controllers
             this.conferenceRepository = conferenceRepository;
         }
 
+        public ActionResult Details(int Id)
+        {
+            var conference = conferenceRepository.GetConferenceById(Id);
+            return View(new ConferenceDetailsViewModel() {
+                Id = conference.Id,
+                Name = conference.Name,
+                ProposalPaperDeadline = conference.ProposalPaperDeadline,
+                AbstractPaperDeadline = conference.AbstractPaperDeadline,
+                BiddingDeadline = conference.BiddingDeadline,
+                StartDate = conference.StartDate,
+                EndDate = conference.EndDate
+            });
+        }
+
         [Authorize]
         public ActionResult Add()
         {

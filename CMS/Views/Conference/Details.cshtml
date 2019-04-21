@@ -1,0 +1,74 @@
+﻿@model CMS.CMS.Common.ViewModels.ConferenceDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Conference</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ChairId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChairId)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AbstractPaperDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AbstractPaperDeadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProposalPaperDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProposalPaperDeadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BiddingDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BiddingDeadline)
+        </dd>
+
+    </dl>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
