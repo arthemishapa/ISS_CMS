@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+using CMS.CMS.Common.Validation;
+
 namespace CMS.CMS.Common.ViewModels
 {
     public class AddConferenceViewModel
@@ -21,6 +23,7 @@ namespace CMS.CMS.Common.ViewModels
         [UIHint("DateTime")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [ValidDate(StartDatePropertyName = "StartDate")]
         public DateTime EndDate { get; set; }
 
         [Required]
@@ -28,6 +31,7 @@ namespace CMS.CMS.Common.ViewModels
         [UIHint("DateTime")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [ValidDate(StartDatePropertyName = "StartDate", EndDatePropertyName = "BiddingDeadline")]
         public DateTime AbstractPaperDeadline { get; set; }
 
         [Required]
@@ -35,6 +39,7 @@ namespace CMS.CMS.Common.ViewModels
         [UIHint("DateTime")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [ValidDate(StartDatePropertyName = "StartDate", EndDatePropertyName = "BiddingDeadline")]
         public DateTime ProposalPaperDeadline { get; set; }
 
         [Required]
@@ -42,6 +47,7 @@ namespace CMS.CMS.Common.ViewModels
         [UIHint("DateTime")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [ValidDate(StartDatePropertyName = "StartDate", EndDatePropertyName = "EndDate")]
         public DateTime BiddingDeadline { get; set; }
     }
 }

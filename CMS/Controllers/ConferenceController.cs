@@ -52,18 +52,22 @@ namespace CMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(AddConferenceViewModel model)
         {
-            var addedConference = conferenceRepository.AddConference(new Conference
+            if (ModelState.IsValid)
             {
-                Name = model.Name,
-                ChairId = User.Identity.GetUserId(),
-                StartDate = model.StartDate,
-                EndDate = model.EndDate,
-                AbstractPaperDeadline = model.AbstractPaperDeadline,
-                ProposalPaperDeadline = model.ProposalPaperDeadline,
-                BiddingDeadline = model.BiddingDeadline
-            });
+                var addedConference = conferenceRepository.AddConference(new Conference
+                {
+                    Name = model.Name,
+                    ChairId = User.Identity.GetUserId(),
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    AbstractPaperDeadline = model.AbstractPaperDeadline,
+                    ProposalPaperDeadline = model.ProposalPaperDeadline,
+                    BiddingDeadline = model.BiddingDeadline
+                });
 
-            return RedirectToAction("Details", "Conference", new { addedConference.Id });
+                return RedirectToAction("Details", "Conference", new { addedConference.Id });
+            }
+            return View(model);
         }
     }
 }
