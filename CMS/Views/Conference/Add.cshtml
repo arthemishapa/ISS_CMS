@@ -1,0 +1,65 @@
+﻿@model CMS.CMS.Common.ViewModels.AddConferenceViewModel
+@{
+    ViewBag.Title = "Add conference";
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Add", "Conference"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.StartDate)
+        @Html.EditorFor(m => m.StartDate, new { htmlAttributes = new { @class = "form-control conference-date" } })
+        @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.EndDate)
+        @Html.EditorFor(m => m.EndDate, new { htmlAttributes = new { @class = "form-control conference-date" } })
+        @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AbstractPaperDeadline)
+        @Html.EditorFor(m => m.AbstractPaperDeadline, new { htmlAttributes = new { @class = "form-control conference-date" } })
+        @Html.ValidationMessageFor(m => m.AbstractPaperDeadline, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProposalPaperDeadline)
+        @Html.EditorFor(m => m.ProposalPaperDeadline, new { htmlAttributes = new { @class = "form-control conference-date" } })
+        @Html.ValidationMessageFor(m => m.ProposalPaperDeadline, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BiddingDeadline)
+        @Html.EditorFor(m => m.BiddingDeadline, new { htmlAttributes = new { @class = "form-control conference-date" } })
+        @Html.ValidationMessageFor(m => m.BiddingDeadline, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Sections)
+        @Html.ListBoxFor(
+            m => m.Sections,
+            new SelectList(Model.SectionsList, "Id", "Name"),
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Sections, "", new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('.conference-date').datepicker({
+                uiLibrary: 'bootstrap3',
+                format: 'MM-dd-yyyy',
+                startDate: '+1d'
+            });
+
+        })
+    </script>
+}

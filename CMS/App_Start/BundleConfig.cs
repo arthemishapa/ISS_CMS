@@ -9,22 +9,24 @@ namespace CMS
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jQuery/jquery-{version}.js"));
+                        "~/CMS.PL/Scripts/jQuery/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jQuery/jquery.validate*"));
+                        "~/CMS.PL/Scripts/jQuery/jquery.validate*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                        "~/CMS.PL/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/Bootstrap/bootstrap.js"));
+                      "~/CMS.PL/Scripts/Bootstrap/bootstrap.js",
+                      "~/CMS.PL/Scripts/Bootstrap/Datepicker/bootstrap-datepicker.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/Bootstrap/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/CMS.PL/Content/Bootstrap/bootstrap.css",
+                      "~/CMS.PL/Content/Bootstrap/Datepicker/bootstrap-datepicker3.css",
+                      "~/CMS.PL/Content/site.css"));
         }
     }
 }

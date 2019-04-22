@@ -50,12 +50,33 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -73,35 +94,23 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.4.1.1\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.10.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.10.0\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc, Version=5.10.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.5.10.0\lib\net46\Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -195,54 +204,194 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="CMS.DAL\Repository\IConferenceRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\IRoleRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\ISectionRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\ISessionRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\ISubmissionRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\ISubmissionReviewRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\IUserRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\IUserRolesRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\UserRolesRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\ConferenceRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\RoleRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\SectionRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\SessionRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\SubmissionRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\SubmissionReviewRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\UserRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ConferenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DatabaseContext\CMSDbContext.cs" />
+    <Compile Include="CMS.DAL\DatabaseContext\CMSDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903081456322_AddNewFieldsToUser.cs" />
-    <Compile Include="Migrations\201903081456322_AddNewFieldsToUser.Designer.cs">
+    <Compile Include="CMS.DAL\Migrations\201903081456322_AddNewFieldsToUser.cs" />
+    <Compile Include="CMS.DAL\Migrations\201903081456322_AddNewFieldsToUser.Designer.cs">
       <DependentUpon>201903081456322_AddNewFieldsToUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903120735292_ModifyUser.cs" />
-    <Compile Include="Migrations\201903120735292_ModifyUser.Designer.cs">
+    <Compile Include="CMS.DAL\Migrations\201903120735292_ModifyUser.cs" />
+    <Compile Include="CMS.DAL\Migrations\201903120735292_ModifyUser.Designer.cs">
       <DependentUpon>201903120735292_ModifyUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Entities\User.cs" />
-    <Compile Include="Models\ViewModels\AccountDetailsViewModel.cs" />
-    <Compile Include="Models\ViewModels\LoginViewModel.cs" />
-    <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="CMS.DAL\Migrations\201903271937279_AddRemainingTables.cs" />
+    <Compile Include="CMS.DAL\Migrations\201903271937279_AddRemainingTables.Designer.cs">
+      <DependentUpon>201903271937279_AddRemainingTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMS.DAL\Migrations\201903271951425_AddSubmissionReviewsTable.cs" />
+    <Compile Include="CMS.DAL\Migrations\201903271951425_AddSubmissionReviewsTable.Designer.cs">
+      <DependentUpon>201903271951425_AddSubmissionReviewsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CMS.DAL\Migrations\Configuration.cs" />
+    <Compile Include="CMS.DAL\Entities\Conference.cs" />
+    <Compile Include="CMS.DAL\Entities\Role.cs" />
+    <Compile Include="CMS.DAL\Entities\Section.cs" />
+    <Compile Include="CMS.DAL\Entities\Session.cs" />
+    <Compile Include="CMS.DAL\Entities\Submission.cs" />
+    <Compile Include="CMS.DAL\Entities\User.cs" />
+    <Compile Include="CMS.DAL\Entities\UserRoles.cs" />
+    <Compile Include="CMS.Common\Enums\Review.cs" />
+    <Compile Include="CMS.Common\Enums\SubmissionType.cs" />
+    <Compile Include="CMS.DAL\Entities\SubmissionReview.cs" />
+    <Compile Include="CMS.Common\ViewModels\AccountDetailsViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\AddConferenceViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\LoginViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Migrations\201904171938437_AddChairColumnToConference.cs" />
+    <Compile Include="Migrations\201904171938437_AddChairColumnToConference.Designer.cs">
+      <DependentUpon>201904171938437_AddChairColumnToConference.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Bootstrap\bootstrap-theme.css" />
-    <Content Include="Content\Bootstrap\bootstrap-theme.min.css" />
-    <Content Include="Content\Bootstrap\bootstrap.css" />
-    <Content Include="Content\Bootstrap\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker.min.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker.standalone.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker3.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker3.min.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker3.standalone.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\bootstrap-theme.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\bootstrap-theme.min.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\bootstrap.css" />
+    <Content Include="CMS.PL\Content\Bootstrap\bootstrap.min.css" />
+    <Content Include="CMS.PL\favicon.ico" />
+    <Content Include="CMS.PL\Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\Bootstrap\bootstrap.js" />
-    <Content Include="Scripts\Bootstrap\bootstrap.min.js" />
+    <Content Include="CMS.PL\Content\Site.css" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\bootstrap-datepicker.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\bootstrap.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Scripts\jQuery\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jQuery\jquery-3.3.1.js" />
-    <Content Include="Scripts\jQuery\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jQuery\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jQuery\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jQuery\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jQuery\jquery.validate.js" />
-    <Content Include="Scripts\jQuery\jquery.validate.min.js" />
-    <Content Include="Scripts\jQuery\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker3.css.map" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker.standalone.css.map" />
+    <Content Include="CMS.PL\Content\Bootstrap\Datepicker\bootstrap-datepicker.css.map" />
+    <Content Include="App_Data\ClassDiagram.cd" />
+    <None Include="CMS.PL\Scripts\jQuery\jquery-3.3.1.intellisense.js" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery-3.3.1.js" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery-3.3.1.min.js" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery-3.3.1.slim.js" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery-3.3.1.slim.min.js" />
+    <None Include="CMS.PL\Scripts\jQuery\jquery.validate-vsdoc.js" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery.validate.js" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery.validate.min.js" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery.validate.unobtrusive.js" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker-en-CA.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ar-tn.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ar.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.az.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.bg.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.bn.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.br.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.bs.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ca.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.cs.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.cy.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.da.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.de.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.el.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.en-AU.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.en-CA.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.en-GB.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.en-IE.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.en-NZ.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.en-ZA.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.eo.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.et.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.eu.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.fa.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.fi.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.fo.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.fr-CH.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.fr.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.gl.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.he.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.hi.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.hr.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.hu.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.hy.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.id.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.is.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.it-CH.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.it.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ja.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ka.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.kh.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.kk.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.km.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ko.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.kr.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.lt.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.lv.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.me.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.mk.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.mn.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ms.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.nl-BE.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.nl.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.no.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.oc.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.pl.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.pt.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ro.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.rs-latin.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.rs.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ru.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.si.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.sk.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.sl.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.sq.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.sr-latin.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.sr.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.sv.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.sw.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.ta.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.tg.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.th.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.tk.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.tr.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.uk.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.uz-cyrl.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.uz-latn.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.vi.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <Content Include="CMS.PL\Scripts\Bootstrap\Datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="CMS.PL\Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -259,32 +408,37 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\AccountDetails.cshtml" />
-    <Content Include="Views\Account\ChangeDeadline.cshtml" />
-    <Content Include="Views\Account\Settings.cshtml" />
+    <Content Include="Views\Conference\Add.cshtml" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Repository\Interfaces\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\Bootstrap\bootstrap.min.css.map" />
-    <Content Include="Content\Bootstrap\bootstrap.css.map" />
-    <Content Include="Content\Bootstrap\bootstrap-theme.min.css.map" />
-    <Content Include="Content\Bootstrap\bootstrap-theme.css.map" />
+    <Content Include="CMS.PL\Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="CMS.PL\Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="CMS.PL\Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="CMS.PL\Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="CMS.PL\Content\Bootstrap\bootstrap.min.css.map" />
+    <Content Include="CMS.PL\Content\Bootstrap\bootstrap.css.map" />
+    <Content Include="CMS.PL\Content\Bootstrap\bootstrap-theme.min.css.map" />
+    <Content Include="CMS.PL\Content\Bootstrap\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jQuery\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jQuery\jquery-3.3.1.min.map" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery-3.3.1.slim.min.map" />
+    <Content Include="CMS.PL\Scripts\jQuery\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903081456322_AddNewFieldsToUser.resx">
+    <EmbeddedResource Include="CMS.DAL\Migrations\201903081456322_AddNewFieldsToUser.resx">
       <DependentUpon>201903081456322_AddNewFieldsToUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903120735292_ModifyUser.resx">
+    <EmbeddedResource Include="CMS.DAL\Migrations\201903120735292_ModifyUser.resx">
       <DependentUpon>201903120735292_ModifyUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMS.DAL\Migrations\201903271937279_AddRemainingTables.resx">
+      <DependentUpon>201903271937279_AddRemainingTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CMS.DAL\Migrations\201903271951425_AddSubmissionReviewsTable.resx">
+      <DependentUpon>201903271951425_AddSubmissionReviewsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904171938437_AddChairColumnToConference.resx">
+      <DependentUpon>201904171938437_AddChairColumnToConference.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
