@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 using CMS.CMS.Common.ViewModels;
@@ -43,11 +42,6 @@ namespace CMS.Controllers
                 AbstractPaperDeadline = DateTime.Now.Date.AddDays(1),
                 ProposalPaperDeadline = DateTime.Now.Date.AddDays(1),
                 BiddingDeadline = DateTime.Now.Date.AddDays(1),
-                SectionsList = new List<Section>
-                {
-                    new Section { Id = 1, Name = "S1" },
-                    new Section { Id = 2, Name = "S2" }
-                } // TODO: remove this
             };
 
             return View(viewModel);
@@ -58,7 +52,7 @@ namespace CMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(AddConferenceViewModel model)
         {
-            conferenceRepository.AddConference(new Conference
+            var addedConference = conferenceRepository.AddConference(new Conference
             {
                 Name = model.Name,
                 ChairId = User.Identity.GetUserId(),
@@ -69,7 +63,7 @@ namespace CMS.Controllers
                 BiddingDeadline = model.BiddingDeadline
             });
 
-            return RedirectToAction("Index", "Home"); // TODO: redirect to details page
+            return RedirectToAction("Details", "Conference", new { addedConference.Id });
         }
     }
 }

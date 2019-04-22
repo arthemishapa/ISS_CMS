@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.Common.ViewModels
 {
@@ -45,11 +43,5 @@ namespace CMS.CMS.Common.ViewModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BiddingDeadline { get; set; }
-
-        [Required]
-        [Display(Name = "Sections")]
-        public List<int> Sections { get; set; }
-
-        public List<Section> SectionsList { get; set; }
     }
 }

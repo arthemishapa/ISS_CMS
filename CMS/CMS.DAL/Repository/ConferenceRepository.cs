@@ -15,10 +15,11 @@ namespace CMS.CMS.DAL.Repository
             this.context = context;
         }
 
-        public void AddConference(Conference conference)
+        public Conference AddConference(Conference conference)
         {
-            context.Conferences.Add(conference);
+            var addedConference = context.Conferences.Add(conference);
             context.SaveChanges();
+            return addedConference;
         }
 
         public void UpdateConference(Conference conference)
