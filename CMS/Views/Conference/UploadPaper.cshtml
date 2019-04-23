@@ -1,0 +1,27 @@
+﻿@model CMS.CMS.Common.ViewModels.UploadPaperViewModel
+
+
+@using (@Html.BeginForm("FormUploadPaper", "Conference", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal">
+        @Html.HiddenFor(x => x.ConferenceId, new { Id = "Id" })
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.Title)
+                @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => Model.File, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(m => m.File, new { type = "file" })
+                @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <input type="submit" name="submit" value="Submit" />
+    </div>
+}
+

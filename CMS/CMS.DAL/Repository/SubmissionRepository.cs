@@ -12,9 +12,11 @@ namespace CMS.CMS.DAL.Repository
             this.context = context;
         }
 
-        public void AddSubmission(Submission submission)
+        public Submission AddSubmission(Submission submission)
         {
-
+            var addedSubmission = context.Submissions.Add(submission);
+            context.SaveChanges();
+            return addedSubmission;
         }
 
         public void UpdateSubmission(Submission submission)

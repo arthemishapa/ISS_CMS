@@ -6,8 +6,10 @@ namespace CMS.CMS.DAL.Entities
     public class Submission
     {
         public int Id { get; set; }
+        public int ConferenceId { get; set; }
         public string AuthorId { get; set; }
         public string Data { get; set; }
+        public string Title { get; set; }
         public SubmissionType Type { get; set; }
 
         public User Author { get; set; }

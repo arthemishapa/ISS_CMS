@@ -19,12 +19,12 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.ChairId)
-        </dt>
+                @Html.DisplayNameFor(model => model.ChairId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChairId)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.ChairId)
+            </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.StartDate)
@@ -69,6 +69,23 @@
     </dl>
 </div>
 @*<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
-</p>*@
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    </p>*@
+
+<button id="renderPartialPaper">Submit paper</button>
+
+<div id="partialUploadPaper" style="display:none">
+    @{
+        Html.RenderAction("UploadPaper", "Conference", new { Model.Id });
+    }
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $('#renderPartialPaper').click(function () {
+            $('#partialUploadPaper').show();
+        });
+    </script>
+}
 

@@ -3,6 +3,7 @@
     public enum SubmissionType
     {
         Abstract = 0,
-        Paper = 1
+        Pdf = 1,
+        Word = 2
     }
 }

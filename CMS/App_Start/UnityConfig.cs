@@ -45,6 +45,7 @@ namespace CMS
 
             // TODO: Register your type's mappings here.
             container.RegisterType<IConferenceRepository, ConferenceRepository>();
+            container.RegisterType<ISubmissionRepository, SubmissionRepository>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             //container.RegisterType<UmbracoAuthorizeAttribute>(new InjectionConstructor());
         }
