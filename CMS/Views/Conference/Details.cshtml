@@ -8,7 +8,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Conference</h4>
+    <button id="joinPC" class="btn btn-default">Join PC</button>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -74,7 +74,6 @@
     </p>*@
 
 <button id="renderPartialPaper" class="btn btn-default">Submit paper</button>
-
 <div id="partialUploadPaper" style="display:none">
     @{
         Html.RenderAction("UploadPaper", "Conference", new { Model.Id });

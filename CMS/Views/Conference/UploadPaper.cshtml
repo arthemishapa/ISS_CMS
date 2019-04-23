@@ -1,9 +1,9 @@
 ﻿@model CMS.CMS.Common.ViewModels.UploadPaperViewModel
 
-
+<hr />
 @using (@Html.BeginForm("FormUploadPaper", "Conference", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
 {
-    <div class="form-horizontal">
+    <div class="form-horizontal" style="margin-top: 15px">
         @Html.HiddenFor(x => x.ConferenceId, new { Id = "Id" })
         <div class="form-group">
             @Html.LabelFor(x => Model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
