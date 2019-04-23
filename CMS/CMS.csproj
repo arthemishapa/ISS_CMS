@@ -206,6 +206,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="CMS.Common\Validation\ValidDateAttribute.cs" />
+    <Compile Include="CMS.Common\ViewModels\ConferenceDetailsViewModel.cs" />
     <Compile Include="CMS.DAL\Repository\IConferenceRepository.cs" />
     <Compile Include="CMS.DAL\Repository\IRoleRepository.cs" />
     <Compile Include="CMS.DAL\Repository\ISectionRepository.cs" />
@@ -408,7 +410,14 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\AccountDetails.cshtml" />
+    <Content Include="Views\Account\ChangeDeadline.cshtml" />
+    <Content Include="Views\Account\Settings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Repository\Interfaces\" />
     <Content Include="Views\Conference\Add.cshtml" />
+    <Content Include="Views\Conference\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

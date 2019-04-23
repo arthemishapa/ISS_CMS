@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CMS.CMS.DAL.Entities;
+
+using CMS.CMS.Common.Validation;
 
 namespace CMS.CMS.Common.ViewModels
 {
@@ -23,6 +23,7 @@ namespace CMS.CMS.Common.ViewModels
         [UIHint("DateTime")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [ValidDate(StartDatePropertyName = "StartDate")]
         public DateTime EndDate { get; set; }
 
         [Required]
@@ -30,6 +31,7 @@ namespace CMS.CMS.Common.ViewModels
         [UIHint("DateTime")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [ValidDate(StartDatePropertyName = "StartDate", EndDatePropertyName = "BiddingDeadline")]
         public DateTime AbstractPaperDeadline { get; set; }
 
         [Required]
@@ -37,6 +39,7 @@ namespace CMS.CMS.Common.ViewModels
         [UIHint("DateTime")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [ValidDate(StartDatePropertyName = "StartDate", EndDatePropertyName = "BiddingDeadline")]
         public DateTime ProposalPaperDeadline { get; set; }
 
         [Required]
@@ -44,12 +47,7 @@ namespace CMS.CMS.Common.ViewModels
         [UIHint("DateTime")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMMM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [ValidDate(StartDatePropertyName = "StartDate", EndDatePropertyName = "EndDate")]
         public DateTime BiddingDeadline { get; set; }
-
-        [Required]
-        [Display(Name = "Sections")]
-        public List<int> Sections { get; set; }
-
-        public List<Section> SectionsList { get; set; }
     }
 }

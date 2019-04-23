@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 using CMS.CMS.Common.ViewModels;
@@ -19,6 +18,20 @@ namespace CMS.Controllers
             this.conferenceRepository = conferenceRepository;
         }
 
+        public ActionResult Details(int Id)
+        {
+            var conference = conferenceRepository.GetConferenceById(Id);
+            return View(new ConferenceDetailsViewModel() {
+                Id = conference.Id,
+                Name = conference.Name,
+                ProposalPaperDeadline = conference.ProposalPaperDeadline,
+                AbstractPaperDeadline = conference.AbstractPaperDeadline,
+                BiddingDeadline = conference.BiddingDeadline,
+                StartDate = conference.StartDate,
+                EndDate = conference.EndDate
+            });
+        }
+
         [Authorize]
         public ActionResult Add()
         {
@@ -29,11 +42,6 @@ namespace CMS.Controllers
                 AbstractPaperDeadline = DateTime.Now.Date.AddDays(1),
                 ProposalPaperDeadline = DateTime.Now.Date.AddDays(1),
                 BiddingDeadline = DateTime.Now.Date.AddDays(1),
-                SectionsList = new List<Section>
-                {
-                    new Section { Id = 1, Name = "S1" },
-                    new Section { Id = 2, Name = "S2" }
-                } // TODO: remove this
             };
 
             return View(viewModel);
@@ -44,18 +52,22 @@ namespace CMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(AddConferenceViewModel model)
         {
-            conferenceRepository.AddConference(new Conference
+            if (ModelState.IsValid)
             {
-                Name = model.Name,
-                ChairId = User.Identity.GetUserId(),
-                StartDate = model.StartDate,
-                EndDate = model.EndDate,
-                AbstractPaperDeadline = model.AbstractPaperDeadline,
-                ProposalPaperDeadline = model.ProposalPaperDeadline,
-                BiddingDeadline = model.BiddingDeadline
-            });
+                var addedConference = conferenceRepository.AddConference(new Conference
+                {
+                    Name = model.Name,
+                    ChairId = User.Identity.GetUserId(),
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    AbstractPaperDeadline = model.AbstractPaperDeadline,
+                    ProposalPaperDeadline = model.ProposalPaperDeadline,
+                    BiddingDeadline = model.BiddingDeadline
+                });
 
-            return RedirectToAction("Index", "Home"); // TODO: redirect to details page
+                return RedirectToAction("Details", "Conference", new { addedConference.Id });
+            }
+            return View(model);
         }
     }
 }
