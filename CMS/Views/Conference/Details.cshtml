@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
+@using Newtonsoft.Json
 
 <h2>Details</h2>
 
@@ -81,10 +82,20 @@
 </div>
 
 @section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
 
         $('#renderPartialPaper').click(function () {
             $('#partialUploadPaper').show();
+        });
+
+        $(document).ready(function () {
+            var model = @Html.Raw(JsonConvert.SerializeObject(this.Model));
+            var today = new Date();
+            console.log(today.toJSON());
+            console.log(model.BiddingDeadline);
+            if (model.BiddingDeadline < today.toJSON()) {
+            document.getElementById("renderPartialPaper").disabled = true; }
         });
     </script>
 }
