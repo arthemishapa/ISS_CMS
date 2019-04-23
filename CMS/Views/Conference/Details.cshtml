@@ -8,7 +8,12 @@
 <h2>Details</h2>
 
 <div>
-    <button id="joinPC" class="btn btn-default">Join PC</button>
+    <button id="renderJoinPC" class="btn btn-default">Join PC</button>
+    <div id="partialJoinPC" style="display:none">
+        @{
+            Html.RenderAction("JoinPC", "Conference", new { Model.Id });
+        }
+    </div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -86,6 +91,10 @@
 
         $('#renderPartialPaper').click(function () {
             $('#partialUploadPaper').show();
+        });
+
+        $('#renderJoinPC').click(function () {
+            $('#partialJoinPC').show();
         });
 
         $(document).ready(function () {

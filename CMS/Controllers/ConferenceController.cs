@@ -74,9 +74,19 @@ namespace CMS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult FormJoinPC(JoinPCViewModel model)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult UploadPaper(int Id)
         {
             return PartialView("UploadPaper", new UploadPaperViewModel() { ConferenceId = Id });
+        }
+
+        public ActionResult JoinPC(int Id)
+        {
+            return PartialView("JoinPC", new JoinPCViewModel() { ConferenceId = Id });
         }
 
         [Authorize]
