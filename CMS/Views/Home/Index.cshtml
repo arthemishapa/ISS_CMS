@@ -2,14 +2,65 @@
 @{
     ViewBag.Title = "Home Page";
 }
+@using Newtonsoft.Json
 
-@foreach (var conference in Model)
-{
-    <div class="row">
-        <div class="col-md-10">
-            @Html.LabelForModel(conference.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <br />
-            <p style="float:left">@Html.ActionLink("View details", "Details", "Conference", new { conference.Id }, null)</p>
-        </div>
-    </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>All available conferences</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var conference in Model)
+        {
+            <tr>
+                <td align="center">
+                    <section>
+                        @Html.LabelForModel(conference.Name, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
+                        <label id="@("label"+conference.Id)" style="color:red"></label>
+                        <span>@Html.ActionLink("View details", "Details", "Conference", new { conference.Id }, null)</span>
+                    </section>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var conferenceList = @Html.Raw(JsonConvert.SerializeObject(this.Model));
+            for (var i = 0; i < conferenceList.length; i++) {
+                var today = new Date();
+
+                if (conferenceList[i].StartDate == today.toJSON()) {
+                    var label = document.getElementById("label" + conferenceList[i].Id);
+                    label.textContent = "Conference just started! Check for call for papers!";
+                }
+                else if (conferenceList[i].StartDate > today.toJSON()) {
+                    var label = document.getElementById("label" + conferenceList[i].Id);
+                    label.textContent = "Conference starts soon! Keep in touch.";
+                }
+                else if (conferenceList[i].AbstractPaperDeadline > today.toJSON() ||
+                    conferenceList[i].ProposalPaperDeadline > today.toJSON()) {
+                    var label = document.getElementById("label" + conferenceList[i].Id);
+                    label.textContent = "Call for papers!";
+                }
+                else if (conferenceList[i].BiddingDeadline > today.toJSON()) {
+                    var label = document.getElementById("label" + conferenceList[i].Id);
+                    label.textContent = "Bidding time!";
+                }
+                else if (conferenceList[i].EndDate > today.toJSON()) {
+                    var label = document.getElementById("label" + conferenceList[i].Id);
+                    label.textContent = "Review time! See you soon at the conference";
+                }
+                else {
+                    var label = document.getElementById("label" + conferenceList[i].Id);
+                    label.textContent = "Conference has ended! We accept feedback.";
+                }
+            }
+    });
+    </script>
 }
