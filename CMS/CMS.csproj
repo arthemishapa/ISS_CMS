@@ -408,7 +408,12 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\AccountDetails.cshtml" />
-    <Content Include="Views\Conference\Add.cshtml" />
+    <Content Include="Views\Account\ChangeDeadline.cshtml" />
+    <Content Include="Views\Account\Settings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Repository\Interfaces\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
