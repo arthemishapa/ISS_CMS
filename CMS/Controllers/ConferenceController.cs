@@ -116,5 +116,44 @@ namespace CMS.Controllers
             }
             return View(model);
         }
+
+        public ActionResult UpdateConference(int Id)
+        {
+            var conference = conferenceRepository.GetConferenceById(Id);
+            return View(new UpdateConferenceViewModel()
+            {
+                Id = conference.Id,
+                Name = conference.Name,
+                ProposalPaperDeadline = conference.ProposalPaperDeadline,
+                AbstractPaperDeadline = conference.AbstractPaperDeadline,
+                BiddingDeadline = conference.BiddingDeadline,
+                StartDate = conference.StartDate,
+                EndDate = conference.EndDate
+            });
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateConference(UpdateConferenceViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var updatedConference = conferenceRepository.GetConferenceById(model.Id);
+
+
+                updatedConference.Name = model.Name;
+                updatedConference.ChairId = User.Identity.GetUserId();
+                updatedConference.StartDate = model.StartDate;
+                updatedConference.EndDate = model.EndDate;
+                updatedConference.AbstractPaperDeadline = model.AbstractPaperDeadline;
+                updatedConference.ProposalPaperDeadline = model.ProposalPaperDeadline;
+                updatedConference.BiddingDeadline = model.BiddingDeadline;
+                conferenceRepository.UpdateConference(updatedConference);
+
+                return RedirectToAction("Details", "Conference", new { updatedConference.Id });
+            }
+            return View(model);
+        }
     }
 }

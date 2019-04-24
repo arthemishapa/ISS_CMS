@@ -67,6 +67,7 @@
             @Html.DisplayFor(model => model.BiddingDeadline)
         </dd>
     </dl>
+    @Html.ActionLink("Edit", "UpdateConference", "Conference", new { Model.Id }, null)
 </div>
 @*<p>
     @Html.ActionLink("Edit", "UpdateConference", new { id = Model.Id })

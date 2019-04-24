@@ -7,6 +7,7 @@ namespace CMS.CMS.Common.ViewModels
 {
     public class UpdateConferenceViewModel
     {
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Conference name")]
         public string Name { get; set; }
