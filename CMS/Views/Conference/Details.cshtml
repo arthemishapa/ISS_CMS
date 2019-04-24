@@ -74,9 +74,17 @@
     </p>*@
 
 <button id="renderPartialPaper" class="btn btn-default">Submit paper</button>
+<button id="renderPartialAbstract" class="btn btn-default">Submit abstract</button>
+
 <div id="partialUploadPaper" style="display:none">
     @{
         Html.RenderAction("UploadPaper", "Conference", new { Model.Id });
+    }
+</div>
+
+<div id="partialUploadAbstract" style="display:none">
+    @{ 
+        Html.RenderAction("UploadAbstract", "Conference", new { Model.Id });
     }
 </div>
 
@@ -88,13 +96,19 @@
             $('#partialUploadPaper').show();
         });
 
+        $('#renderPartialAbstract').click(function () {
+            $('#partialUploadAbstract').show();
+        });
+
         $(document).ready(function () {
             var model = @Html.Raw(JsonConvert.SerializeObject(this.Model));
             var today = new Date();
             console.log(today.toJSON());
             console.log(model.BiddingDeadline);
             if (model.BiddingDeadline < today.toJSON()) {
-            document.getElementById("renderPartialPaper").disabled = true; }
+                document.getElementById("renderPartialPaper").disabled = true;
+                document.getElementById("renderPartialAbstract").disabled = true;
+            }
         });
     </script>
 }

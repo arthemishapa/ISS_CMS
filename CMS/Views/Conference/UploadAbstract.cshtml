@@ -1,0 +1,27 @@
+﻿@model CMS.CMS.Common.ViewModels.UploadAbstractViewModel
+
+<hr />
+@using (@Html.BeginForm("FormUploadAbstract", "Conference", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal" style="margin-top: 15px">
+        @Html.HiddenFor(x => x.ConferenceId, new { Id = "Id" })
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => Model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.TextAreaFor(m => m.Content, htmlAttributes: new { @class = "form-control"})
+                @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <input type="submit" name="submit" value="Submit" class="btn btn-default"/>
+    </div>
+}
+
