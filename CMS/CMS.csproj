@@ -208,6 +208,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="CMS.Common\Validation\ValidDateAttribute.cs" />
     <Compile Include="CMS.Common\ViewModels\ConferenceDetailsViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\UpdateConferenceViewModel.cs" />
     <Compile Include="CMS.DAL\Repository\IConferenceRepository.cs" />
     <Compile Include="CMS.DAL\Repository\IRoleRepository.cs" />
     <Compile Include="CMS.DAL\Repository\ISectionRepository.cs" />
@@ -412,6 +413,7 @@
     <Content Include="Views\Account\AccountDetails.cshtml" />
     <Content Include="Views\Account\ChangeDeadline.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
+    <Content Include="Views\Conference\UpdateConference.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Conference\Add.cshtml" />
@@ -466,7 +468,7 @@
     </ItemGroup>
     <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
     <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
-</Target>
+  </Target>
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
