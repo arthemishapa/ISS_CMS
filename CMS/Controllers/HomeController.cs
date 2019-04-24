@@ -16,5 +16,6 @@ namespace CMS.Controllers
         {
             return View(conferenceRepository.GetAll());
         }
+       
     }
 }

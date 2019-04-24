@@ -66,12 +66,12 @@
         <dd>
             @Html.DisplayFor(model => model.BiddingDeadline)
         </dd>
-
     </dl>
+    @Html.ActionLink("Edit", "UpdateConference", "Conference", new { Model.Id }, null)
 </div>
 @*<p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
-    </p>*@
+    @Html.ActionLink("Edit", "UpdateConference", new { id = Model.Id })
+</p>*@
 
 <button id="renderPartialPaper" class="btn btn-default">Submit paper</button>
 <button id="renderPartialAbstract" class="btn btn-default">Submit abstract</button>
