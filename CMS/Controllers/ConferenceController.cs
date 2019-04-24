@@ -79,6 +79,34 @@ namespace CMS.Controllers
             return PartialView("UploadPaper", new UploadPaperViewModel() { ConferenceId = Id });
         }
 
+        public ActionResult FormUploadAbstract(UploadAbstractViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.Content != null && model.Content.Length > 0)
+                {
+                    submissionRepository.AddSubmission(new Submission()
+                    {
+                        ConferenceId = model.ConferenceId,
+                        Data = model.Content,
+                        Title = model.Title,
+                        AuthorId = System.Web.HttpContext.Current.User.Identity.GetUserId()
+                    });
+                }
+                else
+                {
+                    ViewBag.message = "Please write something.";
+                }
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult UploadAbstract(int Id)
+        {
+            return PartialView("UploadAbstract", new UploadAbstractViewModel() { ConferenceId = Id });
+        }
+
         [Authorize]
         public ActionResult Add()
         {

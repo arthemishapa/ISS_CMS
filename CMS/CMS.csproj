@@ -209,6 +209,7 @@
     <Compile Include="CMS.Common\Validation\ValidDateAttribute.cs" />
     <Compile Include="CMS.Common\ViewModels\ConferenceDetailsViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UpdateConferenceViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\UploadAbstractViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UploadPaperViewModel.cs" />
     <Compile Include="CMS.DAL\Repository\IConferenceRepository.cs" />
     <Compile Include="CMS.DAL\Repository\IRoleRepository.cs" />
@@ -424,6 +425,7 @@
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Conference\UpdateConference.cshtml" />
     <Content Include="Views\Conference\UploadPaper.cshtml" />
+    <Content Include="Views\Conference\UploadAbstract.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Conference\Add.cshtml" />
