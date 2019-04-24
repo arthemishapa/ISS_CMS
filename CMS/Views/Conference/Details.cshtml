@@ -3,11 +3,12 @@
 @{
     ViewBag.Title = "Details";
 }
+@using Newtonsoft.Json
 
 <h2>Details</h2>
 
 <div>
-    <h4>Conference</h4>
+    <button id="joinPC" class="btn btn-default">Join PC</button>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,12 +20,12 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.ChairId)
-        </dt>
+                @Html.DisplayNameFor(model => model.ChairId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChairId)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.ChairId)
+            </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.StartDate)
@@ -70,4 +71,30 @@
 @*<p>
     @Html.ActionLink("Edit", "UpdateConference", new { id = Model.Id })
 </p>*@
+
+<button id="renderPartialPaper" class="btn btn-default">Submit paper</button>
+<div id="partialUploadPaper" style="display:none">
+    @{
+        Html.RenderAction("UploadPaper", "Conference", new { Model.Id });
+    }
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $('#renderPartialPaper').click(function () {
+            $('#partialUploadPaper').show();
+        });
+
+        $(document).ready(function () {
+            var model = @Html.Raw(JsonConvert.SerializeObject(this.Model));
+            var today = new Date();
+            console.log(today.toJSON());
+            console.log(model.BiddingDeadline);
+            if (model.BiddingDeadline < today.toJSON()) {
+            document.getElementById("renderPartialPaper").disabled = true; }
+        });
+    </script>
+}
 

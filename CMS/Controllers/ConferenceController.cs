@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 
 using CMS.CMS.Common.ViewModels;
@@ -12,10 +14,12 @@ namespace CMS.Controllers
     public class ConferenceController : Controller
     {
         private readonly IConferenceRepository conferenceRepository;
+        private readonly ISubmissionRepository submissionRepository;
 
-        public ConferenceController(IConferenceRepository conferenceRepository)
+        public ConferenceController(IConferenceRepository conferenceRepository, ISubmissionRepository submissionRepository)
         {
             this.conferenceRepository = conferenceRepository;
+            this.submissionRepository = submissionRepository;
         }
 
         public ActionResult Details(int Id)
@@ -30,6 +34,49 @@ namespace CMS.Controllers
                 StartDate = conference.StartDate,
                 EndDate = conference.EndDate
             });
+        }
+
+        public ActionResult FormUploadPaper(UploadPaperViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.File != null && model.File.ContentLength > 0)
+                {
+                    var allowedExtensions = new[] { "pdf", "docx" };
+
+                    var fileName = Path.GetFileName(model.File.FileName);
+                    var ext = Path.GetExtension(model.File.FileName).Replace(".", "");
+                    if (allowedExtensions.Contains(ext))
+                    {
+                        string name = Path.GetFileNameWithoutExtension(fileName);
+                        var path = Path.Combine(Server.MapPath("~/Documents"), fileName);
+
+                        submissionRepository.AddSubmission(new Submission() { ConferenceId = model.ConferenceId,
+                            Data = fileName,
+                            Title = model.Title,
+                            Type = ext == "pdf" ? CMS.Common.Enums.SubmissionType.Pdf : CMS.Common.Enums.SubmissionType.Word,
+                            AuthorId = System.Web.HttpContext.Current.User.Identity.GetUserId()
+                        });
+
+                        model.File.SaveAs(path);
+                    }
+                    else
+                    {
+                        ViewBag.message = "Please choose only Image file";
+                    }
+                }
+                else
+                {
+                    ViewBag.message = "Please upload a pdf/word file";
+                }
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult UploadPaper(int Id)
+        {
+            return PartialView("UploadPaper", new UploadPaperViewModel() { ConferenceId = Id });
         }
 
         [Authorize]

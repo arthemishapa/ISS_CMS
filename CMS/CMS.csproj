@@ -209,6 +209,7 @@
     <Compile Include="CMS.Common\Validation\ValidDateAttribute.cs" />
     <Compile Include="CMS.Common\ViewModels\ConferenceDetailsViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UpdateConferenceViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\UploadPaperViewModel.cs" />
     <Compile Include="CMS.DAL\Repository\IConferenceRepository.cs" />
     <Compile Include="CMS.DAL\Repository\IRoleRepository.cs" />
     <Compile Include="CMS.DAL\Repository\ISectionRepository.cs" />
@@ -266,6 +267,14 @@
     <Compile Include="Migrations\201904171938437_AddChairColumnToConference.cs" />
     <Compile Include="Migrations\201904171938437_AddChairColumnToConference.Designer.cs">
       <DependentUpon>201904171938437_AddChairColumnToConference.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904231429271_UpdateSubmissionInfo.cs" />
+    <Compile Include="Migrations\201904231429271_UpdateSubmissionInfo.Designer.cs">
+      <DependentUpon>201904231429271_UpdateSubmissionInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904231504031_UpdateSubmissionInfo-v2.cs" />
+    <Compile Include="Migrations\201904231504031_UpdateSubmissionInfo-v2.Designer.cs">
+      <DependentUpon>201904231504031_UpdateSubmissionInfo-v2.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -414,12 +423,14 @@
     <Content Include="Views\Account\ChangeDeadline.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Conference\UpdateConference.cshtml" />
+    <Content Include="Views\Conference\UploadPaper.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Conference\Add.cshtml" />
     <Content Include="Views\Conference\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Documents\" />
     <Folder Include="Repository\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
@@ -450,6 +461,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904171938437_AddChairColumnToConference.resx">
       <DependentUpon>201904171938437_AddChairColumnToConference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904231429271_UpdateSubmissionInfo.resx">
+      <DependentUpon>201904231429271_UpdateSubmissionInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904231504031_UpdateSubmissionInfo-v2.resx">
+      <DependentUpon>201904231504031_UpdateSubmissionInfo-v2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
