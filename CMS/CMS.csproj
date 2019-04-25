@@ -277,6 +277,10 @@
     <Compile Include="Migrations\201904231504031_UpdateSubmissionInfo-v2.Designer.cs">
       <DependentUpon>201904231504031_UpdateSubmissionInfo-v2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904250539460_Something.cs" />
+    <Compile Include="Migrations\201904250539460_Something.Designer.cs">
+      <DependentUpon>201904250539460_Something.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -469,6 +473,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904231504031_UpdateSubmissionInfo-v2.resx">
       <DependentUpon>201904231504031_UpdateSubmissionInfo-v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904250539460_Something.resx">
+      <DependentUpon>201904250539460_Something.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
