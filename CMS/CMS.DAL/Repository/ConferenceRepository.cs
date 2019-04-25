@@ -24,7 +24,6 @@ namespace CMS.CMS.DAL.Repository
 
         public void UpdateConference(Conference conference)
         {
-
         }
 
         public void DeleteConference(int conferenceId)

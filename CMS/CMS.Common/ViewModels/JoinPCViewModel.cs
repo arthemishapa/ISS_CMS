@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CMS.CMS.Common.ViewModels
+﻿namespace CMS.CMS.Common.ViewModels
 {
     public class JoinPCViewModel
     {

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CMS.CMS.Common.ViewModels.RequestViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Requests</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td align="center">
+                    <section>
+                        @Html.LabelForModel(request.RequestMessage, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
+                        <button class="btn btn-default">Approve</button>
+                        <button class="btn btn-danger">Decline</button>
+                    </section>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
