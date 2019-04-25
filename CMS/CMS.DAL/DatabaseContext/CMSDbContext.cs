@@ -13,6 +13,7 @@ namespace CMS.CMS.DAL.DatabaseContext
         public DbSet<Submission> Submissions { get; set; }
         public DbSet<UserRoles> UserRoles { get; set; }
         public DbSet<SubmissionReview> SubmissionReviews { get; set; }
+        public DbSet<Requests> Requests { get; set; }
 
         public CMSDbContext()
             : base("CMSDatabase", throwIfV1Schema: false)

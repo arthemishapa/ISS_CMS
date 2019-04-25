@@ -15,11 +15,15 @@ namespace CMS.Controllers
     {
         private readonly IConferenceRepository conferenceRepository;
         private readonly ISubmissionRepository submissionRepository;
+        private readonly IRequestRepository requestRepository;
 
-        public ConferenceController(IConferenceRepository conferenceRepository, ISubmissionRepository submissionRepository)
+        public ConferenceController(IConferenceRepository conferenceRepository, 
+            ISubmissionRepository submissionRepository,
+            IRequestRepository requestRepository)
         {
             this.conferenceRepository = conferenceRepository;
             this.submissionRepository = submissionRepository;
+            this.requestRepository = requestRepository;
         }
 
         public ActionResult Details(int Id)
@@ -62,7 +66,7 @@ namespace CMS.Controllers
                     }
                     else
                     {
-                        ViewBag.message = "Please choose only Image file";
+                        ViewBag.message = "Please choose only pdf/word file";
                     }
                 }
                 else
@@ -70,6 +74,26 @@ namespace CMS.Controllers
                     ViewBag.message = "Please upload a pdf/word file";
                 }
 
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult FormJoinPC(JoinPCViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                Conference conference = conferenceRepository.GetConferenceById(model.ConferenceId);
+
+                requestRepository.AddRequest(
+                    new Requests()
+                    {
+                        ConferenceId = conference.Id,
+                        UserRequesterId = System.Web.HttpContext.Current.User.Identity.GetUserId(),
+                        UserChairId = conference.ChairId,
+                        Type = model.Role == "Chair" ? CMS.Common.Enums.RequestType.Chair :
+                        model.Role == "Default" ? CMS.Common.Enums.RequestType.Default :
+                        CMS.Common.Enums.RequestType.CoChair
+                    });
             }
             return RedirectToAction("Index", "Home");
         }

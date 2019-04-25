@@ -206,19 +206,25 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="CMS.Common\Enums\RequestType.cs" />
     <Compile Include="CMS.Common\Validation\ValidDateAttribute.cs" />
     <Compile Include="CMS.Common\ViewModels\ConferenceDetailsViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\JoinPCViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\RequestViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UpdateConferenceViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UploadAbstractViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UploadPaperViewModel.cs" />
-    <Compile Include="CMS.DAL\Repository\IConferenceRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\IRoleRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\ISectionRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\ISessionRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\ISubmissionRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\ISubmissionReviewRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\IUserRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\IUserRolesRepository.cs" />
+    <Compile Include="CMS.DAL\Entities\Requests.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\IConferenceRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\IRequestRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\IRoleRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\ISectionRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\ISessionRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\ISubmissionRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\ISubmissionReviewRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\IUserRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\IUserRolesRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\RequestRepository.cs" />
     <Compile Include="CMS.DAL\Repository\UserRolesRepository.cs" />
     <Compile Include="CMS.DAL\Repository\ConferenceRepository.cs" />
     <Compile Include="CMS.DAL\Repository\RoleRepository.cs" />
@@ -231,6 +237,7 @@
     <Compile Include="Controllers\ConferenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CMS.DAL\DatabaseContext\CMSDbContext.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,6 +283,10 @@
     <Compile Include="Migrations\201904231504031_UpdateSubmissionInfo-v2.cs" />
     <Compile Include="Migrations\201904231504031_UpdateSubmissionInfo-v2.Designer.cs">
       <DependentUpon>201904231504031_UpdateSubmissionInfo-v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904241333498_AddRequests.cs" />
+    <Compile Include="Migrations\201904241333498_AddRequests.Designer.cs">
+      <DependentUpon>201904241333498_AddRequests.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201904250539460_Something.cs" />
     <Compile Include="Migrations\201904250539460_Something.Designer.cs">
@@ -430,6 +441,8 @@
     <Content Include="Views\Conference\UpdateConference.cshtml" />
     <Content Include="Views\Conference\UploadPaper.cshtml" />
     <Content Include="Views\Conference\UploadAbstract.cshtml" />
+    <Content Include="Views\Conference\JoinPC.cshtml" />
+    <Content Include="Views\Request\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Conference\Add.cshtml" />
@@ -437,7 +450,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Documents\" />
-    <Folder Include="Repository\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CMS.PL\Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -476,6 +488,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904250539460_Something.resx">
       <DependentUpon>201904250539460_Something.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904241333498_AddRequests.resx">
+      <DependentUpon>201904241333498_AddRequests.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
