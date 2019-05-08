@@ -40,6 +40,11 @@ namespace CMS.Controllers
             });
         }
 
+        public ActionResult JoinPC(int Id)
+        {
+            return PartialView("JoinPC", new JoinPCViewModel() { ConferenceId = Id });
+        }
+
         public ActionResult FormUploadPaper(UploadPaperViewModel model)
         {
             if (ModelState.IsValid)
