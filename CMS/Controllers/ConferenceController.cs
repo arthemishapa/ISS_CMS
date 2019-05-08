@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
-
+using CMS.CMS.Common.Validation;
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL.Entities;
 using CMS.CMS.DAL.Repository;
@@ -25,7 +25,7 @@ namespace CMS.Controllers
             this.submissionRepository = submissionRepository;
             this.requestRepository = requestRepository;
         }
-
+        [AuthorizeAction(RoleName = "Chair")]
         public ActionResult Details(int Id)
         {
             var conference = conferenceRepository.GetConferenceById(Id);

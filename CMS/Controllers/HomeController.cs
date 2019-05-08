@@ -7,12 +7,15 @@ namespace CMS.Controllers
     public class HomeController : Controller
     {
         private readonly IConferenceRepository conferenceRepository;
+        private readonly IUserRolesRepository userRolesRepository;
+        private readonly IRoleRepository roleRepository;
 
-        public HomeController(IConferenceRepository conferenceRepository)
+        public HomeController(IConferenceRepository conferenceRepository, IUserRolesRepository userRolesRepository, IRoleRepository roleRepository)
         {
             this.conferenceRepository = conferenceRepository;
+            this.userRolesRepository = userRolesRepository;
+            this.roleRepository = roleRepository;
         }
-        [AuthorizeAction]
         public ActionResult Index()
         {
             return View(conferenceRepository.GetAll());

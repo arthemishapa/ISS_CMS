@@ -1,4 +1,6 @@
-﻿using CMS.CMS.DAL.DatabaseContext;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.DAL.Repository
@@ -25,6 +27,11 @@ namespace CMS.CMS.DAL.Repository
         public UserRoles GetUserRoles(string userId, int roleId)
         {
             return null;
+        }
+
+        public IEnumerable<UserRoles> GetAll()
+        {
+            return context.UserRoles.ToList();
         }
     }
 }

@@ -1,24 +1,54 @@
-﻿using System;
+﻿using CMS.CMS.DAL.Repository;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 
 namespace CMS.CMS.Common.Validation
 {
-    public class AuthorizeAction : ActionFilterAttribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+    public class AuthorizeAction : AuthorizeAttribute
     {
-        public override void OnResultExecuting(ResultExecutingContext filterContext)
+        public string RoleName { get; set; }
+
+        private IUserRolesRepository UserRolesRepository
         {
-            //You may fetch data from database here 
-            filterContext.Controller.ViewBag.GreetMesssage = "Hello Foo";
-            base.OnResultExecuting(filterContext);
+            get
+            {
+                return DependencyResolver.Current.GetService<IUserRolesRepository>();
+            }
         }
 
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        private IRoleRepository RoleRepository
         {
-            var controllerName = filterContext.RouteData.Values["controller"];
-            var actionName = filterContext.RouteData.Values["action"];
-            var message = String.Format("{0} controller:{1} action:{2}", "onactionexecuting", controllerName, actionName);
-            Debug.WriteLine(message, "Action Filter Log");
-            base.OnActionExecuting(filterContext);
+            get
+            {
+                return DependencyResolver.Current.GetService<IRoleRepository>();
+            }
+        }
+
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            var isAuthorized = base.AuthorizeCore(httpContext);
+            if (!isAuthorized)
+            {
+                return false;
+            }
+            
+            var Id = (httpContext.Request.RequestContext.RouteData.Values["id"] as string)
+                     ??
+                     (httpContext.Request["id"] as string);
+            int conferenceId;
+            int.TryParse(Id, out conferenceId);
+            var userId = httpContext.User.Identity.Name;
+            var role = RoleRepository.GetAll().SingleOrDefault(r => r.Name == RoleName);
+            var privilege = UserRolesRepository.GetAll().SingleOrDefault(p => p.RoleId == role.Id
+           && p.ConferenceId == conferenceId
+           && p.UserId == userId);
+            if (privilege != null)
+                return true;
+            return false;
         }
     }
 }

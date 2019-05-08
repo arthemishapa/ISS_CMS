@@ -15,10 +15,15 @@ namespace CMS.CMS.DAL.Entities
 
         [Key]
         [Column(Order = 3)]
-        public int SectionId { get; set; }
+        public int ConferenceId { get; set; }
+
+        [Key]
+        [Column(Order = 4)]
+        public int? SectionId { get; set; }
 
         public User User { get; set; }
         public Role Role { get; set; }
         public Section Section { get; set; }
+        public Conference Conference { get; set; }
     }
 }
