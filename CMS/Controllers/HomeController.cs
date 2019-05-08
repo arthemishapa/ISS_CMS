@@ -1,5 +1,6 @@
 ﻿using CMS.CMS.DAL.Repository;
 using System.Web.Mvc;
+using CMS.CMS.Common.Validation;
 
 namespace CMS.Controllers
 {
@@ -11,7 +12,7 @@ namespace CMS.Controllers
         {
             this.conferenceRepository = conferenceRepository;
         }
-
+        [AuthorizeAction]
         public ActionResult Index()
         {
             return View(conferenceRepository.GetAll());
