@@ -1,5 +1,6 @@
 ﻿using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
+using System.Linq;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -30,6 +31,11 @@ namespace CMS.CMS.DAL.Repository
         public User GetUserById(string userId)
         {
             return null;
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return context.Users.SingleOrDefault(u => u.Email == email);
         }
     }
 }

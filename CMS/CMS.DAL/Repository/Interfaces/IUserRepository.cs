@@ -8,5 +8,6 @@ namespace CMS.CMS.DAL.Repository
         void UpdateUser(User user);
         void DeleteUser(string userId);
         User GetUserById(string userId);
+        User GetUserByEmail(string email);
     }
 }

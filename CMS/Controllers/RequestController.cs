@@ -12,6 +12,7 @@ namespace CMS.Controllers
     public class RequestController : Controller
     {
         private readonly IRequestRepository requestRepository;
+        private readonly IConferenceRepository conferenceRepository;
 
         public RequestController(IRequestRepository requestRepository)
         {
@@ -31,8 +32,9 @@ namespace CMS.Controllers
             {
                 User Requester = requestRepository.GetAllUsers().SingleOrDefault(p => p.Id == request.UserRequesterId);
                 User Chair = requestRepository.GetAllUsers().SingleOrDefault(p => p.Id == request.UserChairId);
+                var conference = conferenceRepository.GetConferenceById(request.ConferenceId);
                 string message = Requester.Name + " has asked for permission to be a " + request.Type +
-                    " in your conference with ID: " + request.ConferenceId; 
+                    " in your conference:" + conference.Name; 
                 requests.Add(new RequestViewModel()
                 {
                     Id = request.Id,

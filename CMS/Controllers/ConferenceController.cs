@@ -11,21 +11,28 @@ using Microsoft.AspNet.Identity;
 
 namespace CMS.Controllers
 {
+    [AuthorizeAction(ValidateRole = false)]
     public class ConferenceController : Controller
     {
         private readonly IConferenceRepository conferenceRepository;
         private readonly ISubmissionRepository submissionRepository;
         private readonly IRequestRepository requestRepository;
+        private readonly IUserRolesRepository userRolesRepository;
+        private readonly IUserRepository userRepository;
 
         public ConferenceController(IConferenceRepository conferenceRepository, 
             ISubmissionRepository submissionRepository,
-            IRequestRepository requestRepository)
+            IRequestRepository requestRepository,
+            IUserRolesRepository userRolesRepository,
+            IUserRepository userRepository)
         {
             this.conferenceRepository = conferenceRepository;
             this.submissionRepository = submissionRepository;
             this.requestRepository = requestRepository;
+            this.userRolesRepository = userRolesRepository;
+            this.userRepository = userRepository;
         }
-        [AuthorizeAction(RoleName = "Chair")]
+        
         public ActionResult Details(int Id)
         {
             var conference = conferenceRepository.GetConferenceById(Id);
@@ -168,12 +175,12 @@ namespace CMS.Controllers
                     ProposalPaperDeadline = model.ProposalPaperDeadline,
                     BiddingDeadline = model.BiddingDeadline
                 });
-
+               
                 return RedirectToAction("Details", "Conference", new { addedConference.Id });
             }
             return View(model);
         }
-
+        [AuthorizeAction(RoleName = "Chair", ValidateRole = true)]
         public ActionResult UpdateConference(int Id)
         {
             var conference = conferenceRepository.GetConferenceById(Id);
@@ -192,12 +199,12 @@ namespace CMS.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
+        [AuthorizeAction(RoleName = "Chair", ValidateRole = true)]
         public ActionResult UpdateConference(UpdateConferenceViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var updatedConference = conferenceRepository.GetConferenceById(model.Id);
-
 
                 updatedConference.Name = model.Name;
                 updatedConference.ChairId = User.Identity.GetUserId();

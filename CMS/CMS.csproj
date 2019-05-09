@@ -236,6 +236,7 @@
     <Compile Include="CMS.DAL\Repository\UserRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConferenceController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CMS.DAL\DatabaseContext\CMSDbContext.cs" />
     <Compile Include="Controllers\RequestController.cs" />
@@ -456,6 +457,7 @@
     <Content Include="Views\Conference\UploadAbstract.cshtml" />
     <Content Include="Views\Conference\JoinPC.cshtml" />
     <Content Include="Views\Request\Index.cshtml" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Conference\Add.cshtml" />

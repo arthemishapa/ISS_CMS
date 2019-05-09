@@ -49,6 +49,7 @@ namespace CMS
             container.RegisterType<IRequestRepository, RequestRepository>();
             container.RegisterType<IRoleRepository, RoleRepository>();
             container.RegisterType<IUserRolesRepository, UserRolesRepository>();
+            container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             //container.RegisterType<UmbracoAuthorizeAttribute>(new InjectionConstructor());
         }
