@@ -32,10 +32,16 @@ namespace CMS.Controllers
         public ActionResult ApproveRequest(int Id)
         {
             var request = requestRepository.GetRequestById(Id);
-
+            userRolesRepository.AddUser(new UserRoles()
+            {
+                UserId = request.UserRequesterId,
+                ConferenceId = request.ConferenceId,
+                RoleId = (int)request.Type,
+                SectionId = 1
+            });
+            requestRepository.DeleteRequest(Id);
             return RedirectToAction("Index", "Request");
         }
-
 
         public ActionResult DeleteRequest(int Id)
         {
