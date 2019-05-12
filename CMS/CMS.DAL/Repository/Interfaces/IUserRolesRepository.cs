@@ -5,7 +5,7 @@ namespace CMS.CMS.DAL.Repository
 {
     public interface IUserRolesRepository
     {
-        void AddUser(User userRoles);
+        void AddUser(UserRoles userRoles);
         void UpdateUserRoles(UserRoles userRoles);
         UserRoles GetUserRoles(string userId, int roleId);
         IEnumerable<UserRoles> GetAll();

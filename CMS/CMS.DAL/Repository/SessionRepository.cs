@@ -1,4 +1,6 @@
-﻿using CMS.CMS.DAL.DatabaseContext;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.DAL.Repository
@@ -14,7 +16,8 @@ namespace CMS.CMS.DAL.Repository
 
         public void AddSession(Session session)
         {
-
+            context.Sessions.Add(session);
+            context.SaveChanges();
         }
 
         public void UpdateSession(Session session)
@@ -30,6 +33,11 @@ namespace CMS.CMS.DAL.Repository
         public Session GetSessionById(int sessionId)
         {
             return null;
+        }
+
+        public IEnumerable<Session> GetAll()
+        {
+            return context.Sessions.ToList();
         }
     }
 }

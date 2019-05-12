@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -19,18 +20,21 @@ namespace CMS.Controllers
         private readonly IRequestRepository requestRepository;
         private readonly IUserRolesRepository userRolesRepository;
         private readonly IUserRepository userRepository;
+        private readonly ISessionRepository sessionRepository;
 
         public ConferenceController(IConferenceRepository conferenceRepository, 
             ISubmissionRepository submissionRepository,
             IRequestRepository requestRepository,
             IUserRolesRepository userRolesRepository,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            ISessionRepository sessionRepository)
         {
             this.conferenceRepository = conferenceRepository;
             this.submissionRepository = submissionRepository;
             this.requestRepository = requestRepository;
             this.userRolesRepository = userRolesRepository;
             this.userRepository = userRepository;
+            this.sessionRepository = sessionRepository;
         }
         
         public ActionResult Details(int Id)
@@ -45,6 +49,24 @@ namespace CMS.Controllers
                 StartDate = conference.StartDate,
                 EndDate = conference.EndDate
             });
+        }
+
+        [HttpPost]
+        public void AddSessions(string[] sessions)
+        {
+            if (sessions.Length > 1)
+            {
+                int.TryParse(sessions[0], out int conferenceID);
+                string UserID = System.Web.HttpContext.Current.User.Identity.GetUserId();
+                for (int i = 1; i < sessions.Length; i++)
+                {
+                    sessionRepository.AddSession(new Session() {
+                        ChairId = UserID,
+                        ConferenceId = conferenceID,
+                        Name = sessions[i]
+                    });
+                }
+            }
         }
 
         public ActionResult JoinPC(int Id)
@@ -112,7 +134,25 @@ namespace CMS.Controllers
 
         public ActionResult UploadPaper(int Id)
         {
-            return PartialView("UploadPaper", new UploadPaperViewModel() { ConferenceId = Id });
+            int index = 0;
+            List<SelectListItem> sessions = new List<SelectListItem>();
+            sessions.Insert(index, new SelectListItem()
+            {
+                Value = null,
+                Text = "Select a session"
+            });
+            index++;
+            foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == Id))
+            {
+                sessions.Insert(index, new SelectListItem()
+                {
+                    Value = index.ToString(),
+                    Text = session.Name
+                });
+                index++;
+            }
+       
+            return PartialView("UploadPaper", new UploadPaperViewModel() { ConferenceId = Id, Sessions = sessions });
         }
 
         public ActionResult FormUploadAbstract(UploadAbstractViewModel model)
@@ -133,14 +173,35 @@ namespace CMS.Controllers
                 {
                     ViewBag.message = "Please write something.";
                 }
-
             }
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult UploadAbstract(int Id)
         {
-            return PartialView("UploadAbstract", new UploadAbstractViewModel() { ConferenceId = Id });
+            int index = 0;
+            List<SelectListItem> sessions = new List<SelectListItem>();
+            sessions.Insert(index, new SelectListItem()
+            {
+                Value = null,
+                Text = "Select a session"
+            });
+            index++;
+            foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == Id))
+            {
+                sessions.Insert(index, new SelectListItem()
+                {
+                    Value = index.ToString(),
+                    Text = session.Name
+                });
+                index++;
+            }
+            return PartialView("UploadAbstract", new UploadAbstractViewModel() { ConferenceId = Id, Sessions = sessions });
+        }
+
+        public ActionResult CancelUpload()
+        {
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
@@ -180,6 +241,7 @@ namespace CMS.Controllers
             }
             return View(model);
         }
+
         [AuthorizeAction(RoleName = "Chair", ValidateRole = true)]
         public ActionResult UpdateConference(int Id)
         {

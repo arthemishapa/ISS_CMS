@@ -14,9 +14,10 @@ namespace CMS.CMS.DAL.Repository
             this.context = context;
         }
 
-        public void AddUser(User userRoles)
+        public void AddUser(UserRoles userRoles)
         {
-
+            context.UserRoles.Add(userRoles);
+            context.SaveChanges();
         }
 
         public void UpdateUserRoles(UserRoles userRoles)

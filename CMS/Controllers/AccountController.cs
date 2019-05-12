@@ -101,7 +101,7 @@ namespace CMS.Controllers
         [AllowAnonymous]
         public ActionResult AccountDetails(string memberID)
         {
-            return View(new AccountDetailsViewModel { AffilationTypes = _affiliationTypes, MemberID = memberID });
+            return View(new AccountDetailsViewModel { MemberID = memberID });
         }
 
         [HttpPost]

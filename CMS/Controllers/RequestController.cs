@@ -13,15 +13,34 @@ namespace CMS.Controllers
     {
         private readonly IRequestRepository requestRepository;
         private readonly IConferenceRepository conferenceRepository;
+        private readonly IUserRolesRepository userRolesRepository;
 
-        public RequestController(IRequestRepository requestRepository)
+        public RequestController(IRequestRepository requestRepository,
+            IConferenceRepository conferenceRepository,
+            IUserRolesRepository userRolesRepository)
         {
             this.requestRepository = requestRepository;
+            this.conferenceRepository = conferenceRepository;
+            this.userRolesRepository = userRolesRepository;
         }
 
         public ActionResult Index()
         {
             return View(createViewModel());
+        }
+
+        public ActionResult ApproveRequest(int Id)
+        {
+            var request = requestRepository.GetRequestById(Id);
+
+            return RedirectToAction("Index", "Request");
+        }
+
+
+        public ActionResult DeleteRequest(int Id)
+        {
+            requestRepository.DeleteRequest(Id);
+            return RedirectToAction("Index", "Request");
         }
 
         private IEnumerable<RequestViewModel> createViewModel()

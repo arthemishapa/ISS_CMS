@@ -25,7 +25,8 @@ namespace CMS.CMS.DAL.Repository
 
         public void DeleteRequest(int Id)
         {
-            throw new NotImplementedException();
+            context.Requests.Remove(GetRequestById(Id));
+            context.SaveChanges();
         }
 
         public IEnumerable<Requests> GetAll()
