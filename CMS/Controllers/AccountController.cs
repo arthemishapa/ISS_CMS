@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL.Entities;
-using CMS.CMS.DAL.Repository;
+
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -104,6 +105,7 @@ namespace CMS.Controllers
             return View(new AccountDetailsViewModel { MemberID = memberID });
         }
 
+        // TODO
         [HttpPost]
         [AllowAnonymous]
         public ActionResult AccountDetails(AccountDetailsViewModel accountDetails)
@@ -175,16 +177,6 @@ namespace CMS.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
-        }
-        //CODUL LUI DIRNAJ
-        public ActionResult ChangeDeadline()
-        {
-            return View();
-        }
-
-        public ActionResult Settings()
-        {
-            return View();
         }
 
         protected override void Dispose(bool disposing)

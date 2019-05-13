@@ -3,6 +3,7 @@ using System.Web.Mvc;
 
 using CMS.CMS.Common.Validation;
 using CMS.CMS.Common.ViewModels;
+using CMS.CMS.DAL;
 using CMS.CMS.DAL.Entities;
 using CMS.CMS.DAL.Repository;
 
@@ -13,26 +14,27 @@ namespace CMS.Controllers
     [AuthorizeAction(ValidateRole = false)]
     public class ConferenceController : Controller
     {
-        private readonly IConferenceRepository conferenceRepository;
-        private readonly ISubmissionRepository submissionRepository;
-        private readonly IRequestRepository requestRepository;
-        private readonly IUserRolesRepository userRolesRepository;
-        private readonly IUserRepository userRepository;
-        private readonly ISessionRepository sessionRepository;
+        private readonly UnitOfWork unitOfWork;
 
-        public ConferenceController(IConferenceRepository conferenceRepository, 
-            ISubmissionRepository submissionRepository,
+        private readonly IConferenceRepository conferenceRepository;
+        private readonly IRequestRepository requestRepository;
+        private readonly IUserRoleRepository userRolesRepository;
+        private readonly ISessionRepository sessionRepository;
+        private readonly IRoleRepository roleRepository;
+
+        public ConferenceController(UnitOfWork unitOfWork,
+            IConferenceRepository conferenceRepository, 
             IRequestRepository requestRepository,
-            IUserRolesRepository userRolesRepository,
+            IUserRoleRepository userRolesRepository,
             IUserRepository userRepository,
             ISessionRepository sessionRepository)
         {
             this.conferenceRepository = conferenceRepository;
-            this.submissionRepository = submissionRepository;
             this.requestRepository = requestRepository;
             this.userRolesRepository = userRolesRepository;
-            this.userRepository = userRepository;
             this.sessionRepository = sessionRepository;
+
+            this.unitOfWork = unitOfWork;
         }
         
         public ActionResult Details(int Id)
@@ -72,6 +74,7 @@ namespace CMS.Controllers
             return PartialView("JoinConference", new JoinConferenceViewModel() { ConferenceId = Id });
         }
 
+        // TODO: authorize only for users not having any role within the conference
         //[AuthorizeAction(ValidateRole = true)]
         public ActionResult FormJoinConference(JoinConferenceViewModel model)
         {
@@ -90,118 +93,6 @@ namespace CMS.Controllers
                         CMS.Common.Enums.RequestType.CoChair
                     });
             }
-            return RedirectToAction("Index", "Home");
-        }
-
-        //public ActionResult FormUploadPaper(UploadPaperViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (model.File != null && model.File.ContentLength > 0)
-        //        {
-        //            var allowedExtensions = new[] { "pdf", "docx" };
-
-        //            var fileName = Path.GetFileName(model.File.FileName);
-        //            var ext = Path.GetExtension(model.File.FileName).Replace(".", "");
-        //            if (allowedExtensions.Contains(ext))
-        //            {
-        //                string name = Path.GetFileNameWithoutExtension(fileName);
-        //                var path = Path.Combine(Server.MapPath("~/Documents"), fileName);
-
-        //                submissionRepository.AddSubmission(new Submission()
-        //                {
-        //                    ConferenceId = model.ConferenceId,
-        //                    Data = fileName,
-        //                    Title = model.Title,
-        //                    Type = ext == "pdf" ? CMS.Common.Enums.SubmissionType.Pdf : CMS.Common.Enums.SubmissionType.Word,
-        //                    AuthorId = System.Web.HttpContext.Current.User.Identity.GetUserId()
-        //                });
-
-        //                model.File.SaveAs(path);
-        //            }
-        //            else
-        //            {
-        //                ViewBag.message = "Please choose only pdf/word file";
-        //            }
-        //        }
-        //        else
-        //        {
-        //            ViewBag.message = "Please upload a pdf/word file";
-        //        }
-
-        //    }
-        //    return RedirectToAction("Index", "Home");
-        //}
-
-        //public ActionResult UploadPaper(int Id)
-        //{
-        //    int index = 0;
-        //    List<SelectListItem> sessions = new List<SelectListItem>();
-        //    sessions.Insert(index, new SelectListItem()
-        //    {
-        //        Value = null,
-        //        Text = "Select a session"
-        //    });
-        //    index++;
-        //    foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == Id))
-        //    {
-        //        sessions.Insert(index, new SelectListItem()
-        //        {
-        //            Value = index.ToString(),
-        //            Text = session.Name
-        //        });
-        //        index++;
-        //    }
-       
-        //    return PartialView("UploadPaper", new UploadPaperViewModel() { ConferenceId = Id, Sessions = sessions });
-        //}
-
-        //public ActionResult FormUploadAbstract(UploadAbstractViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (string.IsNullOrEmpty(model.Content))
-        //        {
-        //            submissionRepository.AddSubmission(new Submission()
-        //            {
-        //                ConferenceId = model.ConferenceId,
-        //                Data = model.Content,
-        //                Title = model.Title,
-        //                AuthorId = User.Identity.GetUserId()
-        //            });
-        //        }
-        //        else
-        //        {
-        //            ViewBag.message = "Please write something.";
-        //        }
-        //    }
-        //    return RedirectToAction("Details", "Conference", new { model.ConferenceId });
-        //}
-
-        //public ActionResult UploadAbstract(int Id)
-        //{
-        //    int index = 0;
-        //    List<SelectListItem> sessions = new List<SelectListItem>();
-        //    sessions.Insert(index, new SelectListItem()
-        //    {
-        //        Value = null,
-        //        Text = "Select a session"
-        //    });
-        //    index++;
-        //    foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == Id))
-        //    {
-        //        sessions.Insert(index, new SelectListItem()
-        //        {
-        //            Value = index.ToString(),
-        //            Text = session.Name
-        //        });
-        //        index++;
-        //    }
-        //    return PartialView("UploadAbstract", new UploadAbstractViewModel() { ConferenceId = Id, Sessions = sessions });
-        //}
-
-        public ActionResult CancelUpload()
-        {
             return RedirectToAction("Index", "Home");
         }
 
@@ -237,14 +128,21 @@ namespace CMS.Controllers
                     ProposalPaperDeadline = model.ProposalPaperDeadline,
                     BiddingDeadline = model.BiddingDeadline
                 });
+
+                userRolesRepository.AddUserRole(new UserRole
+                {
+                    ConferenceId = addedConference.Id,
+                    RoleId = 1
+                });
                
                 return RedirectToAction("Details", "Conference", new { addedConference.Id });
             }
             return View(model);
         }
 
+        // TODO: breaks with two "AuthorizeAction" attributes
         [AuthorizeAction(RoleName = "Chair", ValidateRole = true)]
-        [AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
+        //[AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
         public ActionResult UpdateConference(int Id)
         {
             var conference = conferenceRepository.GetConferenceById(Id);
@@ -260,10 +158,11 @@ namespace CMS.Controllers
             });
         }
 
+        // TODO: breaks with two "AuthorizeAction" attributes
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeAction(RoleName = "Chair", ValidateRole = true)]
-        [AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
+        //[AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
         public ActionResult UpdateConference(UpdateConferenceViewModel model)
         {
             if (ModelState.IsValid)

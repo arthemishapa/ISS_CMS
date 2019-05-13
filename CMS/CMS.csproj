@@ -214,9 +214,8 @@
     <Compile Include="CMS.Common\ViewModels\JoinConferenceViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\RequestViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UpdateConferenceViewModel.cs" />
-    <Compile Include="CMS.Common\ViewModels\UploadAbstractViewModel.cs" />
-    <Compile Include="CMS.Common\ViewModels\UploadPaperViewModel.cs" />
     <Compile Include="CMS.DAL\Entities\Requests.cs" />
+    <Compile Include="CMS.DAL\Entities\UserRole.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\IConferenceRepository.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\IRequestRepository.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\IRoleRepository.cs" />
@@ -225,9 +224,8 @@
     <Compile Include="CMS.DAL\Repository\Interfaces\ISubmissionRepository.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\ISubmissionReviewRepository.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\IUserRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\Interfaces\IUserRolesRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\Interfaces\IUserRoleRepository.cs" />
     <Compile Include="CMS.DAL\Repository\RequestRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\UserRolesRepository.cs" />
     <Compile Include="CMS.DAL\Repository\ConferenceRepository.cs" />
     <Compile Include="CMS.DAL\Repository\RoleRepository.cs" />
     <Compile Include="CMS.DAL\Repository\SectionRepository.cs" />
@@ -235,6 +233,8 @@
     <Compile Include="CMS.DAL\Repository\SubmissionRepository.cs" />
     <Compile Include="CMS.DAL\Repository\SubmissionReviewRepository.cs" />
     <Compile Include="CMS.DAL\Repository\UserRepository.cs" />
+    <Compile Include="CMS.DAL\Repository\UserRoleRepository.cs" />
+    <Compile Include="CMS.DAL\UnitOfWork.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConferenceController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -268,9 +268,7 @@
     <Compile Include="CMS.DAL\Entities\Session.cs" />
     <Compile Include="CMS.DAL\Entities\Submission.cs" />
     <Compile Include="CMS.DAL\Entities\User.cs" />
-    <Compile Include="CMS.DAL\Entities\UserRoles.cs" />
     <Compile Include="CMS.Common\Enums\Review.cs" />
-    <Compile Include="CMS.Common\Enums\SubmissionType.cs" />
     <Compile Include="CMS.DAL\Entities\SubmissionReview.cs" />
     <Compile Include="CMS.Common\ViewModels\AccountDetailsViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\AddConferenceViewModel.cs" />
@@ -456,11 +454,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\AccountDetails.cshtml" />
-    <Content Include="Views\Account\ChangeDeadline.cshtml" />
-    <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Conference\UpdateConference.cshtml" />
-    <Content Include="Views\Conference\UploadPaper.cshtml" />
-    <Content Include="Views\Conference\UploadAbstract.cshtml" />
     <Content Include="Views\Conference\JoinConference.cshtml" />
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />

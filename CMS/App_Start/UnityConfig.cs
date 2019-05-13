@@ -48,7 +48,7 @@ namespace CMS
             container.RegisterType<ISubmissionRepository, SubmissionRepository>();
             container.RegisterType<IRequestRepository, RequestRepository>();
             container.RegisterType<IRoleRepository, RoleRepository>();
-            container.RegisterType<IUserRolesRepository, UserRolesRepository>();
+            container.RegisterType<IUserRoleRepository, UserRoleRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<ISessionRepository, SessionRepository>();
             container.RegisterType<AccountController>(new InjectionConstructor());

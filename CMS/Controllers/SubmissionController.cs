@@ -17,7 +17,9 @@ namespace CMS.Controllers
         private readonly ISubmissionRepository submissionRepository;
         private readonly ISessionRepository sessionRepository;
 
-        public SubmissionController(ISubmissionRepository submissionRepository, ISessionRepository sessionRepository)
+        public SubmissionController(
+            ISubmissionRepository submissionRepository, 
+            ISessionRepository sessionRepository)
         {
             this.submissionRepository = submissionRepository;
             this.sessionRepository = sessionRepository;
@@ -29,7 +31,7 @@ namespace CMS.Controllers
             return View(new AddSubmissionViewModel
             {
                 ConferenceId = id,
-                Sessions = GetSessions(id)
+                Sessions = GetSessionsSelectList(id)
             });
         }
 
@@ -39,11 +41,9 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid && ((model.File != null) || !string.IsNullOrEmpty(model.Abstract)))
             {
-                if (model.File != null && !UploadPaper(model.File))
+                if (model.File != null && !TryUploadPaper(model.File))
                 {
-                    ViewBag.ValidationMessage = "Please upload only files of type PDF/Word.";
-                    model.Sessions = GetSessions(model.ConferenceId);
-                    return View(model);
+                    return AddSubmissionErrorView(model, "Please upload only files of type PDF/Word.");
                 }
 
                 submissionRepository.AddSubmission(new Submission()
@@ -58,12 +58,11 @@ namespace CMS.Controllers
                 return RedirectToAction("Details", "Conference", new { id = model.ConferenceId });
             }
 
-            ViewBag.ValidationMessage = "Please add an abstract and/or a file.";
-            model.Sessions = GetSessions(model.ConferenceId);
-            return View(model);
+            return AddSubmissionErrorView(model, "Please add an abstract and/or a file.");
         }
 
-        private bool UploadPaper(HttpPostedFileBase file)
+
+        private bool TryUploadPaper(HttpPostedFileBase file)
         {
             var allowedExtensions = new[] { "pdf", "docx" };
 
@@ -81,7 +80,7 @@ namespace CMS.Controllers
             return false;
         }
 
-        private IEnumerable<SelectListItem> GetSessions(int id)
+        private IList<SelectListItem> GetSessionsSelectList(int id)
         {
             int index = 0;
             List<SelectListItem> sessions = new List<SelectListItem>();
@@ -102,6 +101,13 @@ namespace CMS.Controllers
             }
 
             return sessions;
+        }
+
+        private ActionResult AddSubmissionErrorView(AddSubmissionViewModel model, string errorMessage)
+        {
+            ViewBag.ErrorMessage = errorMessage;
+            model.Sessions = GetSessionsSelectList(model.ConferenceId);
+            return View(model);
         }
     }
 }

@@ -14,11 +14,11 @@ namespace CMS.CMS.Common.Validation
         public string RoleName { get; set; }
         public bool ValidateRole { get; set; }
 
-        private IUserRolesRepository UserRolesRepository
+        private IUserRoleRepository UserRolesRepository
         {
             get
             {
-                return DependencyResolver.Current.GetService<IUserRolesRepository>();
+                return DependencyResolver.Current.GetService<IUserRoleRepository>();
             }
         }
 

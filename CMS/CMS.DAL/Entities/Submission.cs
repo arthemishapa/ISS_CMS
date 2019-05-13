@@ -10,14 +10,8 @@ namespace CMS.CMS.DAL.Entities
         public string AuthorId { get; set; }
 
         public string Title { get; set; }
-
-        // TODO: uncomment
         public string Abstract { get; set; }
         public string Filename { get; set; }
-
-        // TODO: delete
-        //public string Data { get; set; }
-        //public SubmissionType Type { get; set; }
 
         public User Author { get; set; }
         public IEnumerable<SubmissionReview> Reviews { get; set; }

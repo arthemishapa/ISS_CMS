@@ -3,26 +3,26 @@
 <hr />
 @using (@Html.BeginForm("FormJoinConference", "Conference", FormMethod.Post, new { @id = "form1" }))
 {
-<div class="form-horizontal" style="margin-top: 15px">
-    @Html.HiddenFor(x => x.ConferenceId, new { Id = "Id" })
-    <div class="form-group">
-        @Html.Label("Author", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-5">
-            @Html.RadioButtonFor(model => model.Role, "Author")
+    <div class="form-horizontal" style="margin-top: 15px">
+        @Html.HiddenFor(x => x.ConferenceId, new { Id = "Id" })
+        <div class="form-group">
+            @Html.Label("Author", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.RadioButtonFor(model => model.Role, "Author")
+                </div>
             </div>
+        <div class="form-group">
+            @Html.Label("Co-Chair", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.RadioButtonFor(model => model.Role, "CoChair")
+                </div>
+            </div>
+        <div class="form-group">
+            @Html.Label("PC Member", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.RadioButtonFor(model => model.Role, "PCMember")
+                </div>
         </div>
-    <div class="form-group">
-        @Html.Label("Co-Chair", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-5">
-            @Html.RadioButtonFor(model => model.Role, "CoChair")
-            </div>
-        </div>
-    <div class="form-group">
-        @Html.Label("PC Member", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-5">
-            @Html.RadioButtonFor(model => model.Role, "PCMember")
-            </div>
+        <input type="submit" name="submit" value="Join" class="btn btn-success" />
     </div>
-    <input type="submit" name="submit" value="Submit" class="btn btn-default" />
-</div>
 }

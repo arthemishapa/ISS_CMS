@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CMS.CMS.DAL.Entities
 {
-    public class UserRoles
+    public class UserRole
     {
         [Key]
         [Column(Order = 1)]

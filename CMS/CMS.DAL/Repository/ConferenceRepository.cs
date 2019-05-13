@@ -35,10 +35,6 @@ namespace CMS.CMS.DAL.Repository
             context.SaveChanges();
         }
 
-        public void DeleteConference(int conferenceId)
-        {
-        }
-
         public Conference GetConferenceById(int conferenceId)
         {
             return context.Conferences.SingleOrDefault(c => c.Id == conferenceId);

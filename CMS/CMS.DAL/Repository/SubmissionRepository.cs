@@ -18,20 +18,5 @@ namespace CMS.CMS.DAL.Repository
             context.SaveChanges();
             return addedSubmission;
         }
-
-        public void UpdateSubmission(Submission submission)
-        {
-
-        }
-
-        public void DeleteSubmission(int submissionId)
-        {
-
-        }
-
-        public Submission GetSubmissionById(int submissionId)
-        {
-            return null;
-        }
     }
 }

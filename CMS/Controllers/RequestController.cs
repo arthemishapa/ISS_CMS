@@ -1,27 +1,29 @@
-﻿using CMS.CMS.Common.ViewModels;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+
+using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL.Entities;
 using CMS.CMS.DAL.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace CMS.Controllers
 {
     public class RequestController : Controller
     {
+        private readonly IUserRepository userRepository;
         private readonly IRequestRepository requestRepository;
         private readonly IConferenceRepository conferenceRepository;
-        private readonly IUserRolesRepository userRolesRepository;
+        private readonly IUserRoleRepository userRolesRepository;
 
         public RequestController(IRequestRepository requestRepository,
             IConferenceRepository conferenceRepository,
-            IUserRolesRepository userRolesRepository)
+            IUserRoleRepository userRolesRepository,
+            IUserRepository userRepository)
         {
-            this.requestRepository = requestRepository;
-            this.conferenceRepository = conferenceRepository;
-            this.userRolesRepository = userRolesRepository;
+            //this.requestRepository = requestRepository;
+            //this.conferenceRepository = conferenceRepository;
+            //this.userRolesRepository = userRolesRepository;
+            //this.userRepository = userRepository;
         }
 
         public ActionResult Index()
@@ -49,8 +51,8 @@ namespace CMS.Controllers
 
             foreach (Requests request in requestRepository.GetAll())
             {
-                User Requester = requestRepository.GetAllUsers().SingleOrDefault(p => p.Id == request.UserRequesterId);
-                User Chair = requestRepository.GetAllUsers().SingleOrDefault(p => p.Id == request.UserChairId);
+                User Requester = userRepository.GetAll().SingleOrDefault(p => p.Id == request.UserRequesterId);
+                User Chair = userRepository.GetAll().SingleOrDefault(p => p.Id == request.UserChairId);
                 var conference = conferenceRepository.GetConferenceById(request.ConferenceId);
                 string message = Requester.Name + " has asked for permission to be a " + request.Type +
                     " in your conference:" + conference.Name; 
