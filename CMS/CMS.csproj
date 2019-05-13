@@ -308,6 +308,10 @@
     <Compile Include="Migrations\201905081039037_changerolestructure2.Designer.cs">
       <DependentUpon>201905081039037_changerolestructure2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905131445408_ModifySubmission.cs" />
+    <Compile Include="Migrations\201905131445408_ModifySubmission.Designer.cs">
+      <DependentUpon>201905131445408_ModifySubmission.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -518,6 +522,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905081039037_changerolestructure2.resx">
       <DependentUpon>201905081039037_changerolestructure2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905131445408_ModifySubmission.resx">
+      <DependentUpon>201905131445408_ModifySubmission.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

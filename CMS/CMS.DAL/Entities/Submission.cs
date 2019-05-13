@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-using CMS.CMS.Common.Enums;
-
 namespace CMS.CMS.DAL.Entities
 {
     public class Submission
@@ -18,8 +16,8 @@ namespace CMS.CMS.DAL.Entities
         public string Filename { get; set; }
 
         // TODO: delete
-        public string Data { get; set; }
-        public SubmissionType Type { get; set; }
+        //public string Data { get; set; }
+        //public SubmissionType Type { get; set; }
 
         public User Author { get; set; }
         public IEnumerable<SubmissionReview> Reviews { get; set; }

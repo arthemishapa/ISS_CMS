@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Web.Mvc;
 
 using CMS.CMS.Common.Validation;
@@ -96,112 +93,112 @@ namespace CMS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult FormUploadPaper(UploadPaperViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                if (model.File != null && model.File.ContentLength > 0)
-                {
-                    var allowedExtensions = new[] { "pdf", "docx" };
+        //public ActionResult FormUploadPaper(UploadPaperViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (model.File != null && model.File.ContentLength > 0)
+        //        {
+        //            var allowedExtensions = new[] { "pdf", "docx" };
 
-                    var fileName = Path.GetFileName(model.File.FileName);
-                    var ext = Path.GetExtension(model.File.FileName).Replace(".", "");
-                    if (allowedExtensions.Contains(ext))
-                    {
-                        string name = Path.GetFileNameWithoutExtension(fileName);
-                        var path = Path.Combine(Server.MapPath("~/Documents"), fileName);
+        //            var fileName = Path.GetFileName(model.File.FileName);
+        //            var ext = Path.GetExtension(model.File.FileName).Replace(".", "");
+        //            if (allowedExtensions.Contains(ext))
+        //            {
+        //                string name = Path.GetFileNameWithoutExtension(fileName);
+        //                var path = Path.Combine(Server.MapPath("~/Documents"), fileName);
 
-                        submissionRepository.AddSubmission(new Submission()
-                        {
-                            ConferenceId = model.ConferenceId,
-                            Data = fileName,
-                            Title = model.Title,
-                            Type = ext == "pdf" ? CMS.Common.Enums.SubmissionType.Pdf : CMS.Common.Enums.SubmissionType.Word,
-                            AuthorId = System.Web.HttpContext.Current.User.Identity.GetUserId()
-                        });
+        //                submissionRepository.AddSubmission(new Submission()
+        //                {
+        //                    ConferenceId = model.ConferenceId,
+        //                    Data = fileName,
+        //                    Title = model.Title,
+        //                    Type = ext == "pdf" ? CMS.Common.Enums.SubmissionType.Pdf : CMS.Common.Enums.SubmissionType.Word,
+        //                    AuthorId = System.Web.HttpContext.Current.User.Identity.GetUserId()
+        //                });
 
-                        model.File.SaveAs(path);
-                    }
-                    else
-                    {
-                        ViewBag.message = "Please choose only pdf/word file";
-                    }
-                }
-                else
-                {
-                    ViewBag.message = "Please upload a pdf/word file";
-                }
+        //                model.File.SaveAs(path);
+        //            }
+        //            else
+        //            {
+        //                ViewBag.message = "Please choose only pdf/word file";
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ViewBag.message = "Please upload a pdf/word file";
+        //        }
 
-            }
-            return RedirectToAction("Index", "Home");
-        }
+        //    }
+        //    return RedirectToAction("Index", "Home");
+        //}
 
-        public ActionResult UploadPaper(int Id)
-        {
-            int index = 0;
-            List<SelectListItem> sessions = new List<SelectListItem>();
-            sessions.Insert(index, new SelectListItem()
-            {
-                Value = null,
-                Text = "Select a session"
-            });
-            index++;
-            foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == Id))
-            {
-                sessions.Insert(index, new SelectListItem()
-                {
-                    Value = index.ToString(),
-                    Text = session.Name
-                });
-                index++;
-            }
+        //public ActionResult UploadPaper(int Id)
+        //{
+        //    int index = 0;
+        //    List<SelectListItem> sessions = new List<SelectListItem>();
+        //    sessions.Insert(index, new SelectListItem()
+        //    {
+        //        Value = null,
+        //        Text = "Select a session"
+        //    });
+        //    index++;
+        //    foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == Id))
+        //    {
+        //        sessions.Insert(index, new SelectListItem()
+        //        {
+        //            Value = index.ToString(),
+        //            Text = session.Name
+        //        });
+        //        index++;
+        //    }
        
-            return PartialView("UploadPaper", new UploadPaperViewModel() { ConferenceId = Id, Sessions = sessions });
-        }
+        //    return PartialView("UploadPaper", new UploadPaperViewModel() { ConferenceId = Id, Sessions = sessions });
+        //}
 
-        public ActionResult FormUploadAbstract(UploadAbstractViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                if (string.IsNullOrEmpty(model.Content))
-                {
-                    submissionRepository.AddSubmission(new Submission()
-                    {
-                        ConferenceId = model.ConferenceId,
-                        Data = model.Content,
-                        Title = model.Title,
-                        AuthorId = User.Identity.GetUserId()
-                    });
-                }
-                else
-                {
-                    ViewBag.message = "Please write something.";
-                }
-            }
-            return RedirectToAction("Details", "Conference", new { model.ConferenceId });
-        }
+        //public ActionResult FormUploadAbstract(UploadAbstractViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (string.IsNullOrEmpty(model.Content))
+        //        {
+        //            submissionRepository.AddSubmission(new Submission()
+        //            {
+        //                ConferenceId = model.ConferenceId,
+        //                Data = model.Content,
+        //                Title = model.Title,
+        //                AuthorId = User.Identity.GetUserId()
+        //            });
+        //        }
+        //        else
+        //        {
+        //            ViewBag.message = "Please write something.";
+        //        }
+        //    }
+        //    return RedirectToAction("Details", "Conference", new { model.ConferenceId });
+        //}
 
-        public ActionResult UploadAbstract(int Id)
-        {
-            int index = 0;
-            List<SelectListItem> sessions = new List<SelectListItem>();
-            sessions.Insert(index, new SelectListItem()
-            {
-                Value = null,
-                Text = "Select a session"
-            });
-            index++;
-            foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == Id))
-            {
-                sessions.Insert(index, new SelectListItem()
-                {
-                    Value = index.ToString(),
-                    Text = session.Name
-                });
-                index++;
-            }
-            return PartialView("UploadAbstract", new UploadAbstractViewModel() { ConferenceId = Id, Sessions = sessions });
-        }
+        //public ActionResult UploadAbstract(int Id)
+        //{
+        //    int index = 0;
+        //    List<SelectListItem> sessions = new List<SelectListItem>();
+        //    sessions.Insert(index, new SelectListItem()
+        //    {
+        //        Value = null,
+        //        Text = "Select a session"
+        //    });
+        //    index++;
+        //    foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == Id))
+        //    {
+        //        sessions.Insert(index, new SelectListItem()
+        //        {
+        //            Value = index.ToString(),
+        //            Text = session.Name
+        //        });
+        //        index++;
+        //    }
+        //    return PartialView("UploadAbstract", new UploadAbstractViewModel() { ConferenceId = Id, Sessions = sessions });
+        //}
 
         public ActionResult CancelUpload()
         {
