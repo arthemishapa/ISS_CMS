@@ -1,5 +1,8 @@
 ﻿using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
+using System.Collections.Generic;
+using System.Linq;
+using System.Data.Entity;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -32,6 +35,13 @@ namespace CMS.CMS.DAL.Repository
         public Submission GetSubmissionById(int submissionId)
         {
             return null;
+        }
+
+        public IEnumerable<Submission> GetAll()
+        {
+            return context.Submissions
+                .Include(a => a.Author)
+                .ToList();
         }
     }
 }

@@ -79,6 +79,8 @@
         <input name="sessions" id="input-tags" class="form-control" />
         <button id="saveSessions" class="btn btn-default">Save</button>
     </div>
+
+    @Html.ActionLink("Committed papers", "Submissions", "Submission", new { Model.Id }, new { @class = "btn btn-default" })
 </div>
 <hr />
 

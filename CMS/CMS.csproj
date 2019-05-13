@@ -240,6 +240,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CMS.DAL\DatabaseContext\CMSDbContext.cs" />
     <Compile Include="Controllers\RequestController.cs" />
+    <Compile Include="Controllers\SubmissionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -458,6 +459,7 @@
     <Content Include="Views\Conference\JoinPC.cshtml" />
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\Submission\Submissions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Conference\Add.cshtml" />
