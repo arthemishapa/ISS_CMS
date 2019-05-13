@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -27,28 +26,10 @@ namespace CMS.Controllers
         [Authorize]
         public ActionResult Add(int id)
         {
-            int index = 0;
-            List<SelectListItem> sessions = new List<SelectListItem>();
-            sessions.Insert(index, new SelectListItem()
-            {
-                Value = null,
-                Text = "Select a session"
-            });
-            index++;
-            foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == id))
-            {
-                sessions.Insert(index, new SelectListItem()
-                {
-                    Value = index.ToString(),
-                    Text = session.Name
-                });
-                index++;
-            }
-
             return View(new AddSubmissionViewModel
             {
                 ConferenceId = id,
-                Sessions = sessions
+                Sessions = GetSessions(id)
             });
         }
 
@@ -56,10 +37,14 @@ namespace CMS.Controllers
         [HttpPost]
         public ActionResult Add(AddSubmissionViewModel model)
         {
-            if (ModelState.IsValid && (!string.IsNullOrEmpty(model.File.FileName) || !string.IsNullOrEmpty(model.Abstract)))
+            if (ModelState.IsValid && ((model.File != null) || !string.IsNullOrEmpty(model.Abstract)))
             {
-                if (!string.IsNullOrEmpty(model.File.FileName) && !UploadPaper(model.File))
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Please upload a pdf/word file.");
+                if (model.File != null && !UploadPaper(model.File))
+                {
+                    ViewBag.ValidationMessage = "Please upload only files of type PDF/Word.";
+                    model.Sessions = GetSessions(model.ConferenceId);
+                    return View(model);
+                }
 
                 submissionRepository.AddSubmission(new Submission()
                 {
@@ -69,8 +54,13 @@ namespace CMS.Controllers
                     Abstract = model.Abstract,
                     Filename = model.File.FileName
                 });
+
+                return RedirectToAction("Details", "Conference", new { id = model.ConferenceId });
             }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Please add an abstract and/or a file.");
+
+            ViewBag.ValidationMessage = "Please add an abstract and/or a file.";
+            model.Sessions = GetSessions(model.ConferenceId);
+            return View(model);
         }
 
         private bool UploadPaper(HttpPostedFileBase file)
@@ -89,6 +79,29 @@ namespace CMS.Controllers
             }
 
             return false;
+        }
+
+        private IEnumerable<SelectListItem> GetSessions(int id)
+        {
+            int index = 0;
+            List<SelectListItem> sessions = new List<SelectListItem>();
+            sessions.Insert(index, new SelectListItem()
+            {
+                Value = null,
+                Text = "Select a session"
+            });
+            index++;
+            foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == id))
+            {
+                sessions.Insert(index, new SelectListItem()
+                {
+                    Value = index.ToString(),
+                    Text = session.Name
+                });
+                index++;
+            }
+
+            return sessions;
         }
     }
 }

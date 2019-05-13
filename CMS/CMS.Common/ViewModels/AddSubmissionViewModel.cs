@@ -14,7 +14,6 @@ namespace CMS.CMS.Common.ViewModels
         [Display(Name = "Paper title")]
         public string Title { get; set; }
 
-        [Required]
         [Display(Name = "Paper abstract")]
         public string Abstract { get; set; }
 
