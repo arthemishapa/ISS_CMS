@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace CMS.CMS.Common.ViewModels
@@ -22,6 +19,7 @@ namespace CMS.CMS.Common.ViewModels
         [Required]
         [Display(Name = "Session")]
         public string SelectedSession { get; set; }
+
         public IEnumerable<SelectListItem> Sessions { get; set; }
     }
 }

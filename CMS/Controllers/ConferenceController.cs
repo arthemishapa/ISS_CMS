@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+
 using CMS.CMS.Common.Validation;
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL.Entities;
@@ -69,9 +70,30 @@ namespace CMS.Controllers
             }
         }
 
-        public ActionResult JoinPC(int Id)
+        public ActionResult JoinConference(int Id)
         {
-            return PartialView("JoinPC", new JoinPCViewModel() { ConferenceId = Id });
+            return PartialView("JoinConference", new JoinConferenceViewModel() { ConferenceId = Id });
+        }
+
+        //[AuthorizeAction(ValidateRole = true)]
+        public ActionResult FormJoinConference(JoinConferenceViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                Conference conference = conferenceRepository.GetConferenceById(model.ConferenceId);
+
+                requestRepository.AddRequest(
+                    new Requests()
+                    {
+                        ConferenceId = conference.Id,
+                        UserRequesterId = System.Web.HttpContext.Current.User.Identity.GetUserId(),
+                        UserChairId = conference.ChairId,
+                        Type = model.Role == "Author" ? CMS.Common.Enums.RequestType.Author :
+                        model.Role == "PC Member" ? CMS.Common.Enums.RequestType.PCMember :
+                        CMS.Common.Enums.RequestType.CoChair
+                    });
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult FormUploadPaper(UploadPaperViewModel model)
@@ -89,7 +111,9 @@ namespace CMS.Controllers
                         string name = Path.GetFileNameWithoutExtension(fileName);
                         var path = Path.Combine(Server.MapPath("~/Documents"), fileName);
 
-                        submissionRepository.AddSubmission(new Submission() { ConferenceId = model.ConferenceId,
+                        submissionRepository.AddSubmission(new Submission()
+                        {
+                            ConferenceId = model.ConferenceId,
                             Data = fileName,
                             Title = model.Title,
                             Type = ext == "pdf" ? CMS.Common.Enums.SubmissionType.Pdf : CMS.Common.Enums.SubmissionType.Word,
@@ -108,26 +132,6 @@ namespace CMS.Controllers
                     ViewBag.message = "Please upload a pdf/word file";
                 }
 
-            }
-            return RedirectToAction("Index", "Home");
-        }
-
-        public ActionResult FormJoinPC(JoinPCViewModel model)
-        {
-            if(ModelState.IsValid)
-            {
-                Conference conference = conferenceRepository.GetConferenceById(model.ConferenceId);
-
-                requestRepository.AddRequest(
-                    new Requests()
-                    {
-                        ConferenceId = conference.Id,
-                        UserRequesterId = System.Web.HttpContext.Current.User.Identity.GetUserId(),
-                        UserChairId = conference.ChairId,
-                        Type = model.Role == "Chair" ? CMS.Common.Enums.RequestType.Chair :
-                        model.Role == "Default" ? CMS.Common.Enums.RequestType.Default :
-                        CMS.Common.Enums.RequestType.CoChair
-                    });
             }
             return RedirectToAction("Index", "Home");
         }
@@ -159,14 +163,14 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Content != null && model.Content.Length > 0)
+                if (string.IsNullOrEmpty(model.Content))
                 {
                     submissionRepository.AddSubmission(new Submission()
                     {
                         ConferenceId = model.ConferenceId,
                         Data = model.Content,
                         Title = model.Title,
-                        AuthorId = System.Web.HttpContext.Current.User.Identity.GetUserId()
+                        AuthorId = User.Identity.GetUserId()
                     });
                 }
                 else
@@ -174,7 +178,7 @@ namespace CMS.Controllers
                     ViewBag.message = "Please write something.";
                 }
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Details", "Conference", new { model.ConferenceId });
         }
 
         public ActionResult UploadAbstract(int Id)
@@ -243,6 +247,7 @@ namespace CMS.Controllers
         }
 
         [AuthorizeAction(RoleName = "Chair", ValidateRole = true)]
+        [AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
         public ActionResult UpdateConference(int Id)
         {
             var conference = conferenceRepository.GetConferenceById(Id);
@@ -259,25 +264,24 @@ namespace CMS.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         [AuthorizeAction(RoleName = "Chair", ValidateRole = true)]
+        [AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
         public ActionResult UpdateConference(UpdateConferenceViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var updatedConference = conferenceRepository.GetConferenceById(model.Id);
+                conferenceRepository.UpdateConference(new Conference
+                {
+                    Id = model.Id,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    AbstractPaperDeadline = model.AbstractPaperDeadline,
+                    ProposalPaperDeadline = model.ProposalPaperDeadline,
+                    BiddingDeadline = model.BiddingDeadline,
+                });
 
-                updatedConference.Name = model.Name;
-                updatedConference.ChairId = User.Identity.GetUserId();
-                updatedConference.StartDate = model.StartDate;
-                updatedConference.EndDate = model.EndDate;
-                updatedConference.AbstractPaperDeadline = model.AbstractPaperDeadline;
-                updatedConference.ProposalPaperDeadline = model.ProposalPaperDeadline;
-                updatedConference.BiddingDeadline = model.BiddingDeadline;
-                conferenceRepository.UpdateConference(updatedConference);
-
-                return RedirectToAction("Details", "Conference", new { updatedConference.Id });
+                return RedirectToAction("Details", "Conference", new { model.Id });
             }
             return View(model);
         }

@@ -24,6 +24,14 @@ namespace CMS.CMS.DAL.Repository
 
         public void UpdateConference(Conference conference)
         {
+            var conferenceToUpdate = GetConferenceById(conference.Id);
+
+            conferenceToUpdate.StartDate = conference.StartDate;
+            conferenceToUpdate.EndDate = conference.EndDate;
+            conferenceToUpdate.AbstractPaperDeadline = conference.AbstractPaperDeadline;
+            conferenceToUpdate.ProposalPaperDeadline = conference.ProposalPaperDeadline;
+            conferenceToUpdate.BiddingDeadline = conference.BiddingDeadline;
+
             context.SaveChanges();
         }
 

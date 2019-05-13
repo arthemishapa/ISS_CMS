@@ -210,7 +210,7 @@
     <Compile Include="CMS.Common\Validation\AuthorizeAction.cs" />
     <Compile Include="CMS.Common\Validation\ValidDateAttribute.cs" />
     <Compile Include="CMS.Common\ViewModels\ConferenceDetailsViewModel.cs" />
-    <Compile Include="CMS.Common\ViewModels\JoinPCViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\JoinConferenceViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\RequestViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UpdateConferenceViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UploadAbstractViewModel.cs" />
@@ -455,7 +455,7 @@
     <Content Include="Views\Conference\UpdateConference.cshtml" />
     <Content Include="Views\Conference\UploadPaper.cshtml" />
     <Content Include="Views\Conference\UploadAbstract.cshtml" />
-    <Content Include="Views\Conference\JoinPC.cshtml" />
+    <Content Include="Views\Conference\JoinConference.cshtml" />
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
   </ItemGroup>
