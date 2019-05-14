@@ -1,6 +1,7 @@
-﻿using CMS.CMS.DAL.DatabaseContext;
+﻿using System.Linq;
+
+using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
-using System.Linq;
 
 namespace CMS.CMS.DAL.Repository
 {
