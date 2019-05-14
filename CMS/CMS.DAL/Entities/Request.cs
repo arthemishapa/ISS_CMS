@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 namespace CMS.CMS.DAL.Entities
 {
-    public class Requests
+    public class Request
     {
         public int Id { get; set; }
         public string UserRequesterId { get; set; }
-        public string UserChairId { get; set; }
-        public List<string> UserCoChairId { get; set; }
         public int ConferenceId { get; set; }
-        public int SessionId { get; set; }
-        public RequestType Type { get; set; }
+        public int? LocationId { get; set; }
+        public Role Type { get; set; }
+        public User UserRequester { get; set; }
+        public Conference Conference { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace CMS.CMS.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Modify_UserRole : IMigrationMetadata
+    public sealed partial class SurrogateDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Modify_UserRole));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SurrogateDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "201905140812137_Modify_UserRole"; }
+            get { return "201905141154150_SurrogateDatabase"; }
         }
         
         string IMigrationMetadata.Source

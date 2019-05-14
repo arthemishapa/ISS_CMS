@@ -47,7 +47,6 @@ namespace CMS
             container.RegisterType<IConferenceRepository, ConferenceRepository>();
             container.RegisterType<ISubmissionRepository, SubmissionRepository>();
             container.RegisterType<IRequestRepository, RequestRepository>();
-            container.RegisterType<IRoleRepository, RoleRepository>();
             container.RegisterType<IUserRoleRepository, UserRoleRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<ISessionRepository, SessionRepository>();

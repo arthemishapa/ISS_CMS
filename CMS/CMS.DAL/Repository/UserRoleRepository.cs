@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
 
@@ -16,13 +16,13 @@ namespace CMS.CMS.DAL.Repository
 
         public void AddUserRole(UserRole userRole)
         {
-            //context.UserRoles.Add(userRole);
-            //context.SaveChanges();
+            context.UserRoles.Add(userRole);
+            context.SaveChanges();
         }
 
-        //public IEnumerable<UserRole> GetAll()
-        //{
-        //    return context.UserRoles;
-        //}
+        public IEnumerable<UserRole> GetAll()
+        {
+            return context.UserRoles.ToList();
+        }
     }
 }

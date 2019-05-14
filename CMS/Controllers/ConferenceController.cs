@@ -66,14 +66,13 @@ namespace CMS.Controllers
                 Conference conference = unitOfWork.ConferenceRepository.GetConferenceById(model.ConferenceId);
 
                 unitOfWork.RequestRepository.AddRequest(
-                    new Requests()
+                    new Request()
                     {
                         ConferenceId = conference.Id,
                         UserRequesterId = System.Web.HttpContext.Current.User.Identity.GetUserId(),
-                        UserChairId = conference.ChairId,
-                        Type = model.Role == "Author" ? CMS.Common.Enums.RequestType.Author :
-                        model.Role == "PC Member" ? CMS.Common.Enums.RequestType.PCMember :
-                        CMS.Common.Enums.RequestType.CoChair
+                        Type = model.Role == "Author" ? CMS.Common.Enums.Role.Author :
+                        model.Role == "PC Member" ? CMS.Common.Enums.Role.PCMember :
+                        CMS.Common.Enums.Role.CoChair
                     });
             }
             return RedirectToAction("Index", "Home");
@@ -111,14 +110,13 @@ namespace CMS.Controllers
                     ProposalPaperDeadline = model.ProposalPaperDeadline,
                     BiddingDeadline = model.BiddingDeadline
                 });
-
-                // TODO: breaks (problem: sectionId in UserRole - "cannot insert NULL")
-                //unitOfWork.UserRoleRepository.AddUserRole(new UserRole
-                //{
-                //    ConferenceId = addedConference.Id,
-                //    UserId = User.Identity.GetUserId(),
-                //    RoleId = unitOfWork.RoleRepository.GetRoleByName("Chair").Id
-                //});
+                
+                unitOfWork.UserRoleRepository.AddUserRole(new UserRole
+                {
+                    LocationId = addedConference.Id,
+                    UserId = User.Identity.GetUserId(),
+                    Role = CMS.Common.Enums.Role.Chair
+                });
 
                 return RedirectToAction("Details", "Conference", new { addedConference.Id });
             }
@@ -126,7 +124,7 @@ namespace CMS.Controllers
         }
 
         // TODO: breaks with two "AuthorizeAction" attributes
-        [AuthorizeAction(RoleName = "Chair", ValidateRole = true)]
+        [AuthorizeAction(RoleName = "Chair, CoChair", ValidateRole = true)]
         //[AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
         public ActionResult UpdateConference(int Id)
         {
@@ -146,7 +144,7 @@ namespace CMS.Controllers
         // TODO: breaks with two "AuthorizeAction" attributes
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeAction(RoleName = "Chair", ValidateRole = true)]
+        [AuthorizeAction(RoleName = "Chair, CoChair", ValidateRole = true)]
         //[AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
         public ActionResult UpdateConference(UpdateConferenceViewModel model)
         {

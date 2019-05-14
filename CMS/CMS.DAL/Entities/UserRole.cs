@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CMS.CMS.Common.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,20 +10,19 @@ namespace CMS.CMS.DAL.Entities
 {
     public class UserRole
     {
-        public int Id { get; set; }
         [Key]
         [Column(Order = 1)]
         public string UserId { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        public int RoleId { get; set; }
+        public Role Role { get; set; }
 
         [Key]
         [Column(Order = 3)]
         public int? LocationId { get; set; }
 
         public User User { get; set; }
-        public Role Role { get; set; }
+        
     }
 }

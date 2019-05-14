@@ -22,14 +22,6 @@ namespace CMS.CMS.Common.Validation
             }
         }
 
-        private IRoleRepository RoleRepository
-        {
-            get
-            {
-                return DependencyResolver.Current.GetService<IRoleRepository>();
-            }
-        }
-
         private IUserRepository UserRepository
         {
             get

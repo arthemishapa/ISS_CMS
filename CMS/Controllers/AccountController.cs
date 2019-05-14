@@ -129,7 +129,7 @@ namespace CMS.Controllers
                 var user = new User
                 {
                     Name = model.Name,
-                    UserName = model.Email,
+                    UserName = model.Name,
                     Email = model.Email
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);

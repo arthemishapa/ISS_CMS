@@ -7,6 +7,6 @@ namespace CMS.CMS.DAL.Repository
     public interface IUserRoleRepository
     {
         void AddUserRole(UserRole userRole);
-        //IEnumerable<UserRole> GetAll();
+        IEnumerable<UserRole> GetAll();
     }
 }

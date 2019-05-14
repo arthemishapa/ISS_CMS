@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL;
 using CMS.CMS.DAL.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace CMS.Controllers
 {
@@ -24,16 +25,14 @@ namespace CMS.Controllers
 
         public ActionResult ApproveRequest(int Id)
         {
-            //var request = unitOfWork.RequestRepository.GetRequestById(Id);
-            //unitOfWork.UserRoleRepository.AddUserRole(new UserRole()
-            //{
-            //    UserId = request.UserRequesterId,
-            //    ConferenceId = request.ConferenceId,
-            //    RoleId = (int)request.Type,
-            //    SectionId = 1
-            //});
-            //unitOfWork.RequestRepository.DeleteRequest(Id);
-            
+            var request = unitOfWork.RequestRepository.GetRequestById(Id);
+            unitOfWork.UserRoleRepository.AddUserRole(new UserRole()
+            {
+                UserId = request.UserRequesterId,
+                LocationId = request.ConferenceId,
+                Role = request.Type
+            });
+            unitOfWork.RequestRepository.DeleteRequest(Id);
 
             return RedirectToAction("Index", "Request");
         }
@@ -47,19 +46,22 @@ namespace CMS.Controllers
         private IEnumerable<RequestViewModel> createViewModel()
         {
             List<RequestViewModel> requests = new List<RequestViewModel>();
-
-            foreach (Requests request in unitOfWork.RequestRepository.GetAll())
+            string loggedUserId = User.Identity.GetUserId();
+            foreach (Request request in unitOfWork.RequestRepository.GetAll().Where(r => r.UserRequesterId != loggedUserId))
             {
-                User Requester = unitOfWork.UserRepository.GetAll().SingleOrDefault(p => p.Id == request.UserRequesterId);
-                User Chair = unitOfWork.UserRepository.GetAll().SingleOrDefault(p => p.Id == request.UserChairId);
-                var conference = unitOfWork.ConferenceRepository.GetConferenceById(request.ConferenceId);
-                string message = Requester.Name + " has asked for permission to be a " + request.Type +
-                    " in your conference:" + conference.Name; 
-                requests.Add(new RequestViewModel()
+                if (unitOfWork.UserRoleRepository.GetAll()
+                    .Count(u => u.UserId == loggedUserId 
+                            && u.LocationId == request.ConferenceId
+                            && ((int)u.Role == 1 || (int)u.Role == 2)) > 0)
                 {
-                    Id = request.Id,
-                    RequestMessage = message
-                });
+                    string message = request.UserRequester.Name + " has asked for permission to be a " + request.Type +
+                        " in your conference:" + request.Conference.Name;
+                    requests.Add(new RequestViewModel()
+                    {
+                        Id = request.Id,
+                        RequestMessage = message
+                    });
+                }
             }
 
             return requests;

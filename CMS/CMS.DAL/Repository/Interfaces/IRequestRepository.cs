@@ -6,9 +6,9 @@ namespace CMS.CMS.DAL.Repository
 {
     public interface IRequestRepository
     {
-        Requests AddRequest(Requests r);
+        Request AddRequest(Request r);
         void DeleteRequest(int Id);
-        Requests GetRequestById(int Id);
-        IEnumerable<Requests> GetAll();
+        Request GetRequestById(int Id);
+        IEnumerable<Request> GetAll();
     }
 }

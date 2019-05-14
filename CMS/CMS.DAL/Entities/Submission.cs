@@ -14,6 +14,8 @@ namespace CMS.CMS.DAL.Entities
         public string Filename { get; set; }
 
         public User Author { get; set; }
+        public Conference Conference { get; set; }
+
         public IEnumerable<SubmissionReview> Reviews { get; set; }
     }
 }

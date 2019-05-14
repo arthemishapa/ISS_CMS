@@ -7,7 +7,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", 
+            @Html.ActionLink("Hello " + User.Identity.Name + "!", 
            "AccountDetails", 
            "Account",
            routeValues: new { memberID = User.Identity.GetUserId() },
