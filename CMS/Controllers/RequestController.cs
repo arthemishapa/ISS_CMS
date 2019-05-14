@@ -24,16 +24,16 @@ namespace CMS.Controllers
 
         public ActionResult ApproveRequest(int Id)
         {
-            var request = requestRepository.GetRequestById(Id);
-            userRolesRepository.AddUser(new UserRoles()
+            var request = unitOfWork.RequestRepository.GetRequestById(Id);
+            unitOfWork.UserRoleRepository.AddUserRole(new UserRole()
             {
                 UserId = request.UserRequesterId,
                 ConferenceId = request.ConferenceId,
                 RoleId = (int)request.Type,
                 SectionId = 1
             });
-            requestRepository.DeleteRequest(Id);
-            var request = unitOfWork.RequestRepository.GetRequestById(Id);
+            unitOfWork.RequestRepository.DeleteRequest(Id);
+            
 
             return RedirectToAction("Index", "Request");
         }
