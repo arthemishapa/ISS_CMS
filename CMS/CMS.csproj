@@ -314,6 +314,10 @@
     <Compile Include="Migrations\201905140812137_Modify_UserRole.Designer.cs">
       <DependentUpon>201905140812137_Modify_UserRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905140833249_bizzare.cs" />
+    <Compile Include="Migrations\201905140833249_bizzare.Designer.cs">
+      <DependentUpon>201905140833249_bizzare.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -527,6 +531,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905140812137_Modify_UserRole.resx">
       <DependentUpon>201905140812137_Modify_UserRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905140833249_bizzare.resx">
+      <DependentUpon>201905140833249_bizzare.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
