@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -21,5 +22,6 @@ namespace CMS.CMS.DAL.Entities
             // Add custom user claims here
             return userIdentity;
         }
+        public ICollection<Request> Requests { get; set; }
     }
 }

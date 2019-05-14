@@ -1,29 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.DAL.Repository
 {
-    public class SessionRepository : ISessionRepository
+    public class UserRoleRepository : IUserRoleRepository
     {
         private readonly CMSDbContext context;
 
-        public SessionRepository(CMSDbContext context)
+        public UserRoleRepository(CMSDbContext context)
         {
             this.context = context;
         }
 
-        public void AddSession(Session session)
+        public void AddUserRole(UserRole userRole)
         {
-            context.Sessions.Add(session);
+            context.UserRoles.Add(userRole);
             context.SaveChanges();
         }
 
-        public IEnumerable<Session> GetAll()
+        public IEnumerable<UserRole> GetAll()
         {
-            return context.Sessions.ToList();
+            return context.UserRoles.ToList();
         }
     }
 }

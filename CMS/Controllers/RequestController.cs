@@ -1,27 +1,21 @@
-﻿using CMS.CMS.Common.ViewModels;
-using CMS.CMS.DAL.Entities;
-using CMS.CMS.DAL.Repository;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+
+using CMS.CMS.Common.ViewModels;
+using CMS.CMS.DAL;
+using CMS.CMS.DAL.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace CMS.Controllers
 {
     public class RequestController : Controller
     {
-        private readonly IRequestRepository requestRepository;
-        private readonly IConferenceRepository conferenceRepository;
-        private readonly IUserRolesRepository userRolesRepository;
+        private readonly UnitOfWork unitOfWork;
 
-        public RequestController(IRequestRepository requestRepository,
-            IConferenceRepository conferenceRepository,
-            IUserRolesRepository userRolesRepository)
+        public RequestController(UnitOfWork unitOfWork)
         {
-            this.requestRepository = requestRepository;
-            this.conferenceRepository = conferenceRepository;
-            this.userRolesRepository = userRolesRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         public ActionResult Index()
@@ -31,34 +25,43 @@ namespace CMS.Controllers
 
         public ActionResult ApproveRequest(int Id)
         {
-            var request = requestRepository.GetRequestById(Id);
+            var request = unitOfWork.RequestRepository.GetRequestById(Id);
+            unitOfWork.UserRoleRepository.AddUserRole(new UserRole()
+            {
+                UserId = request.UserRequesterId,
+                LocationId = request.ConferenceId,
+                Role = request.Type
+            });
+            unitOfWork.RequestRepository.DeleteRequest(Id);
 
             return RedirectToAction("Index", "Request");
         }
 
-
         public ActionResult DeleteRequest(int Id)
         {
-            requestRepository.DeleteRequest(Id);
+            unitOfWork.RequestRepository.DeleteRequest(Id);
             return RedirectToAction("Index", "Request");
         }
 
         private IEnumerable<RequestViewModel> createViewModel()
         {
             List<RequestViewModel> requests = new List<RequestViewModel>();
-
-            foreach (Requests request in requestRepository.GetAll())
+            string loggedUserId = User.Identity.GetUserId();
+            foreach (Request request in unitOfWork.RequestRepository.GetAll().Where(r => r.UserRequesterId != loggedUserId))
             {
-                User Requester = requestRepository.GetAllUsers().SingleOrDefault(p => p.Id == request.UserRequesterId);
-                User Chair = requestRepository.GetAllUsers().SingleOrDefault(p => p.Id == request.UserChairId);
-                var conference = conferenceRepository.GetConferenceById(request.ConferenceId);
-                string message = Requester.Name + " has asked for permission to be a " + request.Type +
-                    " in your conference:" + conference.Name; 
-                requests.Add(new RequestViewModel()
+                if (unitOfWork.UserRoleRepository.GetAll()
+                    .Count(u => u.UserId == loggedUserId 
+                            && u.LocationId == request.ConferenceId
+                            && ((int)u.Role == 1 || (int)u.Role == 2)) > 0)
                 {
-                    Id = request.Id,
-                    RequestMessage = message
-                });
+                    string message = request.UserRequester.Name + " has asked for permission to be a " + request.Type +
+                        " in your conference:" + request.Conference.Name;
+                    requests.Add(new RequestViewModel()
+                    {
+                        Id = request.Id,
+                        RequestMessage = message
+                    });
+                }
             }
 
             return requests;

@@ -1,17 +1,14 @@
-﻿using CMS.CMS.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+
+using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.DAL.Repository
 {
     public interface IRequestRepository
     {
-        Requests AddRequest(Requests r);
+        Request AddRequest(Request r);
         void DeleteRequest(int Id);
-        Requests GetRequestById(int Id);
-        IEnumerable<Requests> GetAll();
-        IEnumerable<User> GetAllUsers();
+        Request GetRequestById(int Id);
+        IEnumerable<Request> GetAll();
     }
 }

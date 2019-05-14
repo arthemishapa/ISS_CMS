@@ -1,5 +1,4 @@
-﻿
-@model CMS.CMS.Common.ViewModels.UpdateConferenceViewModel
+﻿@model CMS.CMS.Common.ViewModels.UpdateConferenceViewModel
 @{
     ViewBag.Title = "Update conference";
 }
@@ -11,7 +10,6 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Name)
         @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @readonly = "readonly" , autofocus = "autofocus"})
-        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.StartDate)
@@ -38,7 +36,7 @@
         @Html.EditorFor(m => m.BiddingDeadline, new { htmlAttributes = new { @class = "form-control conference-date" } })
         @Html.ValidationMessageFor(m => m.BiddingDeadline, "", new { @class = "text-danger" })
     </div>
-    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+    <button type="submit" class="btn btn-success btn">Save</button>
 }
 
 @section Scripts {

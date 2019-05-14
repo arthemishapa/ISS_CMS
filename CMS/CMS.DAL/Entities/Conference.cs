@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CMS.CMS.DAL.Entities
@@ -16,5 +17,7 @@ namespace CMS.CMS.DAL.Entities
         public DateTime AbstractPaperDeadline { get; set; }
         public DateTime ProposalPaperDeadline { get; set; }
         public DateTime BiddingDeadline { get; set; }
+
+        public ICollection<Request> Requests { get; set; }
     }
 }

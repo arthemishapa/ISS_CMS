@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+
 using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
+using System.Data.Entity;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -16,32 +16,33 @@ namespace CMS.CMS.DAL.Repository
             this.context = context;
         }
 
-        public Requests AddRequest(Requests request)
+        public Request AddRequest(Request request)
         {
-            var addRequest = context.Requests.Add(request);
+            var addRequest = context.Request.Add(request);
             context.SaveChanges();
             return addRequest;
         }
 
         public void DeleteRequest(int Id)
         {
-            context.Requests.Remove(GetRequestById(Id));
+            context.Request.Remove(GetRequestById(Id));
             context.SaveChanges();
         }
 
-        public IEnumerable<Requests> GetAll()
+        public IEnumerable<Request> GetAll()
         {
-            return context.Requests.ToList();
+            return context.Request
+                    .Include(a => a.UserRequester)
+                    .Include(a => a.Conference)
+                    .ToList();
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public Request GetRequestById(int Id)
         {
-            return context.Users.ToList();
-        }
-
-        public Requests GetRequestById(int Id)
-        {
-            return context.Requests.SingleOrDefault(r => r.Id == Id);
+            return context.Request
+                .Include(a => a.UserRequester)
+                .Include(a => a.Conference)
+                .SingleOrDefault(r => r.Id == Id);
         }
     }
 }

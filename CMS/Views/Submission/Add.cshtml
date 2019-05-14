@@ -1,0 +1,55 @@
+﻿@model CMS.CMS.Common.ViewModels.AddSubmissionViewModel
+
+@{
+    ViewBag.Title = "Add submission";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (@Html.BeginForm("Add", "Submission", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data", @class = "was-valdiated" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.ConferenceId, new { Id = "Id" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => Model.SelectedSession, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(m => Model.SelectedSession,
+            new SelectList(Model.Sessions, "Value", "Text"),
+            htmlAttributes: new
+            {
+                @class = "form-control",
+                id = "Session"
+            })
+        @Html.ValidationMessageFor(m => Model.SelectedSession, "",
+            new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => Model.Abstract, htmlAttributes: new { @class = "control-label" })
+        @Html.TextAreaFor(m => m.Abstract, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Abstract, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => Model.File, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.File, new { type = "file" })
+        @Html.ValidationMessageFor(x => x.File, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="text-danger">
+        @ViewBag.ErrorMessage
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

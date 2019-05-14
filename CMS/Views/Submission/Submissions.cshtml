@@ -1,0 +1,27 @@
+﻿@model List<CMS.CMS.DAL.Entities.Submission>
+@{
+    ViewBag.Title = "Submissions";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Submitted papers</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var submission in Model)
+        {
+            <tr>
+                <td align="center">
+                    <section>
+                        @Html.LabelForModel(submission.Title, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
+                        @Html.LabelForModel(submission.Author.Name, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
+                        <label id="@("label"+submission.Id)" style="color:red"></label>
+                        <span>@Html.ActionLink("View details", "Details", "Submission", new { submission.Id }, null)</span>
+                    </section>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>`

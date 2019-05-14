@@ -8,7 +8,6 @@ namespace CMS.CMS.DAL.Repository
     {
         Conference AddConference(Conference conference);
         void UpdateConference(Conference conference);
-        void DeleteConference(int conferenceId);
         Conference GetConferenceById(int conferenceId);
         IEnumerable<Conference> GetAll();
     }

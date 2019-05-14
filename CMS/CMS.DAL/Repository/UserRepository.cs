@@ -1,6 +1,8 @@
-﻿using CMS.CMS.DAL.DatabaseContext;
-using CMS.CMS.DAL.Entities;
+﻿using System.Collections.Generic;
 using System.Linq;
+
+using CMS.CMS.DAL.DatabaseContext;
+using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -13,29 +15,14 @@ namespace CMS.CMS.DAL.Repository
             this.context = context;
         }
 
-        public void AddUser(User user)
-        {
-
-        }
-
-        public void UpdateUser(User user)
-        {
-
-        }
-
-        public void DeleteUser(string userId)
-        {
-
-        }
-
-        public User GetUserById(string userId)
-        {
-            return null;
-        }
-
         public User GetUserByEmail(string email)
         {
             return context.Users.SingleOrDefault(u => u.Email == email);
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return context.Users;
         }
     }
 }

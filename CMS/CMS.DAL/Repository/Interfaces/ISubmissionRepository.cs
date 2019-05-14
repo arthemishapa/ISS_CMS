@@ -1,4 +1,5 @@
 ﻿using CMS.CMS.DAL.Entities;
+using System.Collections.Generic;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -8,5 +9,6 @@ namespace CMS.CMS.DAL.Repository
         void UpdateSubmission(Submission submission);
         void DeleteSubmission(int submissionId);
         Submission GetSubmissionById(int submissionId);
+        IEnumerable<Submission> GetAll();
     }
 }
