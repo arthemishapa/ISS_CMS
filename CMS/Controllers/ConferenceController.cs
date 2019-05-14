@@ -112,13 +112,14 @@ namespace CMS.Controllers
                     BiddingDeadline = model.BiddingDeadline
                 });
 
-                // TODO: breaks
+                // TODO: breaks (problem: sectionId in UserRole - "cannot insert NULL")
                 //unitOfWork.UserRoleRepository.AddUserRole(new UserRole
                 //{
                 //    ConferenceId = addedConference.Id,
-                //    RoleId = 1
+                //    UserId = User.Identity.GetUserId(),
+                //    RoleId = unitOfWork.RoleRepository.GetRoleByName("Chair").Id
                 //});
-               
+
                 return RedirectToAction("Details", "Conference", new { addedConference.Id });
             }
             return View(model);

@@ -6,6 +6,7 @@ namespace CMS.CMS.DAL.Repository
 {
     public interface IRoleRepository
     {
+        Role GetRoleByName(string name);
         IEnumerable<Role> GetAll();
     }
 }

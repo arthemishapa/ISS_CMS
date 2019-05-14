@@ -19,5 +19,10 @@ namespace CMS.CMS.DAL.Repository
         {
             return context.Roles.ToList();
         }
+
+        public Role GetRoleByName(string name)
+        {
+            return context.Roles.SingleOrDefault(r => r.Name == name);
+        }
     }
 }
