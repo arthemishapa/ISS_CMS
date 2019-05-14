@@ -2,9 +2,10 @@
 
 namespace CMS.CMS.DAL.Repository
 {
-    // TODO
     public interface ISubmissionReviewRepository
     {
-        void AddSubmission(SubmissionReview submissionReview);
+        void AddSubmissionReview(SubmissionReview submissionReview);
+        void UpdateSubmissionReview(SubmissionReview submissionReview);
+        SubmissionReview GetSubmissionReview(int submissionId, string reviewerId);
     }
 }

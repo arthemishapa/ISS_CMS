@@ -29,6 +29,7 @@ namespace CMS.Controllers
 
             return File(new FileStream(sDocument, FileMode.Open), "text/plain", FileName);
         }
+
         public ActionResult Submissions(int ConferenceID)
         {
             return View(unitOfWork.SubmissionRepository.GetAll().Where(s => s.ConferenceId == ConferenceID).ToList());
@@ -86,17 +87,28 @@ namespace CMS.Controllers
         {
             if (review)
             {
-                unitOfWork.SubmissionReviewRepository.AddSubmission(new SubmissionReview()
+                unitOfWork.SubmissionReviewRepository.AddSubmissionReview(new SubmissionReview()
                 {
                     ReviewerId = User.Identity.GetUserId(),
                     SubmissionId = Id
                 });
             }
-            return RedirectToAction("Details", "Submissions", new { ConferenceID = unitOfWork.SubmissionRepository.GetSubmissionById(Id).ConferenceId });
+            return RedirectToAction("Submissions", new { ConferenceID = unitOfWork.SubmissionRepository.GetSubmissionById(Id).ConferenceId });
         }
 
+        public ActionResult SubmitReview(int Id, string Review, string Recommendation)
+        {
+            unitOfWork.SubmissionReviewRepository.UpdateSubmissionReview(new SubmissionReview()
+            {
+                SubmissionId = Id,
+                ReviewerId = User.Identity.GetUserId(),
+                Review = (CMS.Common.Enums.Review)Enum.Parse(typeof(CMS.Common.Enums.Review), Review),
+                Recommendation = Recommendation
+            });
+            return RedirectToAction("Submissions", new { ConferenceID = unitOfWork.SubmissionRepository.GetSubmissionById(Id).ConferenceId });
+        }
         #region Helpers
-   
+
         private bool TryUploadPaper(HttpPostedFileBase file)
         {
             var allowedExtensions = new[] { "pdf", "docx" };

@@ -1,5 +1,6 @@
 ﻿using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
+using System.Linq;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -12,9 +13,25 @@ namespace CMS.CMS.DAL.Repository
             this.context = context;
         }
 
-        public void AddSubmission(SubmissionReview submissionReview)
+        public void AddSubmissionReview(SubmissionReview submissionReview)
         {
             context.SubmissionReviews.Add(submissionReview);
+            context.SaveChanges();
+        }
+
+        public SubmissionReview GetSubmissionReview(int submissionId, string reviewerId)
+        {
+            return context.SubmissionReviews.SingleOrDefault(s => s.SubmissionId == submissionId
+                && s.ReviewerId == reviewerId);
+        }
+
+        public void UpdateSubmissionReview(SubmissionReview submissionReview)
+        {
+            var review = GetSubmissionReview(submissionReview.SubmissionId, submissionReview.ReviewerId);
+
+            review.Review = submissionReview.Review;
+            review.Recommendation = submissionReview.Recommendation;
+
             context.SaveChanges();
         }
     }
