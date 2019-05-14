@@ -38,7 +38,6 @@ namespace CMS.CMS.Common.Validation
             }
         }
 
-
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             var isAuthorized = base.AuthorizeCore(httpContext);
@@ -54,13 +53,13 @@ namespace CMS.CMS.Common.Validation
                      (httpContext.Request["id"] as string);
                 int conferenceId;
                 int.TryParse(Id, out conferenceId);
-
                 var userEmail = httpContext.User.Identity.Name;
                 var user = UserRepository.GetUserByEmail(userEmail);
                 var role = RoleRepository.GetAll().SingleOrDefault(r => r.Name == RoleName);
+
                 var privilege = UserRolesRepository.GetAll().SingleOrDefault(p => p.RoleId == role.Id
-               && p.ConferenceId == conferenceId
-               && p.UserId == user.Id);
+                       && p.ConferenceId == conferenceId
+                       && p.UserId == user.Id);
                 if (privilege == null)
                     return false;
             }
@@ -72,7 +71,6 @@ namespace CMS.CMS.Common.Validation
             if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 base.HandleUnauthorizedRequest(filterContext);
-
             }
             else
             {
