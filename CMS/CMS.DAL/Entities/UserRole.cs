@@ -21,5 +21,9 @@ namespace CMS.CMS.DAL.Entities
         [Key]
         [Column(Order = 3)]
         public int? LocationId { get; set; }
+       
+
+        public User User { get; set; }
+        public Role Role { get; set; }
     }
 }
