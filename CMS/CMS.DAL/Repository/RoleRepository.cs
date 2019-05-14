@@ -1,7 +1,8 @@
-﻿using CMS.CMS.DAL.DatabaseContext;
-using CMS.CMS.DAL.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+
+using CMS.CMS.DAL.DatabaseContext;
+using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -14,28 +15,14 @@ namespace CMS.CMS.DAL.Repository
             this.context = context;
         }
 
-        public void AddRole(Role role)
-        {
-
-        }
-
-        public void UpdateRole(Role role)
-        {
-
-        }
-
-        public void DeleteRole(int roleId)
-        {
-
-        }
-
-        public Role GetRoleById(int roleId)
-        {
-            return null;
-        }
         public IEnumerable<Role> GetAll()
         {
             return context.Roles.ToList();
+        }
+
+        public Role GetRoleByName(string name)
+        {
+            return context.Roles.SingleOrDefault(r => r.Name == name);
         }
     }
 }

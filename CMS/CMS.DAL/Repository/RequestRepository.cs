@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+
 using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
 
@@ -32,11 +31,6 @@ namespace CMS.CMS.DAL.Repository
         public IEnumerable<Requests> GetAll()
         {
             return context.Requests.ToList();
-        }
-
-        public IEnumerable<User> GetAllUsers()
-        {
-            return context.Users.ToList();
         }
 
         public Requests GetRequestById(int Id)

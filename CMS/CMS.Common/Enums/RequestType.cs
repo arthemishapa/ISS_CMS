@@ -2,9 +2,9 @@
 {
     public enum RequestType
     {
-        Chair = 1,
+        Author = 1,
         CoChair,
-        Default,
+        PCMember,
         ChairForSession
     }
 }

@@ -1,10 +1,10 @@
-﻿using CMS.CMS.DAL.Repository;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+
+using CMS.CMS.DAL.Repository;
 
 namespace CMS.CMS.Common.Validation
 {
@@ -14,11 +14,11 @@ namespace CMS.CMS.Common.Validation
         public string RoleName { get; set; }
         public bool ValidateRole { get; set; }
 
-        private IUserRolesRepository UserRolesRepository
+        private IUserRoleRepository UserRolesRepository
         {
             get
             {
-                return DependencyResolver.Current.GetService<IUserRolesRepository>();
+                return DependencyResolver.Current.GetService<IUserRoleRepository>();
             }
         }
 
@@ -52,17 +52,28 @@ namespace CMS.CMS.Common.Validation
                 var Id = (httpContext.Request.RequestContext.RouteData.Values["id"] as string)
                      ??
                      (httpContext.Request["id"] as string);
-                int conferenceId;
-                int.TryParse(Id, out conferenceId);
+                int.TryParse(Id, out  int conferenceId);
 
                 var userEmail = httpContext.User.Identity.Name;
                 var user = UserRepository.GetUserByEmail(userEmail);
-                var role = RoleRepository.GetAll().SingleOrDefault(r => r.Name == RoleName);
-                var privilege = UserRolesRepository.GetAll().SingleOrDefault(p => p.RoleId == role.Id
-               && p.ConferenceId == conferenceId
-               && p.UserId == user.Id);
-                if (privilege == null)
-                    return false;
+
+                if (string.IsNullOrEmpty(RoleName))
+                {
+                    var privilege = UserRolesRepository
+                        .GetAll()
+                        .SingleOrDefault(ur => ur.ConferenceId == conferenceId && ur.UserId == user.Id);
+                    if (privilege != null)
+                        return false;
+                }
+                else
+                {
+                    var role = RoleRepository.GetAll().SingleOrDefault(r => r.Name == RoleName);
+                    var privilege = UserRolesRepository.GetAll().SingleOrDefault(p => p.RoleId == role.Id
+                   && p.ConferenceId == conferenceId
+                   && p.UserId == user.Id);
+                    if (privilege == null)
+                        return false;
+                }
             }
             return true;
         }
