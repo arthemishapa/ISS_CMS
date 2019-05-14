@@ -209,11 +209,11 @@
     <Compile Include="CMS.Common\Enums\Role.cs" />
     <Compile Include="CMS.Common\Validation\AuthorizeAction.cs" />
     <Compile Include="CMS.Common\Validation\ValidDateAttribute.cs" />
-    <Compile Include="CMS.Common\ViewModels\AddSubmissionViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\ConferenceDetailsViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\JoinConferenceViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\RequestViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\SubmissionDetailsViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\SubmissionViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UpdateConferenceViewModel.cs" />
     <Compile Include="CMS.DAL\Entities\Request.cs" />
     <Compile Include="CMS.DAL\Entities\UserRole.cs" />
@@ -412,7 +412,7 @@
     <Content Include="Views\Conference\JoinConference.cshtml" />
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
-    <Content Include="Views\Submission\Add.cshtml" />
+    <Content Include="Views\Submission\Submission.cshtml" />
     <Content Include="Views\Submission\Submissions.cshtml" />
     <Content Include="Views\Submission\Details.cshtml" />
   </ItemGroup>

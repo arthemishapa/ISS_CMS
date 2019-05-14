@@ -42,25 +42,28 @@ namespace CMS.Controllers
         [Authorize]
         public ActionResult Add(int id)
         {
-            return View(new AddSubmissionViewModel
+            ViewBag.Title = "Add submission";
+
+            return View("Submission", new SubmissionViewModel
             {
                 ConferenceId = id,
-                Sessions = GetSessionsSelectList(id)
+                Sessions = GetSessionsSelectList(id),
+                Action = "Add"
             });
         }
 
         [Authorize]
         [HttpPost]
-        public ActionResult Add(AddSubmissionViewModel model)
+        public ActionResult Add(SubmissionViewModel model)
         {
             if (ModelState.IsValid && ((model.File != null) || !string.IsNullOrEmpty(model.Abstract)))
             {
                 if (model.File != null && !TryUploadPaper(model.File))
                 {
-                    return AddSubmissionErrorView(model, "Please upload only files of type PDF/Word.");
+                    return SubmissionErrorView(model, "Please upload only files of type PDF/Word.", "Add");
                 }
 
-                unitOfWork.SubmissionRepository.AddSubmission(new Submission()
+                var addedSubmission = unitOfWork.SubmissionRepository.AddSubmission(new Submission()
                 {
                     ConferenceId = model.ConferenceId,
                     AuthorId = User.Identity.GetUserId(),
@@ -69,17 +72,67 @@ namespace CMS.Controllers
                     Filename = model.File?.FileName
                 });
 
-                return RedirectToAction("Details", "Conference", new { id = model.ConferenceId });
+                return RedirectToAction("Details", "Submission", new { id = addedSubmission.Id });
             }
 
-            return AddSubmissionErrorView(model, "Please add an abstract and/or a file.");
+            return SubmissionErrorView(model, "Please add an abstract and/or a file.", "Add");
         }
 
-        private ActionResult AddSubmissionErrorView(AddSubmissionViewModel model, string errorMessage)
+        public ActionResult Edit(int id)
+        {
+            var submission = unitOfWork.SubmissionRepository.GetSubmissionById(id);
+
+            if (User.Identity.GetUserId() != submission.AuthorId)
+            {
+                return RedirectToAction("Details", "Submission", new { id });
+            }
+
+            return View("Submission", new SubmissionViewModel
+            {
+                Id = submission.Id,
+                ConferenceId = submission.ConferenceId,
+                AuthorId = submission.AuthorId,
+                Title = submission.Title,
+                Abstract = submission.Abstract,
+                FileName = submission.Filename,
+                SelectedSession = "Muie PSD", // TODO
+                Action = "Edit"
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Edit(SubmissionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.File != null)
+                {
+                    if (!TryUploadPaper(model.File))
+                        return SubmissionErrorView(model, "Please upload only files of type PDF/Word.", "Edit");
+                    if (model.FileName != null && model.File.FileName != model.FileName)
+                        DeleteExistingFile(model.FileName);
+                }
+
+                unitOfWork.SubmissionRepository.UpdateSubmission(new Submission
+                {
+                    Id = model.Id,
+                    Abstract = model.Abstract,
+                    Filename = model.File != null ? model.File.FileName : model.FileName,
+                });
+
+                return RedirectToAction("Details", new { model.Id });
+            }
+            return View("Submission", model);
+        }
+
+        private ActionResult SubmissionErrorView(SubmissionViewModel model, string errorMessage, string action)
         {
             ViewBag.ErrorMessage = errorMessage;
+
             model.Sessions = GetSessionsSelectList(model.ConferenceId);
-            return View(model);
+            model.Action = action;
+
+            return View("Submission", model);
         }
 
         public ActionResult DecideToReview(int Id, bool review)
@@ -115,6 +168,14 @@ namespace CMS.Controllers
             return false;
         }
 
+        private void DeleteExistingFile(string filename)
+        {
+            var path = Path.Combine(Server.MapPath("~/Documents"), filename);
+
+            if (System.IO.File.Exists(path))
+                System.IO.File.Delete(Path.Combine(Server.MapPath("~/Documents"), filename));
+        }
+
         private SubmissionDetailsViewModel GetSubmissionDetailsViewModel(int id)
         {
             var submission = unitOfWork.SubmissionRepository.GetSubmissionById(id);
@@ -126,7 +187,8 @@ namespace CMS.Controllers
                 Title = submission.Title,
                 Status = GetStatusMessage(submission),
                 Abstract = submission.Abstract,
-                FileName = submission.Filename
+                FileName = submission.Filename,
+                ConferenceId = submission.ConferenceId
             };
         }
 

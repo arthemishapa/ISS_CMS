@@ -2,6 +2,7 @@
 
 namespace CMS.CMS.DAL.Entities
 {
+    // TODO: submission session
     public class Submission
     {
         public int Id { get; set; }
