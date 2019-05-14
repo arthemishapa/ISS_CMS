@@ -1,6 +1,7 @@
+using System;
+
 using CMS.CMS.DAL.Repository;
 using CMS.Controllers;
-using System;
 
 using Unity;
 using Unity.Injection;
@@ -43,7 +44,7 @@ namespace CMS
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 
-            // TODO: Register your type's mappings here.
+            // Register your type's mappings here.
             container.RegisterType<IConferenceRepository, ConferenceRepository>();
             container.RegisterType<ISubmissionRepository, SubmissionRepository>();
             container.RegisterType<ISubmissionReviewRepository, SubmissionReviewRepository>();
