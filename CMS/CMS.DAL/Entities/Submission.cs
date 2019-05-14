@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace CMS.CMS.DAL.Entities
-{
+{   // TODO Field for Grade
     public class Submission
     {
         public int Id { get; set; }
