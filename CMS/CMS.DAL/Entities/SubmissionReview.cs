@@ -14,6 +14,8 @@ namespace CMS.CMS.DAL.Entities
         [Column(Order = 2)]
         public string ReviewerId { get; set; }
 
+        public string Recommendation { get; set; }
+
         public Review Review { get; set; }
 
         public Submission Submission { get; set; }

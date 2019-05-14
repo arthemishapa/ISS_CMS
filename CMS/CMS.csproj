@@ -260,6 +260,10 @@
     <Compile Include="Migrations\201905141154150_SurrogateDatabase.Designer.cs">
       <DependentUpon>201905141154150_SurrogateDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905141755559_Modify_SubmissionReview.cs" />
+    <Compile Include="Migrations\201905141755559_Modify_SubmissionReview.Designer.cs">
+      <DependentUpon>201905141755559_Modify_SubmissionReview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -435,6 +439,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905141154150_SurrogateDatabase.resx">
       <DependentUpon>201905141154150_SurrogateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905141755559_Modify_SubmissionReview.resx">
+      <DependentUpon>201905141755559_Modify_SubmissionReview.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
