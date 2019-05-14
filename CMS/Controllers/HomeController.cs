@@ -1,25 +1,21 @@
 ﻿using System.Web.Mvc;
 
-using CMS.CMS.DAL.Repository;
+using CMS.CMS.DAL;
 
 namespace CMS.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConferenceRepository conferenceRepository;
-        private readonly IUserRoleRepository userRolesRepository;
-        private readonly IRoleRepository roleRepository;
+        private readonly UnitOfWork unitOfWork;
 
-        public HomeController(IConferenceRepository conferenceRepository, IUserRoleRepository userRolesRepository, IRoleRepository roleRepository)
+        public HomeController(UnitOfWork unitOfWork)
         {
-            this.conferenceRepository = conferenceRepository;
-            this.userRolesRepository = userRolesRepository;
-            this.roleRepository = roleRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         public ActionResult Index()
         {
-            return View(conferenceRepository.GetAll());
+            return View(unitOfWork.ConferenceRepository.GetAll());
         }
        
     }

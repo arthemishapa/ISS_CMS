@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 
 using CMS.CMS.Common.ViewModels;
+using CMS.CMS.DAL;
 using CMS.CMS.DAL.Entities;
-using CMS.CMS.DAL.Repository;
 
 using Microsoft.AspNet.Identity;
 
@@ -14,15 +14,12 @@ namespace CMS.Controllers
 {
     public class SubmissionController : Controller
     {
-        private readonly ISubmissionRepository submissionRepository;
-        private readonly ISessionRepository sessionRepository;
+        private readonly UnitOfWork unitOfWork;
 
         public SubmissionController(
-            ISubmissionRepository submissionRepository, 
-            ISessionRepository sessionRepository)
+            UnitOfWork unitOfWork)
         {
-            this.submissionRepository = submissionRepository;
-            this.sessionRepository = sessionRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         [Authorize]
@@ -46,13 +43,13 @@ namespace CMS.Controllers
                     return AddSubmissionErrorView(model, "Please upload only files of type PDF/Word.");
                 }
 
-                submissionRepository.AddSubmission(new Submission()
+                unitOfWork.SubmissionRepository.AddSubmission(new Submission()
                 {
                     ConferenceId = model.ConferenceId,
                     AuthorId = User.Identity.GetUserId(),
                     Title = model.Title,
                     Abstract = model.Abstract,
-                    Filename = model.File.FileName
+                    Filename = model.File?.FileName
                 });
 
                 return RedirectToAction("Details", "Conference", new { id = model.ConferenceId });
@@ -90,7 +87,7 @@ namespace CMS.Controllers
                 Text = "Select a session"
             });
             index++;
-            foreach (Session session in sessionRepository.GetAll().Where(s => s.ConferenceId == id))
+            foreach (Session session in unitOfWork.SessionRepository.GetAll().Where(s => s.ConferenceId == id))
             {
                 sessions.Insert(index, new SelectListItem()
                 {

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,20 +18,17 @@ namespace CMS.Controllers
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private List<SelectListItem> _affiliationTypes;
 
         #endregion Variables
 
         public AccountController()
         {
-            InitialiseAffiliationTypesDropDownList();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            InitialiseAffiliationTypesDropDownList();
         }
 
         public ApplicationSignInManager SignInManager
@@ -200,37 +196,6 @@ namespace CMS.Controllers
         }
 
         #region Helpers
-
-        private void InitialiseAffiliationTypesDropDownList()
-        {
-            // TO-DO take types from the database, change hardcoded version
-            var member = new SelectListItem()
-            {
-                Value = "1",
-                Text = "Member"
-            };
-            var chair = new SelectListItem()
-            {
-                Value = "2",
-                Text = "Chair"
-            };
-            var co_chair = new SelectListItem()
-            {
-                Value = "3",
-                Text = "Co-chair"
-            };
-            var typeTip = new SelectListItem()
-            {
-                Value = null,
-                Text = "Select an affiliation"
-            };
-
-            _affiliationTypes = new List<SelectListItem>();
-            _affiliationTypes.Insert(0, typeTip);
-            _affiliationTypes.Insert(1, member);
-            _affiliationTypes.Insert(2, chair);
-            _affiliationTypes.Insert(3, co_chair);
-        }
 
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

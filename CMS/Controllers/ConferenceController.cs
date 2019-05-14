@@ -5,7 +5,6 @@ using CMS.CMS.Common.Validation;
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL;
 using CMS.CMS.DAL.Entities;
-using CMS.CMS.DAL.Repository;
 
 using Microsoft.AspNet.Identity;
 
@@ -16,30 +15,14 @@ namespace CMS.Controllers
     {
         private readonly UnitOfWork unitOfWork;
 
-        private readonly IConferenceRepository conferenceRepository;
-        private readonly IRequestRepository requestRepository;
-        private readonly IUserRoleRepository userRolesRepository;
-        private readonly ISessionRepository sessionRepository;
-        private readonly IRoleRepository roleRepository;
-
-        public ConferenceController(UnitOfWork unitOfWork,
-            IConferenceRepository conferenceRepository, 
-            IRequestRepository requestRepository,
-            IUserRoleRepository userRolesRepository,
-            IUserRepository userRepository,
-            ISessionRepository sessionRepository)
+        public ConferenceController(UnitOfWork unitOfWork)
         {
-            this.conferenceRepository = conferenceRepository;
-            this.requestRepository = requestRepository;
-            this.userRolesRepository = userRolesRepository;
-            this.sessionRepository = sessionRepository;
-
             this.unitOfWork = unitOfWork;
         }
         
         public ActionResult Details(int Id)
         {
-            var conference = conferenceRepository.GetConferenceById(Id);
+            var conference = unitOfWork.ConferenceRepository.GetConferenceById(Id);
             return View(new ConferenceDetailsViewModel() {
                 Id = conference.Id,
                 Name = conference.Name,
@@ -60,7 +43,7 @@ namespace CMS.Controllers
                 string UserID = System.Web.HttpContext.Current.User.Identity.GetUserId();
                 for (int i = 1; i < sessions.Length; i++)
                 {
-                    sessionRepository.AddSession(new Session() {
+                    unitOfWork.SessionRepository.AddSession(new Session() {
                         ChairId = UserID,
                         ConferenceId = conferenceID,
                         Name = sessions[i]
@@ -80,9 +63,9 @@ namespace CMS.Controllers
         {
             if(ModelState.IsValid)
             {
-                Conference conference = conferenceRepository.GetConferenceById(model.ConferenceId);
+                Conference conference = unitOfWork.ConferenceRepository.GetConferenceById(model.ConferenceId);
 
-                requestRepository.AddRequest(
+                unitOfWork.RequestRepository.AddRequest(
                     new Requests()
                     {
                         ConferenceId = conference.Id,
@@ -118,7 +101,7 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var addedConference = conferenceRepository.AddConference(new Conference
+                var addedConference = unitOfWork.ConferenceRepository.AddConference(new Conference
                 {
                     Name = model.Name,
                     ChairId = User.Identity.GetUserId(),
@@ -129,11 +112,12 @@ namespace CMS.Controllers
                     BiddingDeadline = model.BiddingDeadline
                 });
 
-                userRolesRepository.AddUserRole(new UserRole
-                {
-                    ConferenceId = addedConference.Id,
-                    RoleId = 1
-                });
+                // TODO: breaks
+                //unitOfWork.UserRoleRepository.AddUserRole(new UserRole
+                //{
+                //    ConferenceId = addedConference.Id,
+                //    RoleId = 1
+                //});
                
                 return RedirectToAction("Details", "Conference", new { addedConference.Id });
             }
@@ -145,7 +129,7 @@ namespace CMS.Controllers
         //[AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
         public ActionResult UpdateConference(int Id)
         {
-            var conference = conferenceRepository.GetConferenceById(Id);
+            var conference = unitOfWork.ConferenceRepository.GetConferenceById(Id);
             return View(new UpdateConferenceViewModel()
             {
                 Id = conference.Id,
@@ -167,7 +151,7 @@ namespace CMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                conferenceRepository.UpdateConference(new Conference
+                unitOfWork.ConferenceRepository.UpdateConference(new Conference
                 {
                     Id = model.Id,
                     StartDate = model.StartDate,
