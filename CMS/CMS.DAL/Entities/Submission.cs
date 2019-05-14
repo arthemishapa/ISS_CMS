@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 
 namespace CMS.CMS.DAL.Entities
+{
+    // TODO: submission session
 {   // TODO Field for Grade
     public class Submission
     {

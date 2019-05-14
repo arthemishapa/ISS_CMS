@@ -1,8 +1,9 @@
-﻿using CMS.CMS.DAL.DatabaseContext;
-using CMS.CMS.DAL.Entities;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+
+using CMS.CMS.DAL.DatabaseContext;
+using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -24,7 +25,12 @@ namespace CMS.CMS.DAL.Repository
 
         public void UpdateSubmission(Submission submission)
         {
-            
+            var submissionToUpdate = GetSubmissionById(submission.Id);
+
+            submissionToUpdate.Abstract = submission.Abstract;
+            submissionToUpdate.Filename = submission.Filename;
+
+            context.SaveChanges();
         }
 
         public void DeleteSubmission(int submissionId)

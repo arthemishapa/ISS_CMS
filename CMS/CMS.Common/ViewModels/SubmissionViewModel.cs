@@ -5,8 +5,9 @@ using System.Web.Mvc;
 
 namespace CMS.CMS.Common.ViewModels
 {
-    public class AddSubmissionViewModel
+    public class SubmissionViewModel
     {
+        public int Id { get; set; }
         public int ConferenceId { get; set; }
         public string AuthorId { get; set; }
 
@@ -20,10 +21,14 @@ namespace CMS.CMS.Common.ViewModels
         [Display(Name = "File")]
         public HttpPostedFileBase File { get; set; }
 
+        [Display(Name = "Paper filename")]
+        public string FileName { get; set; }
+
         [Required]
         [Display(Name = "Session")]
         public string SelectedSession { get; set; }
 
         public IEnumerable<SelectListItem> Sessions { get; set; }
+        public string Action { get; set; }
     }
 }

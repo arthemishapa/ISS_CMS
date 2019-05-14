@@ -22,7 +22,7 @@
         @Html.DisplayNameFor(Model => Model.ConferenceName)
     </dt>
     <dd>
-        @Html.DisplayFor(Model => Model.ConferenceName)
+        @Html.ActionLink(Model.ConferenceName, "Details", "Conference", routeValues: new { id = Model.ConferenceId }, htmlAttributes: null)
     </dd>
     <dt>
         @Html.DisplayNameFor(Model => Model.Status)
@@ -46,6 +46,9 @@
 <div>
     @Html.ActionLink("Accept", "DecideToReview", "Submission", new { Id = Model.Id, review = true }, new { @class = "btn btn-primary" })
     @Html.ActionLink("Reject", "DecideToReview", "Submission", new { Id = Model.Id, review = false }, new { @class = "btn btn-primary" })
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", "Submission", new { id = Model.Id }, new { @class = "btn btn-info" })
 </div>
 
 @using (@Html.BeginForm("SubmitReview", "Submission", FormMethod.Post))

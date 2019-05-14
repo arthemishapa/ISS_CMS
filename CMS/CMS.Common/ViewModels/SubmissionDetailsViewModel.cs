@@ -1,9 +1,7 @@
-﻿using CMS.CMS.DAL.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+
+using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.Common.ViewModels
 {
@@ -21,6 +19,7 @@ namespace CMS.CMS.Common.ViewModels
         public string Status { get; set; }
         [Display(Name = "Abstract")]
         public string Abstract { get; set; }
+        public int ConferenceId { get; set; }
         public IEnumerable<SubmissionReview> Reviews { get; set; }
     }
 }
