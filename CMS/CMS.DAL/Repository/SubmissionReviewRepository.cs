@@ -1,4 +1,5 @@
 ﻿using CMS.CMS.DAL.DatabaseContext;
+using CMS.CMS.DAL.Entities;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -9,6 +10,12 @@ namespace CMS.CMS.DAL.Repository
         public SubmissionReviewRepository(CMSDbContext context)
         {
             this.context = context;
+        }
+
+        public void AddSubmission(SubmissionReview submissionReview)
+        {
+            context.SubmissionReviews.Add(submissionReview);
+            context.SaveChanges();
         }
     }
 }

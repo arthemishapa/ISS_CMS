@@ -15,8 +15,8 @@
             <tr>
                 <td align="center">
                     <section>
-                        @Html.LabelForModel(submission.Title, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
-                        @Html.LabelForModel(submission.Author.Name, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
+                        @Html.LabelForModel("Title: " + submission.Title, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
+                        @Html.LabelForModel("Author: " + submission.Author.Name, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
                         <label id="@("label"+submission.Id)" style="color:red"></label>
                         <span>@Html.ActionLink("View details", "Details", "Submission", new { submission.Id }, null)</span>
                     </section>
@@ -24,4 +24,4 @@
             </tr>
         }
     </tbody>
-</table>`
+</table>

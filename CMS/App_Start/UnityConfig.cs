@@ -46,6 +46,7 @@ namespace CMS
             // TODO: Register your type's mappings here.
             container.RegisterType<IConferenceRepository, ConferenceRepository>();
             container.RegisterType<ISubmissionRepository, SubmissionRepository>();
+            container.RegisterType<ISubmissionReviewRepository, SubmissionReviewRepository>();
             container.RegisterType<IRequestRepository, RequestRepository>();
             container.RegisterType<IUserRoleRepository, UserRoleRepository>();
             container.RegisterType<IUserRepository, UserRepository>();

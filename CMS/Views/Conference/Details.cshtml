@@ -83,15 +83,12 @@
             <button id="saveSessions" class="btn btn-success">Save</button>
         </div>
     </div>
-
+    <br />
     <div>
         @Html.ActionLink("Submit paper", "Add", "Submission", new { Model.Id }, new { @class = "btn btn-primary" })
-    </div>
-    <div>
         @Html.ActionLink("View submitted papers", "Submissions", "Submission", new { ConferenceID = Model.Id }, new { @class = "btn btn-primary" })
     </div>
 </div>
-<hr />
 
 @section Scripts
 {

@@ -1,0 +1,49 @@
+﻿@model CMS.CMS.Common.ViewModels.SubmissionDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(Model => Model.Title)
+    </dt>
+    <dd>
+        @Html.DisplayFor(Model => Model.Title)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(Model => Model.AuthorName)
+    </dt>
+    <dd>
+        @Html.DisplayFor(Model => Model.AuthorName)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(Model => Model.ConferenceName)
+    </dt>
+    <dd>
+        @Html.DisplayFor(Model => Model.ConferenceName)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(Model => Model.Status)
+    </dt>
+    <dd>
+        @Html.DisplayFor(Model => Model.Status)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(Model => Model.Abstract)
+    </dt>
+    <dd>
+        @Html.DisplayFor(Model => Model.Abstract)
+    </dd>
+    <dt>
+        @Html.DisplayName("Paper")
+    </dt>
+    <dd>
+        @Html.ActionLink("Download", "DownloadFile", "Submission", new { fileName = Model.FileName } )
+    </dd>
+</dl>
+<div>
+    @Html.ActionLink("Accept", "DecideToReview", "Submission", new { Id = Model.Id, review = true }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Reject", "DecideToReview", "Submission", new { Id = Model.Id, review = false }, new { @class = "btn btn-primary" })
+</div>

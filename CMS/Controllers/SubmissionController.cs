@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -15,13 +16,29 @@ namespace CMS.Controllers
     public class SubmissionController : Controller
     {
         private readonly UnitOfWork unitOfWork;
+        private string DocumentsDirectory = "~/Documents/";
 
         public SubmissionController(
             UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
+        public ActionResult DownloadFile(string fileName)
+        {
+            var sDocument = Server.MapPath(DocumentsDirectory + fileName);
 
+            if (!sDocument.StartsWith(DocumentsDirectory))
+            {
+                throw new HttpException(403, "Forbidden");
+            }
+
+            if (!System.IO.File.Exists(sDocument))
+            {
+                return HttpNotFound();
+            }
+
+            return File(sDocument, "application/pdf", Server.UrlEncode(sDocument));
+        }
         public ActionResult Submissions(int ConferenceID)
         {
             return View(unitOfWork.SubmissionRepository.GetAll().Where(s => s.ConferenceId == ConferenceID).ToList());
@@ -29,7 +46,7 @@ namespace CMS.Controllers
 
         public ActionResult Details(int Id)
         {
-            return View();
+            return View(GetSubmissionDetailsViewModel(Id));
         }
 
         [Authorize]
@@ -68,7 +85,28 @@ namespace CMS.Controllers
             return AddSubmissionErrorView(model, "Please add an abstract and/or a file.");
         }
 
+        private ActionResult AddSubmissionErrorView(AddSubmissionViewModel model, string errorMessage)
+        {
+            ViewBag.ErrorMessage = errorMessage;
+            model.Sessions = GetSessionsSelectList(model.ConferenceId);
+            return View(model);
+        }
 
+        public ActionResult DecideToReview(int Id, bool review)
+        {
+            if (review)
+            {
+                unitOfWork.SubmissionReviewRepository.AddSubmission(new SubmissionReview()
+                {
+                    ReviewerId = User.Identity.GetUserId(),
+                    SubmissionId = Id
+                });
+            }
+            return RedirectToAction("Details", "Submissions", new { ConferenceID = unitOfWork.SubmissionRepository.GetSubmissionById(Id).ConferenceId });
+        }
+
+        #region Helpers
+   
         private bool TryUploadPaper(HttpPostedFileBase file)
         {
             var allowedExtensions = new[] { "pdf", "docx" };
@@ -87,6 +125,35 @@ namespace CMS.Controllers
             return false;
         }
 
+        private SubmissionDetailsViewModel GetSubmissionDetailsViewModel(int id)
+        {
+            var submission = unitOfWork.SubmissionRepository.GetSubmissionById(id);
+            return new SubmissionDetailsViewModel()
+            {
+                Id = submission.Id,
+                AuthorName = submission.Author.Name,
+                ConferenceName = submission.Conference.Name,
+                Title = submission.Title,
+                Status = GetStatusMessage(submission),
+                Abstract = submission.Abstract,
+                FileName = submission.Filename
+            };
+        }
+
+        private string GetStatusMessage (Submission submission)
+        {
+            string status = "Unknown";
+            DateTime today = DateTime.Now;
+
+            if (today <= submission.Conference.AbstractPaperDeadline)
+            {
+                status = string.IsNullOrEmpty(submission.Abstract) ? "Abstract empty"
+                : string.IsNullOrEmpty(submission.Filename) ? "File not uploaded"
+                : "Ok";
+            };
+
+            return status;
+        }
         private IList<SelectListItem> GetSessionsSelectList(int id)
         {
             int index = 0;
@@ -109,12 +176,6 @@ namespace CMS.Controllers
 
             return sessions;
         }
-
-        private ActionResult AddSubmissionErrorView(AddSubmissionViewModel model, string errorMessage)
-        {
-            ViewBag.ErrorMessage = errorMessage;
-            model.Sessions = GetSessionsSelectList(model.ConferenceId);
-            return View(model);
-        }
+        #endregion Helpers
     }
 }

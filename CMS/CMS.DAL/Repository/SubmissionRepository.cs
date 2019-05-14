@@ -34,13 +34,17 @@ namespace CMS.CMS.DAL.Repository
 
         public Submission GetSubmissionById(int submissionId)
         {
-            return null;
+            return context.Submissions
+                .Include(a => a.Author)
+                .Include(c => c.Conference)
+                .SingleOrDefault(s => s.Id == submissionId);
         }
 
         public IEnumerable<Submission> GetAll()
         {
             return context.Submissions
                 .Include(a => a.Author)
+                .Include(c => c.Conference)
                 .ToList();
         }
     }

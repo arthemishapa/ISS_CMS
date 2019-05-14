@@ -10,6 +10,7 @@ namespace CMS.CMS.DAL
         public ISessionRepository SessionRepository { get; }
         public IUserRepository UserRepository { get; set; }
         public ISubmissionRepository SubmissionRepository { get; set; }
+        public ISubmissionReviewRepository SubmissionReviewRepository { get; set; }
 
         public UnitOfWork(
             IConferenceRepository conferenceRepository,
@@ -17,7 +18,8 @@ namespace CMS.CMS.DAL
             IUserRoleRepository userRoleRepository,
             ISessionRepository sessionRepository,
             IUserRepository userRepository,
-            ISubmissionRepository submissionRepository)
+            ISubmissionRepository submissionRepository,
+            ISubmissionReviewRepository submissionReviewRepository)
         {
             ConferenceRepository = conferenceRepository;
             RequestRepository = requestRepository;
@@ -25,6 +27,7 @@ namespace CMS.CMS.DAL
             SessionRepository = sessionRepository;
             UserRepository = userRepository;
             SubmissionRepository = submissionRepository;
+            SubmissionReviewRepository = submissionReviewRepository;
         }
     }
 }
