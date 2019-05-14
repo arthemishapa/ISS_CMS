@@ -24,15 +24,15 @@ namespace CMS.Controllers
 
         public ActionResult ApproveRequest(int Id)
         {
-            var request = unitOfWork.RequestRepository.GetRequestById(Id);
-            unitOfWork.UserRoleRepository.AddUserRole(new UserRole()
-            {
-                UserId = request.UserRequesterId,
-                ConferenceId = request.ConferenceId,
-                RoleId = (int)request.Type,
-                SectionId = 1
-            });
-            unitOfWork.RequestRepository.DeleteRequest(Id);
+            //var request = unitOfWork.RequestRepository.GetRequestById(Id);
+            //unitOfWork.UserRoleRepository.AddUserRole(new UserRole()
+            //{
+            //    UserId = request.UserRequesterId,
+            //    ConferenceId = request.ConferenceId,
+            //    RoleId = (int)request.Type,
+            //    SectionId = 1
+            //});
+            //unitOfWork.RequestRepository.DeleteRequest(Id);
             
 
             return RedirectToAction("Index", "Request");

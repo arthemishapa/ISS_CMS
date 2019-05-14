@@ -57,23 +57,23 @@ namespace CMS.CMS.Common.Validation
                 var userEmail = httpContext.User.Identity.Name;
                 var user = UserRepository.GetUserByEmail(userEmail);
 
-                if (string.IsNullOrEmpty(RoleName))
-                {
-                    var privilege = UserRolesRepository
-                        .GetAll()
-                        .SingleOrDefault(ur => ur.ConferenceId == conferenceId && ur.UserId == user.Id);
-                    if (privilege != null)
-                        return false;
-                }
-                else
-                {
-                    var role = RoleRepository.GetAll().SingleOrDefault(r => r.Name == RoleName);
-                    var privilege = UserRolesRepository.GetAll().SingleOrDefault(p => p.RoleId == role.Id
-                   && p.ConferenceId == conferenceId
-                   && p.UserId == user.Id);
-                    if (privilege == null)
-                        return false;
-                }
+                //if (string.IsNullOrEmpty(RoleName))
+                //{
+                //    var privilege = UserRolesRepository
+                //        .GetAll()
+                //        .SingleOrDefault(ur => ur.ConferenceId == conferenceId && ur.UserId == user.Id);
+                //    if (privilege != null)
+                //        return false;
+                //}
+                //else
+                //{
+                //    var role = RoleRepository.GetAll().SingleOrDefault(r => r.Name == RoleName);
+                //    var privilege = UserRolesRepository.GetAll().SingleOrDefault(p => p.RoleId == role.Id
+                //   && p.ConferenceId == conferenceId
+                //   && p.UserId == user.Id);
+                //    if (privilege == null)
+                //        return false;
+                //}
             }
             return true;
         }
