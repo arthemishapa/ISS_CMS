@@ -40,7 +40,7 @@
         @Html.DisplayName("Paper")
     </dt>
     <dd>
-        @Html.ActionLink("Download", "DownloadFile", "Submission", new { fileName = Model.FileName } )
+        @Html.ActionLink("Download", "DownloadFile", "Submission", new { FileName = Model.FileName }, null)
     </dd>
 </dl>
 <div>

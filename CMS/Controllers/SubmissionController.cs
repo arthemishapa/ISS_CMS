@@ -23,21 +23,11 @@ namespace CMS.Controllers
         {
             this.unitOfWork = unitOfWork;
         }
-        public ActionResult DownloadFile(string fileName)
+        public FileStreamResult DownloadFile(string FileName)
         {
-            var sDocument = Server.MapPath(DocumentsDirectory + fileName);
+            var sDocument = Server.MapPath(DocumentsDirectory + FileName);
 
-            if (!sDocument.StartsWith(DocumentsDirectory))
-            {
-                throw new HttpException(403, "Forbidden");
-            }
-
-            if (!System.IO.File.Exists(sDocument))
-            {
-                return HttpNotFound();
-            }
-
-            return File(sDocument, "application/pdf", Server.UrlEncode(sDocument));
+            return File(new FileStream(sDocument, FileMode.Open), "text/plain", FileName);
         }
         public ActionResult Submissions(int ConferenceID)
         {
