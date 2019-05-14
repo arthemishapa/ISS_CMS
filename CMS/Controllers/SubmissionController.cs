@@ -24,7 +24,7 @@ namespace CMS.Controllers
 
         public ActionResult Submissions(int ConferenceID)
         {
-            return View(unitOfWork.SubmissionRepository.GetAll().Select(s => s.ConferenceId == ConferenceID));
+            return View(unitOfWork.SubmissionRepository.GetAll().Where(s => s.ConferenceId == ConferenceID).ToList());
         }
 
         public ActionResult Details(int Id)

@@ -1,10 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace CMS.CMS.DAL.Entities
 {
     public class UserRole
     {
+        public int Id { get; set; }
         [Key]
         [Column(Order = 1)]
         public string UserId { get; set; }
@@ -15,15 +20,6 @@ namespace CMS.CMS.DAL.Entities
 
         [Key]
         [Column(Order = 3)]
-        public int ConferenceId { get; set; }
-
-        [Key]
-        [Column(Order = 4)]
-        public int? SectionId { get; set; }
-
-        public User User { get; set; }
-        public Role Role { get; set; }
-        public Section Section { get; set; }
-        public Conference Conference { get; set; }
+        public int? LocationId { get; set; }
     }
 }
