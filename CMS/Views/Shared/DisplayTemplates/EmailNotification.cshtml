@@ -1,0 +1,10 @@
+﻿@model dynamic
+
+@{
+    Layout = "Layout";
+}
+
+@Model.EmailNotification.Title <br /> <br />
+
+Hello, @Model.EmailNotification.User! @Model.EmailNotification.Content
+<a href="@Model.EmailNotification.CallBack">here</a>
