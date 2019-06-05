@@ -1,6 +1,8 @@
 ﻿@model CMS.CMS.Common.ViewModels.SubmissionDetailsViewModel
 @{
     ViewBag.Title = "Details";
+    string status = Session["status"].ToString();
+    string reviewed = Session["reviewed"].ToString();
 }
 
 <h2>Details</h2>
@@ -43,46 +45,84 @@
         @Html.ActionLink("Download", "DownloadFile", "Submission", new { FileName = Model.FileName }, null)
     </dd>
 </dl>
-<div>
-    @Html.ActionLink("Accept", "DecideToReview", "Submission", new { Id = Model.Id, review = true }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Reject", "DecideToReview", "Submission", new { Id = Model.Id, review = false }, new { @class = "btn btn-primary" })
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", "Submission", new { id = Model.Id }, new { @class = "btn btn-info" })
-</div>
-
-@using (@Html.BeginForm("SubmitReview", "Submission", FormMethod.Post))
+@if (status == "Bidding")
 {
-    @Html.AntiForgeryToken()
-
-    @Html.HiddenFor(x => x.Id, new { Id = "Id" })
-    
-    <h3>Review</h3>
-    <div class="form-group">
-        @Html.Label("StrongReject", htmlAttributes: new { @class = "control-label" })
-        @Html.RadioButton("Review", "StrongReject")
-        @Html.Label("Reject", htmlAttributes: new { @class = "control-label" })
-        @Html.RadioButton("Review", "Reject")
-        @Html.Label("WeakReject", htmlAttributes: new { @class = "control-label" })
-        @Html.RadioButton("Review", "WeakReject")
-        @Html.Label("BorderlinePaper", htmlAttributes: new { @class = "control-label" })
-        @Html.RadioButton("Review", "BorderlinePaper")
-        @Html.Label("WeakAccept", htmlAttributes: new { @class = "control-label" })
-        @Html.RadioButton("Review", "WeakAccept")
-        @Html.Label("Accept", htmlAttributes: new { @class = "control-label" })
-        @Html.RadioButton("Review", "Accept")
-        @Html.Label("StrongAccept", htmlAttributes: new { @class = "control-label" })
-        @Html.RadioButton("Review", "StrongAccept")
+    <div>
+        @Html.ActionLink("Accept", "DecideToReview", "Submission", new { Id = Model.ConferenceId, SubmissionId = Model.Id, review = true }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Reject", "DecideToReview", "Submission", new { Id = Model.ConferenceId, SubmissionId = Model.Id, review = false }, new { @class = "btn btn-primary" })
     </div>
+}
 
-    <div class="form-group">
-        @Html.Label("Recommendation", htmlAttributes: new { @class = "control-label" })
-        @Html.TextArea("Recommendation", htmlAttributes: new { @class = "form-control" })
+@if (status == "Call for papers")
+{
+    <div>
+        @Html.ActionLink("Edit", "Edit", "Submission", new { id = Model.Id }, new { @class = "btn btn-info" })
     </div>
+}
 
-    <div class="text-danger">
-        @ViewBag.ErrorMessage
-    </div>
+@if (status == "Review" && reviewed != "true")
+{
+    using (@Html.BeginForm("SubmitReview", "Submission", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-    <button type="submit" class="btn btn-success">Submit</button>
+        @Html.HiddenFor(x => x.Id, new { SubmissionId = "SubmissionId" })
+        @Html.HiddenFor(x => x.ConferenceId, new { Id = "Id" })
+
+
+        <h3>Review</h3>
+        <div class="form-group">
+            @Html.Label("StrongReject", htmlAttributes: new { @class = "control-label" })
+            @Html.RadioButton("Review", "StrongReject")
+            @Html.Label("Reject", htmlAttributes: new { @class = "control-label" })
+            @Html.RadioButton("Review", "Reject")
+            @Html.Label("WeakReject", htmlAttributes: new { @class = "control-label" })
+            @Html.RadioButton("Review", "WeakReject")
+            @Html.Label("BorderlinePaper", htmlAttributes: new { @class = "control-label" })
+            @Html.RadioButton("Review", "BorderlinePaper")
+            @Html.Label("WeakAccept", htmlAttributes: new { @class = "control-label" })
+            @Html.RadioButton("Review", "WeakAccept")
+            @Html.Label("Accept", htmlAttributes: new { @class = "control-label" })
+            @Html.RadioButton("Review", "Accept")
+            @Html.Label("StrongAccept", htmlAttributes: new { @class = "control-label" })
+            @Html.RadioButton("Review", "StrongAccept")
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Recommendation", htmlAttributes: new { @class = "control-label" })
+            @Html.TextArea("Recommendation", htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="text-danger">
+            @ViewBag.ErrorMessage
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    }
+}
+
+@if (reviewed == "true")
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Submitted reviews</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model.Reviews)
+            {
+                <tr>
+                    <td align="center">
+                        <section>
+                            @Html.LabelForModel("Review: " + review.Review, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
+                            @Html.LabelForModel("Recommendation: " + review.Review, htmlAttributes: new { @class = "control-label col-md-2", style = "margin-left: 10px" })
+                            
+                        </section>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
 }

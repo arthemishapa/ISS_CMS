@@ -17,7 +17,7 @@ namespace CMS.CMS.DAL.Repository
 
         public User GetUserByEmail(string email)
         {
-            return context.Users.SingleOrDefault(u => u.Email == email);
+            return context.Users.SingleOrDefault(u => u.Name == email);
         }
 
         public IEnumerable<User> GetAll()

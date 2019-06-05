@@ -61,8 +61,7 @@ namespace CMS.Controllers
             return PartialView("JoinConference", new JoinConferenceViewModel() { ConferenceId = Id });
         }
 
-        // TODO: authorize only for users not having any role within the conference
-        //[AuthorizeAction(ValidateRole = true)]
+        [AuthorizeAction(ValidateRole = true)]
         public ActionResult FormJoinConference(JoinConferenceViewModel model)
         {
             if(ModelState.IsValid)
@@ -75,7 +74,7 @@ namespace CMS.Controllers
                         ConferenceId = conference.Id,
                         UserRequesterId = System.Web.HttpContext.Current.User.Identity.GetUserId(),
                         Type = model.Role == "Author" ? CMS.Common.Enums.Role.Author :
-                        model.Role == "PC Member" ? CMS.Common.Enums.Role.PCMember :
+                        model.Role == "PCMember" ? CMS.Common.Enums.Role.PCMember :
                         CMS.Common.Enums.Role.CoChair
                     });
             }
@@ -126,10 +125,8 @@ namespace CMS.Controllers
             }
             return View(model);
         }
-
-        // TODO: breaks with two "AuthorizeAction" attributes
+        
         [AuthorizeAction(RoleName = "Chair, CoChair", ValidateRole = true)]
-        //[AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
         public ActionResult UpdateConference(int Id)
         {
             var conference = unitOfWork.ConferenceRepository.GetConferenceById(Id);
@@ -144,12 +141,10 @@ namespace CMS.Controllers
                 EndDate = conference.EndDate
             });
         }
-
-        // TODO: breaks with two "AuthorizeAction" attributes
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeAction(RoleName = "Chair, CoChair", ValidateRole = true)]
-        //[AuthorizeAction(RoleName = "CoChair", ValidateRole = true)]
         public ActionResult UpdateConference(UpdateConferenceViewModel model)
         {
             if (ModelState.IsValid)

@@ -278,6 +278,10 @@
     <Compile Include="Migrations\201905141755559_Modify_SubmissionReview.Designer.cs">
       <DependentUpon>201905141755559_Modify_SubmissionReview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906051605070_UpdateSubmissionWithScore.cs" />
+    <Compile Include="Migrations\201906051605070_UpdateSubmissionWithScore.Designer.cs">
+      <DependentUpon>201906051605070_UpdateSubmissionWithScore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201906051724086_AddSessionToSubmission.cs" />
     <Compile Include="Migrations\201906051724086_AddSessionToSubmission.Designer.cs">
       <DependentUpon>201906051724086_AddSessionToSubmission.cs</DependentUpon>
@@ -466,6 +470,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905141755559_Modify_SubmissionReview.resx">
       <DependentUpon>201905141755559_Modify_SubmissionReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906051605070_UpdateSubmissionWithScore.resx">
+      <DependentUpon>201906051605070_UpdateSubmissionWithScore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906051724086_AddSessionToSubmission.resx">
       <DependentUpon>201906051724086_AddSessionToSubmission.cs</DependentUpon>
