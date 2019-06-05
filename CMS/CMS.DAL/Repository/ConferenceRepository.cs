@@ -15,6 +15,11 @@ namespace CMS.CMS.DAL.Repository
             this.context = context;
         }
 
+        public ConferenceRepository()
+        {
+            this.context = new CMSDbContext();
+        }
+
         public Conference AddConference(Conference conference)
         {
             var addedConference = context.Conferences.Add(conference);

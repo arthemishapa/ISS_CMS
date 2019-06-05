@@ -19,5 +19,15 @@ namespace CMS.CMS.DAL.Entities
         public DateTime BiddingDeadline { get; set; }
 
         public ICollection<Request> Requests { get; set; }
+
+        public int getId() { return Id; }
+        public void setId(int id) { Id = id; }
+        public string getName() { return Name; }
+        public void setName(string newName) { Name = newName; }
+        public string getChairId() { return ChairId; }
+        public void setChairId(string chairId) { ChairId = chairId; }
+        public DateTime getStartDate() { return StartDate; }
+        public void setStartDate(DateTime newDate) { StartDate = newDate; }
+
     }
 }

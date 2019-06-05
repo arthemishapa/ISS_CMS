@@ -20,5 +20,12 @@ namespace CMS.CMS.DAL.Entities
 
         public Submission Submission { get; set; }
         public User Reviewer { get; set; }
+
+        public int getSubmissionId() { return SubmissionId; }
+        public void setSubmissionId(int id) { SubmissionId = id; }
+        public string getReviewerId() { return ReviewerId; }
+        public void setReviewerId(string id) { ReviewerId = id; }
+        public string getRecommendation() { return Recommendation; }
+        public void setRecommendation(string recommendation) { Recommendation = recommendation; }
     }
 }

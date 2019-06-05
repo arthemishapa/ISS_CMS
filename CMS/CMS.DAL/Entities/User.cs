@@ -23,5 +23,10 @@ namespace CMS.CMS.DAL.Entities
             return userIdentity;
         }
         public ICollection<Request> Requests { get; set; }
+
+        public string getName() { return Name; }
+        public void setName(string name) { Name = name; }
+        public string getPersonalWebPage() { return PersonalWebpage; }
+        public void setPersonalWebPage(string webPage) { PersonalWebpage = webPage; }
     }
 }

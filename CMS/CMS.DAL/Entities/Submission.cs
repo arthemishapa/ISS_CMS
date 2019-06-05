@@ -19,5 +19,20 @@ namespace CMS.CMS.DAL.Entities
         public Conference Conference { get; set; }
 
         public IEnumerable<SubmissionReview> Reviews { get; set; }
+        public int getId() { return Id; }
+        public void setId(int id) { Id = id; }
+        public int getConferenceId() { return ConferenceId; }
+        public void setConferenceId(int id) { ConferenceId = id; }
+
+        public string getAuthorId() { return AuthorId; }
+        public void setAuthorId(string id) { AuthorId = id; }
+
+        public string getTitle() { return Title; }
+        public void setTitle(string title) { Title = title; }
+        public string getAbstract() { return Abstract; }
+        public void setAbstract(string _abstract) { Abstract = _abstract; }
+        public string getFileName() { return Filename; }
+        public void setFileName(string fileName) { Filename = fileName; }
+
     }
 }
