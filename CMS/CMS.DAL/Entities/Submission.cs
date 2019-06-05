@@ -14,6 +14,7 @@ namespace CMS.CMS.DAL.Entities
         public string Title { get; set; }
         public string Abstract { get; set; }
         public string Filename { get; set; }
+        public int Mark { get; set; }
 
         public User Author { get; set; }
         public Conference Conference { get; set; }

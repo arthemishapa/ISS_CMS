@@ -19,7 +19,7 @@ namespace CMS.CMS.Common.ScheduledJobs
 
             ITrigger trigger = TriggerBuilder.Create()
                 .StartNow()
-                .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(11, 30))
+                .WithSchedule(CronScheduleBuilder.DailyAtHourAndMinute(18, 13))
                 .Build();
 
             await scheduler.ScheduleJob(job, trigger);

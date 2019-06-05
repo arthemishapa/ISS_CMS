@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using CMS.CMS.Common.Validation;
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL;
 using CMS.CMS.DAL.Entities;
@@ -23,6 +23,7 @@ namespace CMS.Controllers
         {
             this.unitOfWork = unitOfWork;
         }
+
         public FileStreamResult DownloadFile(string FileName)
         {
             var sDocument = Server.MapPath(DocumentsDirectory + FileName);
@@ -32,11 +33,19 @@ namespace CMS.Controllers
 
         public ActionResult Submissions(int ConferenceID)
         {
+            var conference = unitOfWork.ConferenceRepository.GetConferenceById(ConferenceID);
+            Session["status"] = conference.BiddingDeadline >= DateTime.Now 
+                && conference.AbstractPaperDeadline < DateTime.Now ? "Bidding" : 
+                conference.AbstractPaperDeadline >= DateTime.Now ? "Call for papers" : "Review";
+
             return View(unitOfWork.SubmissionRepository.GetAll().Where(s => s.ConferenceId == ConferenceID).ToList());
         }
 
         public ActionResult Details(int Id)
         {
+            Session["reviewed"] = unitOfWork.SubmissionReviewRepository.GetAll().Where(s => s.SubmissionId == Id
+                && s.ReviewerId == User.Identity.GetUserId()
+                && s.Review != CMS.Common.Enums.Review.None).Count() >= 1 ? "true" : "false";
             return View(GetSubmissionDetailsViewModel(Id));
         }
 
@@ -55,6 +64,7 @@ namespace CMS.Controllers
 
         [Authorize]
         [HttpPost]
+        [AuthorizeAction(RoleName = "Author", ValidateRole = true)]
         public ActionResult Add(SubmissionViewModel model)
         {
             if (ModelState.IsValid && ((model.File != null) || !string.IsNullOrEmpty(model.Abstract)))
@@ -70,7 +80,8 @@ namespace CMS.Controllers
                     AuthorId = User.Identity.GetUserId(),
                     Title = model.Title,
                     Abstract = model.Abstract,
-                    Filename = model.File?.FileName
+                    Filename = model.File?.FileName,
+                    Mark = -1
                 });
 
                 return RedirectToAction("Details", "Submission", new { id = addedSubmission.Id });
@@ -102,6 +113,7 @@ namespace CMS.Controllers
         }
 
         [HttpPost]
+        [AuthorizeAction(RoleName = "Author", ValidateRole = true)]
         public ActionResult Edit(SubmissionViewModel model)
         {
             if (ModelState.IsValid)
@@ -119,6 +131,7 @@ namespace CMS.Controllers
                     Id = model.Id,
                     Abstract = model.Abstract,
                     Filename = model.File != null ? model.File.FileName : model.FileName,
+                    Mark = -1
                 });
 
                 return RedirectToAction("Details", new { model.Id });
@@ -136,31 +149,58 @@ namespace CMS.Controllers
             return View("Submission", model);
         }
 
-        public ActionResult DecideToReview(int Id, bool review)
+        [AuthorizeAction(RoleName = "PCMember", ValidateRole = true)]
+        public ActionResult DecideToReview(int Id, int SubmissionId, bool review)
         {
             if (review)
             {
                 unitOfWork.SubmissionReviewRepository.AddSubmissionReview(new SubmissionReview()
                 {
                     ReviewerId = User.Identity.GetUserId(),
-                    SubmissionId = Id
+                    SubmissionId = SubmissionId,
+                    Review = CMS.Common.Enums.Review.None
                 });
             }
-            return RedirectToAction("Submissions", new { ConferenceID = unitOfWork.SubmissionRepository.GetSubmissionById(Id).ConferenceId });
+            return RedirectToAction("Submissions", new { ConferenceID = Id });
         }
 
-        public ActionResult SubmitReview(int Id, string Review, string Recommendation)
+        [AuthorizeAction(RoleName = "PCMember", ValidateRole = true)]
+        public ActionResult SubmitReview(int ConferenceId, int Id, string Review, string Recommendation)
         {
-            unitOfWork.SubmissionReviewRepository.UpdateSubmissionReview(new SubmissionReview()
+            if (unitOfWork.SubmissionReviewRepository.GetAll().Where(s => s.SubmissionId == Id
+             && s.ReviewerId == User.Identity.GetUserId()).Count() >= 1)
             {
-                SubmissionId = Id,
-                ReviewerId = User.Identity.GetUserId(),
-                Review = (CMS.Common.Enums.Review)Enum.Parse(typeof(CMS.Common.Enums.Review), Review),
-                Recommendation = Recommendation
-            });
-            return RedirectToAction("Submissions", new { ConferenceID = unitOfWork.SubmissionRepository.GetSubmissionById(Id).ConferenceId });
+                unitOfWork.SubmissionReviewRepository.UpdateSubmissionReview(new SubmissionReview()
+                {
+                    SubmissionId = Id,
+                    ReviewerId = User.Identity.GetUserId(),
+                    Review = (CMS.Common.Enums.Review)Enum.Parse(typeof(CMS.Common.Enums.Review), Review),
+                    Recommendation = Recommendation
+                });
+                CheckAndGiveFinalGrade(Id);
+                Session["reviewed"] = "true";
+            }
+            return RedirectToAction("Submissions", new { ConferenceID = ConferenceId });
         }
         #region Helpers
+
+        private void CheckAndGiveFinalGrade(int submissionId)
+        {
+            if(unitOfWork.SubmissionReviewRepository.GetAll().Count(s => s.SubmissionId == submissionId && s.Review == CMS.Common.Enums.Review.None) == 0)
+            {
+                int mark = unitOfWork.SubmissionReviewRepository.GetAll().Where(s => s.SubmissionId == submissionId)
+                    .Sum(s => (int)s.Review);
+
+                var submission = unitOfWork.SubmissionRepository.GetSubmissionById(submissionId);
+                unitOfWork.SubmissionRepository.UpdateSubmission(new Submission
+                {
+                    Id = submissionId,
+                    Abstract = submission.Abstract,
+                    Filename = submission.Filename,
+                    Mark = mark
+                });
+            }
+        }
 
         private bool TryUploadPaper(HttpPostedFileBase file)
         {
@@ -191,6 +231,7 @@ namespace CMS.Controllers
         private SubmissionDetailsViewModel GetSubmissionDetailsViewModel(int id)
         {
             var submission = unitOfWork.SubmissionRepository.GetSubmissionById(id);
+            var reviews = unitOfWork.SubmissionReviewRepository.GetAll().Where(s => s.SubmissionId == id);
             return new SubmissionDetailsViewModel()
             {
                 Id = submission.Id,
@@ -200,7 +241,8 @@ namespace CMS.Controllers
                 Status = GetStatusMessage(submission),
                 Abstract = submission.Abstract,
                 FileName = submission.Filename,
-                ConferenceId = submission.ConferenceId
+                ConferenceId = submission.ConferenceId,
+                Reviews = reviews
             };
         }
 

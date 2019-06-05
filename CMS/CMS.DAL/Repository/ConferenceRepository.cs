@@ -3,6 +3,7 @@ using System.Linq;
 
 using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
+using System.Data.Entity;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -37,12 +38,12 @@ namespace CMS.CMS.DAL.Repository
 
         public Conference GetConferenceById(int conferenceId)
         {
-            return context.Conferences.SingleOrDefault(c => c.Id == conferenceId);
+            return context.Conferences.Include(a => a.Chair).SingleOrDefault(c => c.Id == conferenceId);
         }
 
         public IEnumerable<Conference> GetAll()
         {   
-            return context.Conferences.ToList();
+            return context.Conferences.Include(a => a.Chair).ToList();
         }
     }
 }

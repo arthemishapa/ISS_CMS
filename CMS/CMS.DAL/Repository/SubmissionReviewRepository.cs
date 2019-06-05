@@ -2,6 +2,8 @@
 
 using CMS.CMS.DAL.DatabaseContext;
 using CMS.CMS.DAL.Entities;
+using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace CMS.CMS.DAL.Repository
 {
@@ -20,9 +22,18 @@ namespace CMS.CMS.DAL.Repository
             context.SaveChanges();
         }
 
+        public IEnumerable<SubmissionReview> GetAll()
+        {
+            return context.SubmissionReviews.Include(a => a.Reviewer)
+               .Include(a => a.Submission)
+               .ToList();
+        }
+
         public SubmissionReview GetSubmissionReview(int submissionId, string reviewerId)
         {
-            return context.SubmissionReviews.SingleOrDefault(s => s.SubmissionId == submissionId
+            return context.SubmissionReviews.Include(a => a.Reviewer)
+                .Include(a => a.Submission)
+                .SingleOrDefault(s => s.SubmissionId == submissionId
                 && s.ReviewerId == reviewerId);
         }
 

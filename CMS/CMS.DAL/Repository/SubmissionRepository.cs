@@ -29,6 +29,7 @@ namespace CMS.CMS.DAL.Repository
 
             submissionToUpdate.Abstract = submission.Abstract;
             submissionToUpdate.Filename = submission.Filename;
+            submissionToUpdate.Mark = submission.Mark;
 
             context.SaveChanges();
         }
