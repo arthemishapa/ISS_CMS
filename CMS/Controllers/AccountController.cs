@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 using CMS.CMS.Common.ViewModels;
 using CMS.CMS.DAL.Entities;
+using CMS.CMS.DAL.Repository;
 
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -19,16 +20,21 @@ namespace CMS.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        private readonly IUserRepository userRepository;
+
         #endregion Variables
 
         public AccountController()
         {
+            this.userRepository = DependencyResolver.Current.GetService<IUserRepository>();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+
+            this.userRepository = DependencyResolver.Current.GetService<IUserRepository>();
         }
 
         public ApplicationSignInManager SignInManager
@@ -101,12 +107,17 @@ namespace CMS.Controllers
             return View(new AccountDetailsViewModel { MemberID = memberID });
         }
 
-        // TODO
         [HttpPost]
         [AllowAnonymous]
         public ActionResult AccountDetails(AccountDetailsViewModel accountDetails)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                userRepository.SetUserWebpage(accountDetails.MemberID, accountDetails.Webpage);
+                return View(accountDetails);
+            }
+
+            return AccountDetails(accountDetails.MemberID);
         }
 
         //

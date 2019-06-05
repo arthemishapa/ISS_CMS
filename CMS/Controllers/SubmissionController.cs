@@ -35,6 +35,43 @@ namespace CMS.Controllers
             return View(unitOfWork.SubmissionRepository.GetAll().Where(s => s.ConferenceId == ConferenceID).ToList());
         }
 
+        public ActionResult AddSessionsToSubmissions(int conferenceId)
+        {
+            var sessions = unitOfWork.SessionRepository.GetAll().Where(s => s.ConferenceId == conferenceId).Select(s => new SessionViewModel
+            {
+                Id = s.Id,
+                Name = s.Name
+            }).ToList();
+
+            return View(unitOfWork.SubmissionRepository.GetAll().Where(s => s.ConferenceId == conferenceId && !s.SessionId.HasValue).Select(s => new SubmissionViewModel
+            {
+                Id = s.Id,
+                ConferenceId = s.ConferenceId,
+                Sessions = sessions,
+                AuthorName = s.Author.Name,
+                Title = s.Title
+            }).ToList());
+        }
+
+        [HttpPost]
+        public ActionResult AddSessionsToSubmissions(IList<SubmissionViewModel> model)
+        {
+            if (model.Count == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            foreach (var s in model)
+            {
+                if (s.SessionId != 0)
+                {
+                    unitOfWork.SubmissionRepository.SetSubmissionSession(s.Id, s.SessionId);
+                }
+            }
+
+            return RedirectToAction("Details", "Conference", new { Id = model[0].ConferenceId });
+        }
+
         public ActionResult Details(int Id)
         {
             return View(GetSubmissionDetailsViewModel(Id));
@@ -48,7 +85,6 @@ namespace CMS.Controllers
             return View("Submission", new SubmissionViewModel
             {
                 ConferenceId = id,
-                Sessions = GetSessionsSelectList(id),
                 Action = "Add"
             });
         }
@@ -96,7 +132,6 @@ namespace CMS.Controllers
                 Title = submission.Title,
                 Abstract = submission.Abstract,
                 FileName = submission.Filename,
-                SelectedSession = "Muie PSD", // TODO
                 Action = "Edit"
             });
         }
@@ -130,7 +165,6 @@ namespace CMS.Controllers
         {
             ViewBag.ErrorMessage = errorMessage;
 
-            model.Sessions = GetSessionsSelectList(model.ConferenceId);
             model.Action = action;
 
             return View("Submission", model);
@@ -160,6 +194,7 @@ namespace CMS.Controllers
             });
             return RedirectToAction("Submissions", new { ConferenceID = unitOfWork.SubmissionRepository.GetSubmissionById(Id).ConferenceId });
         }
+
         #region Helpers
 
         private bool TryUploadPaper(HttpPostedFileBase file)
@@ -218,28 +253,29 @@ namespace CMS.Controllers
 
             return status;
         }
-        private IList<SelectListItem> GetSessionsSelectList(int id)
-        {
-            int index = 0;
-            List<SelectListItem> sessions = new List<SelectListItem>();
-            sessions.Insert(index, new SelectListItem()
-            {
-                Value = null,
-                Text = "Select a session"
-            });
-            index++;
-            foreach (Session session in unitOfWork.SessionRepository.GetAll().Where(s => s.ConferenceId == id))
-            {
-                sessions.Insert(index, new SelectListItem()
-                {
-                    Value = index.ToString(),
-                    Text = session.Name
-                });
-                index++;
-            }
 
-            return sessions;
-        }
+        //private IList<SelectListItem> GetSessionsSelectList(int id)
+        //{
+        //    int index = 0;
+        //    List<SelectListItem> sessions = new List<SelectListItem>();
+        //    sessions.Insert(index, new SelectListItem()
+        //    {
+        //        Value = null,
+        //        Text = "Select a session"
+        //    });
+        //    index++;
+        //    foreach (Session session in unitOfWork.SessionRepository.GetAll().Where(s => s.ConferenceId == id))
+        //    {
+        //        sessions.Insert(index, new SelectListItem()
+        //        {
+        //            Value = index.ToString(),
+        //            Text = session.Name
+        //        });
+        //        index++;
+        //    }
+
+        //    return sessions;
+        //}
         #endregion Helpers
     }
 }

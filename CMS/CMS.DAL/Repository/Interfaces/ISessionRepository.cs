@@ -6,7 +6,7 @@ namespace CMS.CMS.DAL.Repository
 {
     public interface ISessionRepository
     {
-        void AddSession(Session session);
+        Session AddSession(Session session);
         IEnumerable<Session> GetAll();
     }
 }

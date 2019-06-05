@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 using CMS.CMS.DAL.DatabaseContext;
@@ -15,15 +16,17 @@ namespace CMS.CMS.DAL.Repository
             this.context = context;
         }
 
-        public void AddSession(Session session)
+        public Session AddSession(Session session)
         {
-            context.Sessions.Add(session);
+            var addedSession = context.Sessions.Add(session);
             context.SaveChanges();
+
+            return addedSession;
         }
 
         public IEnumerable<Session> GetAll()
         {
-            return context.Sessions.ToList();
+            return context.Sessions.Include(s => s.Chair).ToList();
         }
     }
 }

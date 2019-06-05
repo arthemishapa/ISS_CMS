@@ -2,7 +2,6 @@
 
 namespace CMS.CMS.DAL.Entities
 {
-    // TODO: submission session
     // TODO Field for Grade
     public class Submission
     {
@@ -10,6 +9,7 @@ namespace CMS.CMS.DAL.Entities
 
         public int ConferenceId { get; set; }
         public string AuthorId { get; set; }
+        public int? SessionId { get; set; }
 
         public string Title { get; set; }
         public string Abstract { get; set; }
@@ -17,6 +17,7 @@ namespace CMS.CMS.DAL.Entities
 
         public User Author { get; set; }
         public Conference Conference { get; set; }
+        public Session Session { get; set; }
 
         public IEnumerable<SubmissionReview> Reviews { get; set; }
     }

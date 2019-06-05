@@ -53,5 +53,12 @@ namespace CMS.CMS.DAL.Repository
                 .Include(c => c.Conference)
                 .ToList();
         }
+
+        public void SetSubmissionSession(int submissionId, int sessionId)
+        {
+            var submission = context.Submissions.SingleOrDefault(s => s.Id == submissionId);
+            submission.SessionId = sessionId;
+            context.SaveChanges();
+        }
     }
 }

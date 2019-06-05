@@ -24,5 +24,12 @@ namespace CMS.CMS.DAL.Repository
         {
             return context.Users;
         }
+
+        public void SetUserWebpage(string userId, string webpage)
+        {
+            User user = context.Users.SingleOrDefault(u => u.Id == userId);
+            user.PersonalWebpage = webpage;
+            context.SaveChanges();
+        }
     }
 }

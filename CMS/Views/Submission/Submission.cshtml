@@ -26,26 +26,6 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(x => Model.SelectedSession, htmlAttributes: new { @class = "control-label" })
-        @if (Model.Action == "Add")
-        {
-            @Html.DropDownListFor(m => Model.SelectedSession,
-                 new SelectList(Model.Sessions, "Value", "Text"),
-                 htmlAttributes: new
-                 {
-                     @class = "form-control",
-                     id = "Session"
-                 })
-        }
-        else
-        {
-            @Html.TextBoxFor(m => Model.SelectedSession, htmlAttributes: new { @class = "form-control", @readonly = true })
-        }
-        @Html.ValidationMessageFor(m => Model.SelectedSession, "",
-            new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
         @Html.LabelFor(x => Model.Abstract, htmlAttributes: new { @class = "control-label" })
         @Html.TextAreaFor(m => m.Abstract, htmlAttributes: new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.Abstract, "", new { @class = "text-danger" })

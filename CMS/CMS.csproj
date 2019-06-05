@@ -213,6 +213,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="CMS.Common\Enums\ConferenceState.cs" />
     <Compile Include="CMS.Common\Enums\Role.cs" />
     <Compile Include="CMS.Common\ScheduledJobs\EmailHelper.cs" />
     <Compile Include="CMS.Common\ScheduledJobs\EmailJob.cs" />
@@ -224,14 +225,15 @@
     <Compile Include="CMS.Common\ViewModels\EmailNotificationViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\JoinConferenceViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\RequestViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\SessionViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\SubmissionDetailsViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\SubmissionViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\UpdateConferenceViewModel.cs" />
+    <Compile Include="CMS.Common\ViewModels\UserViewModel.cs" />
     <Compile Include="CMS.DAL\Entities\Request.cs" />
     <Compile Include="CMS.DAL\Entities\UserRole.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\IConferenceRepository.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\IRequestRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\Interfaces\ISectionRepository.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\ISessionRepository.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\ISubmissionRepository.cs" />
     <Compile Include="CMS.DAL\Repository\Interfaces\ISubmissionReviewRepository.cs" />
@@ -239,7 +241,6 @@
     <Compile Include="CMS.DAL\Repository\Interfaces\IUserRoleRepository.cs" />
     <Compile Include="CMS.DAL\Repository\RequestRepository.cs" />
     <Compile Include="CMS.DAL\Repository\ConferenceRepository.cs" />
-    <Compile Include="CMS.DAL\Repository\SectionRepository.cs" />
     <Compile Include="CMS.DAL\Repository\SessionRepository.cs" />
     <Compile Include="CMS.DAL\Repository\SubmissionRepository.cs" />
     <Compile Include="CMS.DAL\Repository\SubmissionReviewRepository.cs" />
@@ -252,6 +253,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CMS.DAL\DatabaseContext\CMSDbContext.cs" />
     <Compile Include="Controllers\RequestController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\SubmissionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -275,6 +277,10 @@
     <Compile Include="Migrations\201905141755559_Modify_SubmissionReview.cs" />
     <Compile Include="Migrations\201905141755559_Modify_SubmissionReview.Designer.cs">
       <DependentUpon>201905141755559_Modify_SubmissionReview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906051724086_AddSessionToSubmission.cs" />
+    <Compile Include="Migrations\201906051724086_AddSessionToSubmission.Designer.cs">
+      <DependentUpon>201906051724086_AddSessionToSubmission.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -431,6 +437,8 @@
     <Content Include="Views\Shared\DisplayTemplates\Header.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Layout.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EmailNotification.cshtml" />
+    <Content Include="Views\Session\AddSession.cshtml" />
+    <Content Include="Views\Submission\AddSessionsToSubmissions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Conference\Add.cshtml" />
@@ -458,6 +466,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905141755559_Modify_SubmissionReview.resx">
       <DependentUpon>201905141755559_Modify_SubmissionReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906051724086_AddSessionToSubmission.resx">
+      <DependentUpon>201906051724086_AddSessionToSubmission.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

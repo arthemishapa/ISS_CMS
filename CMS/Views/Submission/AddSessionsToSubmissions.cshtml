@@ -1,0 +1,31 @@
+﻿@model IList<CMS.CMS.Common.ViewModels.SubmissionViewModel>
+@{
+    ViewBag.Title = "Submissions";
+}
+
+@using (Html.BeginForm("AddSessionsToSubmissions", "Submission"))
+{
+    @Html.AntiForgeryToken()
+
+    for (int i = 0; i < Model.Count; i++)
+    {
+        var submission = Model[i];
+        <div class="form-group">
+            @Html.HiddenFor(m => m[i].Id)
+            @Html.HiddenFor(m => m[i].ConferenceId)
+            "@Html.DisplayFor(m => m[i].Title)" by @Html.DisplayFor(m => m[i].AuthorName)
+            @Html.DropDownListFor(
+                m => m[i].SessionId,
+                new SelectList(
+                    Model[i].Sessions,
+                    "Id",
+                    "Name"
+                    ),
+                "",
+                null
+            )
+        </div>
+    }
+
+    <button type="submit" class="btn btn-success">Save</button>
+}

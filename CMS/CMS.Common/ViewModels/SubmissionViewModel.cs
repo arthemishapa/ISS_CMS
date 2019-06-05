@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
-using System.Web.Mvc;
 
 namespace CMS.CMS.Common.ViewModels
 {
@@ -24,11 +23,13 @@ namespace CMS.CMS.Common.ViewModels
         [Display(Name = "Paper filename")]
         public string FileName { get; set; }
 
-        [Required]
-        [Display(Name = "Session")]
-        public string SelectedSession { get; set; }
+        [Display(Name = "Author")]
+        public string AuthorName { get; set; }
 
-        public IEnumerable<SelectListItem> Sessions { get; set; }
+        [Display(Name = "Session")]
+        public int SessionId { get; set; }
+
         public string Action { get; set; }
+        public IEnumerable<SessionViewModel> Sessions { get; set; }
     }
 }

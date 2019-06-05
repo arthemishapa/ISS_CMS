@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 
 using CMS.CMS.Common.Validation;
@@ -23,6 +24,8 @@ namespace CMS.Controllers
         public ActionResult Details(int Id)
         {
             var conference = unitOfWork.ConferenceRepository.GetConferenceById(Id);
+            var sessions = unitOfWork.SessionRepository.GetAll().Where(s => s.ConferenceId == Id).ToDictionary(s => s.Name, s => s.Chair.Name);
+
             return View(new ConferenceDetailsViewModel() {
                 Id = conference.Id,
                 Name = conference.Name,
@@ -30,7 +33,8 @@ namespace CMS.Controllers
                 AbstractPaperDeadline = conference.AbstractPaperDeadline,
                 BiddingDeadline = conference.BiddingDeadline,
                 StartDate = conference.StartDate,
-                EndDate = conference.EndDate
+                EndDate = conference.EndDate,
+                Sessions = sessions
             });
         }
 

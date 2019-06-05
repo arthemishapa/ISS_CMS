@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CMS.CMS.Common.ViewModels
@@ -22,5 +23,7 @@ namespace CMS.CMS.Common.ViewModels
         public DateTime ProposalPaperDeadline { get; set; }
         [Display(Name = "Bidding deadline")]
         public DateTime BiddingDeadline { get; set; }
+
+        public IDictionary<string, string> Sessions { get; set; }
     }
 }
