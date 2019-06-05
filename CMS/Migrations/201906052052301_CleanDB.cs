@@ -3,7 +3,7 @@ namespace CMS.CMS.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SurrogateDatabase : DbMigration
+    public partial class CleanDB : DbMigration
     {
         public override void Up()
         {
@@ -78,7 +78,7 @@ namespace CMS.CMS.DAL.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         UserRequesterId = c.String(maxLength: 128),
                         ConferenceId = c.Int(nullable: false),
-                        LocationId = c.Int(nullable: true),
+                        LocationId = c.Int(),
                         Type = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -143,6 +143,7 @@ namespace CMS.CMS.DAL.Migrations
                     {
                         SubmissionId = c.Int(nullable: false),
                         ReviewerId = c.String(nullable: false, maxLength: 128),
+                        Recommendation = c.String(),
                         Review = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.SubmissionId, t.ReviewerId })
@@ -158,15 +159,19 @@ namespace CMS.CMS.DAL.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         ConferenceId = c.Int(nullable: false),
                         AuthorId = c.String(maxLength: 128),
+                        SessionId = c.Int(),
                         Title = c.String(),
                         Abstract = c.String(),
                         Filename = c.String(),
+                        Mark = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.AuthorId)
                 .ForeignKey("dbo.Conferences", t => t.ConferenceId, cascadeDelete: true)
+                .ForeignKey("dbo.Sessions", t => t.SessionId)
                 .Index(t => t.ConferenceId)
-                .Index(t => t.AuthorId);
+                .Index(t => t.AuthorId)
+                .Index(t => t.SessionId);
             
             CreateTable(
                 "dbo.UserRoles",
@@ -186,6 +191,7 @@ namespace CMS.CMS.DAL.Migrations
         {
             DropForeignKey("dbo.UserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.SubmissionReviews", "SubmissionId", "dbo.Submissions");
+            DropForeignKey("dbo.Submissions", "SessionId", "dbo.Sessions");
             DropForeignKey("dbo.Submissions", "ConferenceId", "dbo.Conferences");
             DropForeignKey("dbo.Submissions", "AuthorId", "dbo.AspNetUsers");
             DropForeignKey("dbo.SubmissionReviews", "ReviewerId", "dbo.AspNetUsers");
@@ -200,6 +206,7 @@ namespace CMS.CMS.DAL.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.UserRoles", new[] { "UserId" });
+            DropIndex("dbo.Submissions", new[] { "SessionId" });
             DropIndex("dbo.Submissions", new[] { "AuthorId" });
             DropIndex("dbo.Submissions", new[] { "ConferenceId" });
             DropIndex("dbo.SubmissionReviews", new[] { "ReviewerId" });

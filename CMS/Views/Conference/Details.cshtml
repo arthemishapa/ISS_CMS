@@ -73,18 +73,21 @@
             @Html.DisplayFor(model => model.BiddingDeadline)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Sessions)
-        </dt>
+        @if (Model.Sessions.Count > 0)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Sessions)
+            </dt>
 
-        <dd>
-            @{ var sessions = ""; }
-            @foreach (var s in Model.Sessions)
-            {
-                sessions += $"{s.Key} ({s.Value}), ";
-            }
-            @sessions.Remove(sessions.Length - 2, 2)
-        </dd>
+            <dd>
+                @{ var sessions = ""; }
+                @foreach (var s in Model.Sessions)
+                {
+                    sessions += $"{s.Key} ({s.Value}), ";
+                }
+                @sessions.Remove(sessions.Length - 2, 2)
+            </dd>
+         }
     </dl>
 
     <div>

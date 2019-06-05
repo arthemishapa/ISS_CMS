@@ -7,13 +7,13 @@ namespace CMS.CMS.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddSessionToSubmission : IMigrationMetadata
+    public sealed partial class CleanDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddSessionToSubmission));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CleanDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201906051724086_AddSessionToSubmission"; }
+            get { return "201906052052301_CleanDB"; }
         }
         
         string IMigrationMetadata.Source

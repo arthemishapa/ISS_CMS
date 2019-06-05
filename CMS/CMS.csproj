@@ -270,21 +270,9 @@
     <Compile Include="CMS.Common\ViewModels\AddConferenceViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\LoginViewModel.cs" />
     <Compile Include="CMS.Common\ViewModels\RegisterViewModel.cs" />
-    <Compile Include="Migrations\201905141154150_SurrogateDatabase.cs" />
-    <Compile Include="Migrations\201905141154150_SurrogateDatabase.Designer.cs">
-      <DependentUpon>201905141154150_SurrogateDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905141755559_Modify_SubmissionReview.cs" />
-    <Compile Include="Migrations\201905141755559_Modify_SubmissionReview.Designer.cs">
-      <DependentUpon>201905141755559_Modify_SubmissionReview.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906051605070_UpdateSubmissionWithScore.cs" />
-    <Compile Include="Migrations\201906051605070_UpdateSubmissionWithScore.Designer.cs">
-      <DependentUpon>201906051605070_UpdateSubmissionWithScore.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906051724086_AddSessionToSubmission.cs" />
-    <Compile Include="Migrations\201906051724086_AddSessionToSubmission.Designer.cs">
-      <DependentUpon>201906051724086_AddSessionToSubmission.cs</DependentUpon>
+    <Compile Include="Migrations\201906052052301_CleanDB.cs" />
+    <Compile Include="Migrations\201906052052301_CleanDB.Designer.cs">
+      <DependentUpon>201906052052301_CleanDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -465,17 +453,8 @@
     <Content Include="CMS.PL\Scripts\jQuery\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905141154150_SurrogateDatabase.resx">
-      <DependentUpon>201905141154150_SurrogateDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905141755559_Modify_SubmissionReview.resx">
-      <DependentUpon>201905141755559_Modify_SubmissionReview.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906051605070_UpdateSubmissionWithScore.resx">
-      <DependentUpon>201906051605070_UpdateSubmissionWithScore.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906051724086_AddSessionToSubmission.resx">
-      <DependentUpon>201906051724086_AddSessionToSubmission.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906052052301_CleanDB.resx">
+      <DependentUpon>201906052052301_CleanDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
